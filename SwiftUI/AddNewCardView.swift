@@ -49,12 +49,15 @@ struct AddNewCardView: View {
     ]
     private var eventValue = "Anniversary"
 
+    @State private var zoomed = false
+
     enum CaptureCardView: Identifiable {
         case front, back
         var id: Int {
             hashValue
         }
     }
+
     @State var captureCardView: CaptureCardView?
     @State private var selectedEvent = 0
     @State private var eventDate = Date()
@@ -105,7 +108,6 @@ struct AddNewCardView: View {
                         ZStack {
                             frontImageSelected?
                                 .resizable()
-                                .frame(width: geomtry.size.width * 0.45, height: geomtry.size.height * 0.45 )
                                 .aspectRatio(contentMode: .fit)
                                 .shadow(radius: 10 )
                             VStack {
@@ -125,53 +127,17 @@ struct AddNewCardView: View {
                                         self.captureFrontImage.toggle()
                                         self.shouldPresentCamera = true
                                     }),
-                                    ActionSheet.Button.default(Text("Photo Library"), action: {
-                                        self.captureFrontImage.toggle()
-                                        self.shouldPresentCamera = false
-                                    }),
-                                    ActionSheet.Button.cancel()])
+                                              ActionSheet.Button.default(Text("Photo Library"), action: {
+                                                  self.captureFrontImage.toggle()
+                                                  self.shouldPresentCamera = false
+                                              }),
+                                              ActionSheet.Button.cancel()])
                             }
                             .sheet(isPresented: $captureFrontImage) {
                                 ImagePicker(
                                     sourceType: self.shouldPresentCamera ? .camera : .photoLibrary,
                                     image: $frontImageSelected,
                                     isPresented: self.$captureFrontImage)
-                            }
-                        }
-                        ZStack {
-                            backImageSelected?
-                                .resizable()
-                                .frame(width: geomtry.size.width * 0.45, height: geomtry.size.height * 0.45 )
-                                .aspectRatio(contentMode: .fill)
-                                .shadow(radius: 10 )
-                            VStack {
-                                Image(systemName: "camera.fill")
-                                Text("Back")
-                            }
-                            .foregroundColor(.white)
-                            .shadow(radius: 10)
-                            .font(.largeTitle)
-                            .frame(width: geomtry.size.width * 0.45)
-                            .onTapGesture { self.backPhoto = true }
-                            .actionSheet(isPresented: $backPhoto) { () -> ActionSheet in
-                                ActionSheet(
-                                    title: Text("Choose mode"),
-                                    message: Text("Select one."),
-                                    buttons: [ActionSheet.Button.default(Text("Camera"), action: {
-                                    self.captureBackImage.toggle()
-                                    self.shouldPresentCamera = true
-                                }),
-                                ActionSheet.Button.default(Text("Photo Library"), action: {
-                                    self.captureBackImage.toggle()
-                                    self.shouldPresentCamera = false
-                                }),
-                                ActionSheet.Button.cancel()])
-                            }
-                            .sheet(isPresented: $captureBackImage) {
-                                ImagePicker(
-                                    sourceType: self.shouldPresentCamera ? .camera : .photoLibrary,
-                                    image: $backImageSelected,
-                                    isPresented: self.$captureBackImage)
                             }
                         }
                     }
@@ -182,22 +148,22 @@ struct AddNewCardView: View {
             .navigationBarTitle("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")")
             .navigationBarItems(trailing:
                                     HStack {
-                                        Button(action: {
-                                            saveCard()
-                                            self.presentationMode.wrappedValue.dismiss()
-                                        }, label: {
-                                            Image(systemName: "square.and.arrow.down")
-                                                .font(.largeTitle)
-                                                .foregroundColor(.green)
-                                        })
-                                        Button(action: {
-                                            self.presentationMode.wrappedValue.dismiss()
-                                        }, label: {
-                                            Image(systemName: "chevron.down.circle.fill")
-                                                .font(.largeTitle)
-                                                .foregroundColor(.green)
-                                        })
-                                    }
+                Button(action: {
+                    saveCard()
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "square.and.arrow.down")
+                        .font(.largeTitle)
+                        .foregroundColor(.green)
+                })
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "chevron.down.circle.fill")
+                        .font(.largeTitle)
+                        .foregroundColor(.green)
+                })
+            }
             )
         }
     }
@@ -226,7 +192,10 @@ extension View {
         let controller = UIHostingController(rootView: self)
 
         controller.view.frame = CGRect(x: 0, y: CGFloat(Int.max), width: 1, height: 1)
-        UIApplication.shared.windows.first!.rootViewController?.view.addSubview(controller.view)
+//        UIApplication.shared.windows.first!.rootViewController?.view.addSubview(controller.view)
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        windowScene?.windows.first!.rootViewController?.view.addSubview(controller.view)
 
         let size = controller.sizeThatFits(in: UIScreen.main.bounds.size)
         controller.view.bounds = CGRect(origin: .zero, size: size)
@@ -253,6 +222,6 @@ struct AddNewCardView_Previews: PreviewProvider {
     static var previews: some View {
         AddNewCardView(
             recipient: Recipient()).environment(\.managedObjectContext,
-                                                PersistentCloudKitContainer.persistentContainer.viewContext)
+                                                 PersistentCloudKitContainer.persistentContainer.viewContext)
     }
 }

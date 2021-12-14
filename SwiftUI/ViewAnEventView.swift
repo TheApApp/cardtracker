@@ -90,21 +90,16 @@ struct AddressView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("\(recipient.addressLine1 ?? "")")
-                .foregroundColor(.green)
                 .padding([.top], 10)
+                .foregroundColor(.green)
             if recipient.addressLine2 != "" {
                 Text("\(recipient.addressLine2 ?? "")")
                     .foregroundColor(.green)
-                Text("\(recipient.city ?? ""), \(recipient.state ?? "") \(recipient.zip ?? "")")
-                    .foregroundColor(.green)
-                Text("\(recipient.country ?? "")")
-                    .foregroundColor(.green)
-            } else {
-                Text("\(recipient.city ?? ""), \(recipient.state ?? "") \(recipient.zip ?? "")")
-                    .foregroundColor(.green)
-                Text("\(recipient.country ?? "")")
-                    .foregroundColor(.green)
             }
+            Text("\(recipient.city ?? ""), \(recipient.state ?? "") \(recipient.zip ?? "")")
+                .foregroundColor(.green)
+            Text("\(recipient.country ?? "")")
+                .foregroundColor(.green)
         }
         .padding([.leading, .trailing], 10 )
     }
