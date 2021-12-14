@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Event" representedClassName="Event" syncable="YES">
+        <attribute name="cardBackImage" optional="YES" attributeType="Transformable" valueTransformerName="ImageTransformer" customClassName="."/>
+        <attribute name="cardBackThumbnailImage" optional="YES" attributeType="Transformable" valueTransformerName="ImageTransformer" customClassName="."/>
+        <attribute name="cardBackThumbnailURI" optional="YES" attributeType="String"/>
+        <attribute name="cardBackURI" optional="YES" attributeType="String"/>
+        <attribute name="cardFrontImage" optional="YES" attributeType="Transformable" valueTransformerName="ImageTransformer" customClassName="."/>
+        <attribute name="cardFrontThumbnailImage" optional="YES" attributeType="Transformable" valueTransformerName="ImageTransformer" customClassName="."/>
+        <attribute name="cardFrontThumbnailURI" optional="YES" attributeType="String"/>
+        <attribute name="cardFrontURI" optional="YES" attributeType="String"/>
+        <attribute name="event" optional="YES" attributeType="String"/>
+        <attribute name="eventDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="recipient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipient" inverseName="events" inverseEntity="Recipient"/>
+        <fetchIndex name="byEntityDate">
+            <fetchIndexElement property="eventDate" type="Binary" order="descending"/>
+        </fetchIndex>
+    </entity>
+    <entity name="Recipient" representedClassName="Recipient" syncable="YES">
+        <attribute name="addressLine1" optional="YES" attributeType="String"/>
+        <attribute name="addressLine2" optional="YES" attributeType="String"/>
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="country" optional="YES" attributeType="String"/>
+        <attribute name="firstName" attributeType="String" defaultValueString=""/>
+        <attribute name="lastName" attributeType="String" defaultValueString=""/>
+        <attribute name="state" optional="YES" attributeType="String"/>
+        <attribute name="zip" optional="YES" attributeType="String"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" inverseName="recipient" inverseEntity="Event"/>
+    </entity>
+    <elements>
+        <element name="Event" positionX="-200" positionY="294" width="128" height="194"/>
+        <element name="Recipient" positionX="-666" positionY="83" width="128" height="164"/>
+    </elements>
+</model>

@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftUIKit",
+        "repositoryURL": "https://github.com/youjinp/SwiftUIKit",
+        "state": {
+          "branch": null,
+          "revision": "90c0ec689b3b415630a8a71748637588a097609d",
+          "version": "0.0.16"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
