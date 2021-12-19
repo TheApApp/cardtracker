@@ -45,70 +45,67 @@ struct AddNewRecipientView: View {
     var body: some View {
         NavigationView {
             GeometryReader { geomtry in
-                if showPicker == false {
-                    VStack {
-                        Text("")
-                        HStack {
-                            VStack(alignment: .leading) {
-                                TextField("First Name", text: $firstName)
-                                    .customTextField()
-                            }
-                            VStack(alignment: .leading) {
-                                TextField("Last Name", text: $lastName)
-                                    .customTextField()
-                            }
-                        }
-                        TextField("Address Line 1", text: $addressLine1)
-                            .customTextField()
-                        TextField("Address Line 2", text: $addressLine2)
-                            .customTextField()
-                        HStack {
-                            TextField("City", text: $city)
-                                .customTextField()
-                                .frame(width: geomtry.size.width * 0.48)
-                            Spacer()
-                            TextField("ST", text: $state)
-                                .customTextField()
-                                .frame(width: geomtry.size.width * 0.18)
-                            Spacer()
-                            TextField("Zip", text: $zip)
-                                .customTextField()
-                                .frame(width: geomtry.size.width * 0.28)
-                        }
-                        TextField("Country", text: $country)
-                            .customTextField()
-                        Spacer()
-                    }
-                } else {
-                    ContactPicker(showPicker: $showPicker, onSelectContact: {contact in
-                        firstName = contact.givenName
-                        lastName = contact.familyName
-                        if contact.postalAddresses.count > 0 {
-                            if let addressString = (
-                                ((contact.postalAddresses[0] as AnyObject).value(forKey: "labelValuePair")
-                                 as AnyObject).value(forKey: "value"))
-                                as? CNPostalAddress {
-                                // swiftlint:disable:next line_length
-                                let mailAddress = CNPostalAddressFormatter.string(from: addressString, style: .mailingAddress)
-                                addressLine1 = "\(addressString.street)"
-                                addressLine2 = ""
-                                city = "\(addressString.city)"
-                                state = "\(addressString.state)"
-                                zip = "\(addressString.postalCode)"
-                                country = "\(addressString.country)"
-                                print("Mail address is \n\(mailAddress)")
-                            }
-                        } else {
-                            addressLine1 = "No Address Provided"
+                ContactPicker(showPicker: $showPicker, onSelectContact: {contact in
+                    firstName = contact.givenName
+                    lastName = contact.familyName
+                    if contact.postalAddresses.count > 0 {
+                        if let addressString = (
+                            ((contact.postalAddresses[0] as AnyObject).value(forKey: "labelValuePair")
+                             as AnyObject).value(forKey: "value"))
+                            as? CNPostalAddress {
+                            // swiftlint:disable:next line_length
+                            let mailAddress = CNPostalAddressFormatter.string(from: addressString, style: .mailingAddress)
+                            addressLine1 = "\(addressString.street)"
                             addressLine2 = ""
-                            city = ""
-                            state = ""
-                            zip = ""
-                            country = ""
-                            print("No Address Provided")
+                            city = "\(addressString.city)"
+                            state = "\(addressString.state)"
+                            zip = "\(addressString.postalCode)"
+                            country = "\(addressString.country)"
+                            print("Mail address is \n\(mailAddress)")
                         }
-                        self.showPicker.toggle()
-                    }, onCancel: nil)
+                    } else {
+                        addressLine1 = "No Address Provided"
+                        addressLine2 = ""
+                        city = ""
+                        state = ""
+                        zip = ""
+                        country = ""
+                        print("No Address Provided")
+                    }
+                    self.showPicker.toggle()
+                }, onCancel: nil)
+                VStack {
+                    Text("")
+                    HStack {
+                        VStack(alignment: .leading) {
+                            TextField("First Name", text: $firstName)
+                                .customTextField()
+                        }
+                        VStack(alignment: .leading) {
+                            TextField("Last Name", text: $lastName)
+                                .customTextField()
+                        }
+                    }
+                    TextField("Address Line 1", text: $addressLine1)
+                        .customTextField()
+                    TextField("Address Line 2", text: $addressLine2)
+                        .customTextField()
+                    HStack {
+                        TextField("City", text: $city)
+                            .customTextField()
+                            .frame(width: geomtry.size.width * 0.48)
+                        Spacer()
+                        TextField("ST", text: $state)
+                            .customTextField()
+                            .frame(width: geomtry.size.width * 0.18)
+                        Spacer()
+                        TextField("Zip", text: $zip)
+                            .customTextField()
+                            .frame(width: geomtry.size.width * 0.28)
+                    }
+                    TextField("Country", text: $country)
+                        .customTextField()
+                    Spacer()
                 }
             }
             .padding([.leading, .trailing], 10 )
