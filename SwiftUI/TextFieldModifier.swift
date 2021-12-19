@@ -14,7 +14,7 @@ struct TextFieldModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(10)
-            .font(Font.system(size: 15, weight: .medium, design: .serif))
+            .font(Font.system(size: 20, weight: .medium, design: .serif))
             .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.green, lineWidth: borderWidth))
     }
 }

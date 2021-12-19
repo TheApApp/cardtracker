@@ -23,11 +23,11 @@
 		187E4382259D2AD90075AEBF /* PersistentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E4381259D2AD90075AEBF /* PersistentStore.swift */; };
 		18839B0F259F9F57000BB450 /* AddNewRecipientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B0E259F9F57000BB450 /* AddNewRecipientView.swift */; };
 		18839B12259FA00D000BB450 /* AddNewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B11259FA00D000BB450 /* AddNewCardView.swift */; };
-		18839B16259FBF2A000BB450 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18839B15259FBF2A000BB450 /* SwiftUIKit */; };
 		18B70D54205608F700EAC1BD /* Card_Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18B70D52205608F600EAC1BD /* Card_Tracker.xcdatamodeld */; };
 		18BE2ADE2585611600419A63 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BE2ADD2585611600419A63 /* CloudKit.framework */; };
 		18CC9EEE25EF169300434AF9 /* TextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC9EED25EF169300434AF9 /* TextFieldModifier.swift */; };
 		18D49B872676F59700833E31 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D49B862676F59700833E31 /* CloudKitHelper.swift */; };
+		18E1F6D1276EA07C00BAA1BE /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18E1F6D0276EA07C00BAA1BE /* SwiftUIKit */; };
 		18EF638425EC7D9800448984 /* EditRecipientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF638325EC7D9800448984 /* EditRecipientView.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18BE2ADE2585611600419A63 /* CloudKit.framework in Frameworks */,
-				18839B16259FBF2A000BB450 /* SwiftUIKit in Frameworks */,
+				18E1F6D1276EA07C00BAA1BE /* SwiftUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,7 +163,7 @@
 			);
 			name = "Card Tracker";
 			packageProductDependencies = (
-				18839B15259FBF2A000BB450 /* SwiftUIKit */,
+				18E1F6D0276EA07C00BAA1BE /* SwiftUIKit */,
 			);
 			productName = "Card Tracker";
 			productReference = 18478CC2203887E300C91E22 /* Card Tracker.app */;
@@ -394,7 +394,7 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = LGX23BH474;
 				INFOPLIST_FILE = "Card Tracker/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -423,7 +423,7 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = LGX23BH474;
 				INFOPLIST_FILE = "Card Tracker/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -475,7 +475,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		18839B15259FBF2A000BB450 /* SwiftUIKit */ = {
+		18E1F6D0276EA07C00BAA1BE /* SwiftUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 18839B14259FBF2A000BB450 /* XCRemoteSwiftPackageReference "SwiftUIKit" */;
 			productName = SwiftUIKit;

@@ -12,11 +12,11 @@ import ContactsUI
 import Contacts
 import CoreData
 
+/* Thanks to @rlong405 and @nigelgee for initial guidance in getting past the early issues. */
+
 struct AddNewRecipientView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
-
-    private let borderWidth: CGFloat = 1.0
 
     @State private var lastName: String = ""
     @State private var firstName: String = ""
@@ -45,100 +45,102 @@ struct AddNewRecipientView: View {
     var body: some View {
         NavigationView {
             GeometryReader { geomtry in
-                VStack {
-                    Spacer()
-                    HStack {
-                        VStack(alignment: .leading) {
-                            TextField("First Name", text: $firstName)
-                                .customTextField()
+                if showPicker == false {
+                    VStack {
+                        Text("")
+                        HStack {
+                            VStack(alignment: .leading) {
+                                TextField("First Name", text: $firstName)
+                                    .customTextField()
+                            }
+                            VStack(alignment: .leading) {
+                                TextField("Last Name", text: $lastName)
+                                    .customTextField()
+                            }
                         }
-                        VStack(alignment: .leading) {
-                            TextField("Last Name", text: $lastName)
+                        TextField("Address Line 1", text: $addressLine1)
+                            .customTextField()
+                        TextField("Address Line 2", text: $addressLine2)
+                            .customTextField()
+                        HStack {
+                            TextField("City", text: $city)
                                 .customTextField()
+                                .frame(width: geomtry.size.width * 0.48)
+                            Spacer()
+                            TextField("ST", text: $state)
+                                .customTextField()
+                                .frame(width: geomtry.size.width * 0.18)
+                            Spacer()
+                            TextField("Zip", text: $zip)
+                                .customTextField()
+                                .frame(width: geomtry.size.width * 0.28)
                         }
-                    }
-                    TextField("Address Line 1", text: $addressLine1)
-                        .customTextField()
-                    TextField("Address Line 2", text: $addressLine2)
-                        .customTextField()
-                    HStack {
-                        TextField("City", text: $city)
+                        TextField("Country", text: $country)
                             .customTextField()
-                            .frame(width: geomtry.size.width * 0.48)
                         Spacer()
-                        TextField("ST", text: $state)
-                            .customTextField()
-                            .frame(width: geomtry.size.width * 0.18)
-                        Spacer()
-                        TextField("Zip", text: $zip)
-                            .customTextField()
-                            .frame(width: geomtry.size.width * 0.28)
                     }
-                    TextField("Country", text: $country)
-                        .customTextField()
-                    Spacer()
-                    Spacer()
-                }
-                ContactPicker(showPicker: $showPicker, onSelectContact: {contact in
-                    firstName = contact.givenName
-                    lastName = contact.familyName
-                    if contact.postalAddresses.count > 0 {
-                        if let addressString = (
-                            ((contact.postalAddresses[0] as AnyObject).value(forKey: "labelValuePair")
-                                as AnyObject).value(forKey: "value"))
-                            as? CNPostalAddress {
-                            // swiftlint:disable:next line_length
-                            let mailAddress = CNPostalAddressFormatter.string(from: addressString, style: .mailingAddress)
-                            addressLine1 = "\(addressString.street)"
+                } else {
+                    ContactPicker(showPicker: $showPicker, onSelectContact: {contact in
+                        firstName = contact.givenName
+                        lastName = contact.familyName
+                        if contact.postalAddresses.count > 0 {
+                            if let addressString = (
+                                ((contact.postalAddresses[0] as AnyObject).value(forKey: "labelValuePair")
+                                 as AnyObject).value(forKey: "value"))
+                                as? CNPostalAddress {
+                                // swiftlint:disable:next line_length
+                                let mailAddress = CNPostalAddressFormatter.string(from: addressString, style: .mailingAddress)
+                                addressLine1 = "\(addressString.street)"
+                                addressLine2 = ""
+                                city = "\(addressString.city)"
+                                state = "\(addressString.state)"
+                                zip = "\(addressString.postalCode)"
+                                country = "\(addressString.country)"
+                                print("Mail address is \n\(mailAddress)")
+                            }
+                        } else {
+                            addressLine1 = "No Address Provided"
                             addressLine2 = ""
-                            city = "\(addressString.city)"
-                            state = "\(addressString.state)"
-                            zip = "\(addressString.postalCode)"
-                            country = "\(addressString.country)"
-                            print(mailAddress)
+                            city = ""
+                            state = ""
+                            zip = ""
+                            country = ""
+                            print("No Address Provided")
                         }
-                    } else {
-                        addressLine1 = "No Address Provided"
-                        addressLine2 = ""
-                        city = ""
-                        state = ""
-                        zip = ""
-                        country = ""
-                        print("No Address Provided")
-                    }
-                    self.showPicker.toggle()
-                }, onCancel: nil)
+                        self.showPicker.toggle()
+                    }, onCancel: nil)
+                }
             }
             .padding([.leading, .trailing], 10 )
             .navigationTitle("Recipient")
             .navigationBarItems(trailing:
                                     HStack {
-                                        Button(action: {
-                                            let contactsPermsissions = checkContactsPermissions()
-                                            if contactsPermsissions == true {
-                                                self.showPicker.toggle()
-                                            }
-                                        }, label: {
-                                            Image(systemName: "magnifyingglass")
-                                                .font(.largeTitle)
-                                                .foregroundColor(.green)
-                                        })
-                                        Button(action: {
-                                            saveRecipient()
-                                            self.presentationMode.wrappedValue.dismiss()
-                                        }, label: {
-                                            Image(systemName: "square.and.arrow.down")
-                                                .font(.largeTitle)
-                                                .foregroundColor(.green)
-                                        })
-                                        Button(action: {
-                                            self.presentationMode.wrappedValue.dismiss()
-                                        }, label: {
-                                            Image(systemName: "chevron.down.circle.fill")
-                                                .font(.largeTitle)
-                                                .foregroundColor(.green)
-                                        })
-                                    }
+                Button(action: {
+                    let contactsPermsissions = checkContactsPermissions()
+                    if contactsPermsissions == true {
+                        self.showPicker.toggle()
+                    }
+                }, label: {
+                    Image(systemName: "person.crop.circle.fill")
+                        .font(.largeTitle)
+                        .foregroundColor(.green)
+                })
+                Button(action: {
+                    saveRecipient()
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "square.and.arrow.down")
+                        .font(.largeTitle)
+                        .foregroundColor(.green)
+                })
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "chevron.down.circle.fill")
+                        .font(.largeTitle)
+                        .foregroundColor(.green)
+                })
+            }
             )
         }
     }
@@ -167,7 +169,7 @@ struct AddNewRecipientView: View {
         let authStatus = CNContactStore.authorizationStatus(for: .contacts)
         switch authStatus {
         case .restricted:
-            print("User cannot grant premission, e.g. perental controls are in force.")
+            print("User cannot grant premission, e.g. parental controls are in force.")
             return false
         case .denied:
             print("User has denided permissions")
