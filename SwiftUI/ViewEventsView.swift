@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import MapKit
 
 enum NavBarItemChoosen: Identifiable {
     case newCard, editRecipient
@@ -24,8 +25,13 @@ struct ViewEventsView: View {
     @State var frontView = false
     @State var backView = false
     @State var frontShown = true
+    @State var addressString = ""
     @State private var frontImageShown: UIImage?
     @State var navBarItemChoosen: NavBarItemChoosen?
+
+    // swiftlint:disable:next line_length
+    @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+    @State var location: CLLocationCoordinate2D?
 
     static let eventDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -65,6 +71,20 @@ struct ViewEventsView: View {
                         Text("\(recipient.addressLine1 ?? "")")
                             .foregroundColor(.green)
                             .padding([.top], 10)
+                            .onAppear {
+                                // swiftlint:disable:next line_length
+                                addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
+                                self.getLocation(from: addressString) { coordinates in
+
+                                    // swiftlint:disable:next line_length
+                                    print("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
+                                    self.location = coordinates ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+                                    // Assign to a local variable for further processing
+                                    self.region.center.longitude = location?.longitude ?? 0.0
+                                    print("region long = \(self.region.center.longitude)")
+                                    self.region.center.latitude = location?.latitude ?? 0.0
+                                }
+                            }
                         if recipient.addressLine2 != "" {
                             Text("\(recipient.addressLine2 ?? "")")
                                 .foregroundColor(.green)
@@ -74,8 +94,11 @@ struct ViewEventsView: View {
                         Text("\(recipient.country ?? "")")
                             .foregroundColor(.green)
                     }
-                    .padding([.leading, .trailing], 10 )
+                    .padding([.leading], 5)
                     Spacer()
+                    Map(coordinateRegion: $region)
+                        .frame(width: 300, height: 250)
+                        .padding([.leading, .trailing], 10 )
                 }
 
                 List {
@@ -85,10 +108,10 @@ struct ViewEventsView: View {
                                 VStack {
                                     Spacer()
                                     Text("\(event.event ?? "Unknown Event")")
-                                        .font(.largeTitle)
+                                        .font(.title)
                                         .foregroundColor(.green)
                                     Text("\(event.eventDate!, formatter: Self.eventDateFormatter)")
-                                        .font(.largeTitle)
+                                        .font(.title)
                                         .foregroundColor(.green)
                                     Spacer()
                                 }
@@ -96,25 +119,12 @@ struct ViewEventsView: View {
                                 if event.cardFrontImage != nil {
                                     Image(uiImage: (event.cardFrontImage ?? UIImage(contentsOfFile: "frontImage"))!)
                                         .resizable()
-//                                        .frame(width: 120, height: 120)
                                         .aspectRatio(contentMode: .fit)
                                 } else {
                                     Image("frontImage")
                                         .resizable()
-//                                        .frame(width: 120, height: 120)
                                         .aspectRatio(contentMode: .fit)
                                 }
-//                                if event.cardBackImage != nil {
-//                                    Image(uiImage: (event.cardBackImage ?? UIImage(contentsOfFile: "backImage"))!)
-//                                        .resizable()
-//                                        .frame(width: 75, height: 120)
-//                                        .aspectRatio(contentMode: .fit)
-//                                } else {
-//                                    Image("backImage")
-//                                        .resizable()
-//                                        .frame(width: 75, height: 120)
-//                                        .aspectRatio(contentMode: .fit)
-//                                }
                             } .frame(height: 300)
                         }
                     }
@@ -123,21 +133,21 @@ struct ViewEventsView: View {
                 .navigationTitle("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")")
                 .navigationBarItems(trailing:
                                         HStack {
-                                            Button(action: {
-                                                navBarItemChoosen = .newCard
-                                            }, label: {
-                                                Image(systemName: "plus.circle.fill")
-                                                    .font(.largeTitle)
-                                                    .foregroundColor(.green)
-                                            })
-                                            Button(action: {
-                                                navBarItemChoosen = .editRecipient
-                                            }, label: {
-                                                Image(systemName: "square.and.pencil")
-                                                    .font(.largeTitle)
-                                                    .foregroundColor(.green)
-                                            })
-                                        })
+                    Button(action: {
+                        navBarItemChoosen = .newCard
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.green)
+                    })
+                    Button(action: {
+                        navBarItemChoosen = .editRecipient
+                    }, label: {
+                        Image(systemName: "square.and.pencil")
+                            .font(.largeTitle)
+                            .foregroundColor(.green)
+                    })
+                })
             }
             .sheet(item: $navBarItemChoosen ) { item in
                 switch item {
@@ -175,6 +185,18 @@ struct ViewEventsView: View {
         newEntry.recipient = recipient
         if self.moc.hasChanges {
             try? self.moc.save()
+        }
+    }
+
+    func getLocation(from address: String, completion: @escaping (_ location: CLLocationCoordinate2D?) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(address) { (placemarks, _) in
+            guard let placemarks = placemarks,
+                  let location = placemarks.first?.location?.coordinate else {
+                      completion(nil)
+                      return
+                  }
+            completion(location)
         }
     }
 }
