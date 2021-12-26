@@ -9,6 +9,13 @@
 import SwiftUI
 
 struct ViewAnEventView: View {
+    enum NavBarItemChoosen: Identifiable {
+        case editEvent
+        var id: Int {
+            hashValue
+        }
+    }
+
     @Environment(\.presentationMode) var presentationMode
     @State private var zoomed = false
 
@@ -16,10 +23,11 @@ struct ViewAnEventView: View {
     private var recipient: Recipient
 
     private var blankCardFront = UIImage(contentsOfFile: "frontImage")
-    private var blankCardBack = UIImage(contentsOfFile: "backImage")
+
+    @State var navBarItemChoosen: NavBarItemChoosen?
 
     enum ShowCardView: Identifiable {
-        case front, back
+        case front, edit
         var id: Int {
             hashValue
         }
@@ -40,7 +48,7 @@ struct ViewAnEventView: View {
         ]
         navBarApperance.titleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
-            .font: UIFont(name: "ArialRoundedMTBold", size: 20)!
+            .font: UIFont(name: "ArialRoundedMTBold", size: 15)!
         ]
 
         UINavigationBar.appearance().standardAppearance = navBarApperance
@@ -52,6 +60,20 @@ struct ViewAnEventView: View {
 
     var body: some View {
         VStack {
+            HStack {
+                Text("\(event.event ?? "no event")-\(event.eventDate!, formatter: Self.eventDateFormatter)")
+                    .font(.title)
+                    .foregroundColor(.green)
+                Spacer()
+                Button(action: {
+                    showCardView = .edit
+                }, label: {
+                    Image(systemName: "square.and.pencil")
+                        .font(.title)
+                        .foregroundColor(.green)
+                })
+            }
+            .padding([.leading, .trailing], 10 )
             HStack {
                 AddressView(recipient: recipient)
                 Spacer()
@@ -70,8 +92,8 @@ struct ViewAnEventView: View {
                     switch item {
                     case .front:
                         CardView(cardImage: (event.cardFrontImage ?? blankCardFront)!)
-                    case .back:
-                        CardView(cardImage: (event.cardBackImage ?? blankCardBack)!)
+                    case .edit:
+                        EditAnEvent(event: event, recipient: recipient)
                     }
                 }
         }

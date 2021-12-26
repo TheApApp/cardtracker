@@ -1,15 +1,14 @@
 //
-//  AddNewCardView.swift
+//  EditAnEvent.swift
 //  Card Tracker
 //
-//  Created by Michael Rowe on 1/1/21.
+//  Created by Michael Rowe on 12/22/21.
 //  Copyright © 2021 Michael Rowe. All rights reserved.
 //
 
 import SwiftUI
 
-struct AddNewCardView: View {
-    var recipient: Recipient
+struct EditAnEvent: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
 
@@ -47,26 +46,21 @@ struct AddNewCardView: View {
         "Thinking of You",
         "Wedding"
     ]
-    private var eventValue = "Anniversary"
+    var event: Event
+    var recipient: Recipient
 
-    @State private var zoomed = false
-
-    enum CaptureCardView: Identifiable {
-        case front
-        var id: Int {
-            hashValue
-        }
-    }
-
-    @State var captureCardView: CaptureCardView?
-    @State private var selectedEvent = 0
-    @State private var eventDate = Date()
-    @State var frontImageSelected: Image? = Image("frontImage")
-    @State var shouldPresentCamera = false
+    @State private var cardFrontImage: Image?
+    @State var frontImageSelected: Image?
+    @State private var eventName: String
+    @State private var firstName: String
+    @State private var lastName: String
+    @State private var eventDate: Date
+    @State private var selectedEvent: Int
     @State var frontPhoto = false
     @State var captureFrontImage = false
+    @State var shouldPresentCamera = false
 
-    init(recipient: Recipient) {
+    init(event: Event, recipient: Recipient) {
         let navBarApperance = UINavigationBarAppearance()
         navBarApperance.largeTitleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
@@ -74,11 +68,18 @@ struct AddNewCardView: View {
         navBarApperance.titleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
-
         UINavigationBar.appearance().standardAppearance = navBarApperance
         UINavigationBar.appearance().scrollEdgeAppearance = navBarApperance
         UINavigationBar.appearance().compactAppearance = navBarApperance
+        self.event = event
         self.recipient = recipient
+        self._firstName = State(initialValue: recipient.firstName ?? "")
+        self._lastName = State(initialValue: recipient.lastName ?? "")
+        self._cardFrontImage = State(initialValue: Image(uiImage: event.cardFrontImage!))
+        self._frontImageSelected = State(initialValue: Image(uiImage: event.cardFrontImage!))
+        self._eventDate = State(initialValue: event.eventDate! as Date)
+        self._eventName = State(initialValue: event.event ?? "")
+        self._selectedEvent = State(initialValue: eventChoices.firstIndex(of: event.event ?? "Anniversary")!)
     }
 
     var body: some View {
@@ -146,7 +147,12 @@ struct AddNewCardView: View {
             .navigationBarItems(trailing:
                                     HStack {
                 Button(action: {
-                    saveCard()
+                    saveCard(
+                        event: self.event,
+                        eventName: eventName,
+                        eventDate: eventDate,
+                        cardFrontImage: (frontImageSelected?.asUIImage())!,
+                        recipient: recipient)
                     self.presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Image(systemName: "square.and.arrow.down")
@@ -165,12 +171,16 @@ struct AddNewCardView: View {
         }
     }
 
-    func saveCard() {
-        print("saving...")
-        let event = Event(context: moc)
+    func saveCard(
+        event: Event,
+        eventName: String,
+        eventDate: Date,
+        cardFrontImage: UIImage,
+        recipient: Recipient) {
+        print("saving event...")
         event.event = eventChoices[selectedEvent]
         event.eventDate = eventDate as NSDate
-        event.cardFrontImage = frontImageSelected?.asUIImage()
+        event.cardFrontImage = cardFrontImage
         event.recipient = recipient
         do {
             print(event)
@@ -181,43 +191,8 @@ struct AddNewCardView: View {
     }
 }
 
-extension View {
-    // This function changes our View to UIView, then calls another function
-    // to convert the newly-made UIView to a UIImage.
-    public func asUIImage() -> UIImage {
-        let controller = UIHostingController(rootView: self)
-
-        controller.view.frame = CGRect(x: 0, y: CGFloat(Int.max), width: 1, height: 1)
-//        UIApplication.shared.windows.first!.rootViewController?.view.addSubview(controller.view)
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first as? UIWindowScene
-        windowScene?.windows.first!.rootViewController?.view.addSubview(controller.view)
-
-        let size = controller.sizeThatFits(in: UIScreen.main.bounds.size)
-        controller.view.bounds = CGRect(origin: .zero, size: size)
-        controller.view.sizeToFit()
-
-        // here is the call to the function that converts UIView to UIImage: `.asImage()`
-        let image = controller.view.asUIImage()
-        controller.view.removeFromSuperview()
-        return image
-    }
-}
-
-extension UIView {
-    // This is the function to convert UIView to UIImage
-    public func asUIImage() -> UIImage {
-        let renderer = UIGraphicsImageRenderer(bounds: bounds)
-        return renderer.image { rendererContext in
-            layer.render(in: rendererContext.cgContext)
-        }
-    }
-}
-
-struct AddNewCardView_Previews: PreviewProvider {
+struct EditAnEvent_Previews: PreviewProvider {
     static var previews: some View {
-        AddNewCardView(
-            recipient: Recipient()).environment(\.managedObjectContext,
-                                                 PersistentCloudKitContainer.persistentContainer.viewContext)
+        EditAnEvent(event: Event(), recipient: Recipient())
     }
 }
