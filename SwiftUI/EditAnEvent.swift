@@ -147,12 +147,7 @@ struct EditAnEvent: View {
             .navigationBarItems(trailing:
                                     HStack {
                 Button(action: {
-                    saveCard(
-                        event: self.event,
-                        eventName: eventName,
-                        eventDate: eventDate,
-                        cardFrontImage: (frontImageSelected?.asUIImage())!,
-                        recipient: recipient)
+                    saveCard()
                     self.presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Image(systemName: "square.and.arrow.down")
@@ -171,20 +166,15 @@ struct EditAnEvent: View {
         }
     }
 
-    func saveCard(
-        event: Event,
-        eventName: String,
-        eventDate: Date,
-        cardFrontImage: UIImage,
-        recipient: Recipient) {
-        print("saving event...")
+    func saveCard() {
+            print("saving event... \(eventName)")
         event.event = eventChoices[selectedEvent]
         event.eventDate = eventDate as NSDate
-        event.cardFrontImage = cardFrontImage
+        event.cardFrontImage = frontImageSelected?.asUIImage()
         event.recipient = recipient
+        let context = PersistentCloudKitContainer.persistentContainer.viewContext
         do {
-            print(event)
-            try moc.save()
+            try context.save()
         } catch let error as NSError {
             print("Save error \(error), \(error.userInfo)")
         }

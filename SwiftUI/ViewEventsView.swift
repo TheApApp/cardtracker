@@ -175,19 +175,6 @@ struct ViewEventsView: View {
         }
     }
 
-    private func addEvent() {
-        // replace with Actual AddEvent Logic
-        let newEntry = Event(context: self.moc)
-        newEntry.event = "Christmas"
-        newEntry.eventDate = Date() as NSDate
-        newEntry.cardFrontImage = UIImage(contentsOfFile: "frontImage")
-        newEntry.cardBackImage = UIImage(contentsOfFile: "frontImage")
-        newEntry.recipient = recipient
-        if self.moc.hasChanges {
-            try? self.moc.save()
-        }
-    }
-
     func getLocation(from address: String, completion: @escaping (_ location: CLLocationCoordinate2D?) -> Void) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { (placemarks, _) in
