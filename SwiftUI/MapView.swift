@@ -11,16 +11,14 @@ import MapKit
 
 /// a very simple view that just presents a  Map given a MKCoordinateRegion
 struct MapView: View {
-    
+
     @State private var region: MKCoordinateRegion
-    
+
     init(region: MKCoordinateRegion) {
         self.region = region
     }
-    
+
     var body: some View {
         Map(coordinateRegion: $region)
     }
 }
-
-

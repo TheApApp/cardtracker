@@ -28,7 +28,6 @@ struct ViewEventsView: View {
     @State private var frontImageShown: UIImage?
     @State var navBarItemChoosen: NavBarItemChoosen?
 
-    // swiftlint:disable:next line_length
     @State var region: MKCoordinateRegion?
 
     static let eventDateFormatter: DateFormatter = {
@@ -65,6 +64,11 @@ struct ViewEventsView: View {
         GeometryReader { _ in
             VStack {
                 HStack {
+                    if let region = region {
+                        MapView(region: region)
+                            .frame(width: 200, height: 150)
+                            .padding([.leading, .trailing], 10 )
+                    }
                     VStack(alignment: .leading) {
                         if let region = region {
                             MapView(region: region)
@@ -78,14 +82,11 @@ struct ViewEventsView: View {
                         if let addressLine2 = recipient.addressLine2, !addressLine2.isEmpty {
                             Text(addressLine2)
                         }
-                        
-                        let cityLine = recipient.city.map { "\($0)," } ?? ""
-                        + (recipient.state ?? "")
-                        + (recipient.zip ?? "")
-                        if !cityLine.isEmpty {
+                        // swiftlint:disable:next line_length
+                        let cityLine = (recipient.city.map {"\($0), "} ?? "") + (recipient.state.map {"\($0) "} ?? "") + (recipient.zip ?? "")
+                        if cityLine != ",  " {
                             Text(cityLine)
                         }
-                        
                         if let countryLine = recipient.country, !countryLine.isEmpty {
                             Text(countryLine)
                         }
@@ -96,10 +97,9 @@ struct ViewEventsView: View {
                         // swiftlint:disable:next line_length
                         let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
                         getLocation(from: addressString) { coordinates in
-
                             if let coordinates = coordinates {
-                                print("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
-                                
+                                print("\(addressString)")
+                                // swiftlint:disable:next line_length
                                 self.region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
                             }
                         }
@@ -165,7 +165,7 @@ struct ViewEventsView: View {
             }
         }
     }
-    
+
     private func deleteEvent(offsets: IndexSet) {
         withAnimation {
             offsets.map { events[$0] }.forEach(moc.delete)
