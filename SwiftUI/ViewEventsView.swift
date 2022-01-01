@@ -25,13 +25,11 @@ struct ViewEventsView: View {
     @State var frontView = false
     @State var backView = false
     @State var frontShown = true
-    @State var addressString = ""
     @State private var frontImageShown: UIImage?
     @State var navBarItemChoosen: NavBarItemChoosen?
 
     // swiftlint:disable:next line_length
-    @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-    @State var location: CLLocationCoordinate2D?
+    @State var region: MKCoordinateRegion?
 
     static let eventDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -73,16 +71,14 @@ struct ViewEventsView: View {
                             .padding([.top], 10)
                             .onAppear {
                                 // swiftlint:disable:next line_length
-                                addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
-                                self.getLocation(from: addressString) { coordinates in
+                                let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
+                                getLocation(from: addressString) { coordinates in
 
                                     // swiftlint:disable:next line_length
                                     print("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
-                                    self.location = coordinates ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-                                    // Assign to a local variable for further processing
-                                    self.region.center.longitude = location?.longitude ?? 0.0
-                                    print("region long = \(self.region.center.longitude)")
-                                    self.region.center.latitude = location?.latitude ?? 0.0
+                                    let location = coordinates ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+                                    
+                                    self.region = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
                                 }
                             }
                         if recipient.addressLine2 != "" {
@@ -96,9 +92,12 @@ struct ViewEventsView: View {
                     }
                     .padding([.leading], 5)
                     Spacer()
-                    Map(coordinateRegion: $region)
-                        .frame(width: 300, height: 250)
-                        .padding([.leading, .trailing], 10 )
+                    if let region = region {
+                        MapView(region: region)
+                            .frame(width: 300)
+                            .frame(maxHeight: 250)
+                            .padding([.leading, .trailing], 10 )
+                    }
                 }
 
                 List {
@@ -159,6 +158,7 @@ struct ViewEventsView: View {
             }
         }
     }
+    
     private func deleteEvent(offsets: IndexSet) {
         withAnimation {
             offsets.map { events[$0] }.forEach(moc.delete)

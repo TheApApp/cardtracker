@@ -30,6 +30,7 @@
 		18D49B872676F59700833E31 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D49B862676F59700833E31 /* CloudKitHelper.swift */; };
 		18E1F6D1276EA07C00BAA1BE /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18E1F6D0276EA07C00BAA1BE /* SwiftUIKit */; };
 		18EF638425EC7D9800448984 /* EditRecipientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF638325EC7D9800448984 /* EditRecipientView.swift */; };
+		7CB807AC2780A40D00E138C4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB807AB2780A40D00E138C4 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		18CC9EED25EF169300434AF9 /* TextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModifier.swift; sourceTree = "<group>"; };
 		18D49B862676F59700833E31 /* CloudKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
 		18EF638325EC7D9800448984 /* EditRecipientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipientView.swift; sourceTree = "<group>"; };
+		7CB807AB2780A40D00E138C4 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				18CC9EED25EF169300434AF9 /* TextFieldModifier.swift */,
 				185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */,
 				1857025C259A1E0B001AA8EA /* ViewEventsView.swift */,
+				7CB807AB2780A40D00E138C4 /* MapView.swift */,
 				18570289259A75F2001AA8EA /* ViewRecipientsView.swift */,
 			);
 			path = SwiftUI;
@@ -254,6 +257,7 @@
 				1857028A259A75F2001AA8EA /* ViewRecipientsView.swift in Sources */,
 				184F7054205CB1F20040204D /* Recipient+CoreDataProperties.swift in Sources */,
 				18CC9EEE25EF169300434AF9 /* TextFieldModifier.swift in Sources */,
+				7CB807AC2780A40D00E138C4 /* MapView.swift in Sources */,
 				18A83CCC27753913005ACB5F /* EditAnEvent.swift in Sources */,
 				184F7056205CB1F20040204D /* Event+CoreDataProperties.swift in Sources */,
 				184EE4C9258829EB007A23C4 /* CardView.swift in Sources */,
