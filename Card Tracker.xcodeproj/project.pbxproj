@@ -19,8 +19,8 @@
 		1857028A259A75F2001AA8EA /* ViewRecipientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18570289259A75F2001AA8EA /* ViewRecipientsView.swift */; };
 		1857028D259A7611001AA8EA /* HolidayCardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857028C259A7611001AA8EA /* HolidayCardApp.swift */; };
 		185CC1F125981BAF00CF4A6F /* ViewAnEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */; };
-		1875A37D2780CE7900911FB4 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1875A37C2780CE7900911FB4 /* Coordinator.swift */; };
 		1875A37F2780CEAC00911FB4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1875A37E2780CEAC00911FB4 /* MapView.swift */; };
+		1875A3812780DA4600911FB4 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1875A3802780DA4600911FB4 /* Coordinator.swift */; };
 		187AAC712596A9E700BC7682 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AAC702596A9E700BC7682 /* UIImage+Extensions.swift */; };
 		187E4382259D2AD90075AEBF /* PersistentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E4381259D2AD90075AEBF /* PersistentStore.swift */; };
 		18839B0F259F9F57000BB450 /* AddNewRecipientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B0E259F9F57000BB450 /* AddNewRecipientView.swift */; };
@@ -54,8 +54,8 @@
 		1857028C259A7611001AA8EA /* HolidayCardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayCardApp.swift; sourceTree = "<group>"; };
 		185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnEventView.swift; sourceTree = "<group>"; };
 		185DD0C62363B6B9009B932C /* Card Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Card Tracker.entitlements"; sourceTree = "<group>"; };
-		1875A37C2780CE7900911FB4 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Coordinator.swift; path = ../../../Desktop/cardtracker/SwiftUI/Coordinator.swift; sourceTree = "<group>"; };
 		1875A37E2780CEAC00911FB4 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		1875A3802780DA4600911FB4 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		187AAC702596A9E700BC7682 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		187E4381259D2AD90075AEBF /* PersistentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStore.swift; sourceTree = "<group>"; };
 		18839B0E259F9F57000BB450 /* AddNewRecipientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRecipientView.swift; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 				18839B11259FA00D000BB450 /* AddNewCardView.swift */,
 				18839B0E259F9F57000BB450 /* AddNewRecipientView.swift */,
 				184EE4C8258829EB007A23C4 /* CardView.swift */,
-				1875A37C2780CE7900911FB4 /* Coordinator.swift */,
+				1875A3802780DA4600911FB4 /* Coordinator.swift */,
 				18A83CCB27753913005ACB5F /* EditAnEvent.swift */,
 				18EF638325EC7D9800448984 /* EditRecipientView.swift */,
 				1829EA3C25AB9CAB00774299 /* ImagePicker.swift */,
@@ -259,6 +259,7 @@
 				1875A37F2780CEAC00911FB4 /* MapView.swift in Sources */,
 				185CC1F125981BAF00CF4A6F /* ViewAnEventView.swift in Sources */,
 				1857028A259A75F2001AA8EA /* ViewRecipientsView.swift in Sources */,
+				1875A3812780DA4600911FB4 /* Coordinator.swift in Sources */,
 				184F7054205CB1F20040204D /* Recipient+CoreDataProperties.swift in Sources */,
 				18CC9EEE25EF169300434AF9 /* TextFieldModifier.swift in Sources */,
 				18A83CCC27753913005ACB5F /* EditAnEvent.swift in Sources */,
@@ -274,7 +275,6 @@
 				1829EA3D25AB9CAB00774299 /* ImagePicker.swift in Sources */,
 				187E4382259D2AD90075AEBF /* PersistentStore.swift in Sources */,
 				1849EF3D25902FDB00EE2780 /* ImageTransformer.swift in Sources */,
-				1875A37D2780CE7900911FB4 /* Coordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
