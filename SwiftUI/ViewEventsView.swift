@@ -66,39 +66,46 @@ struct ViewEventsView: View {
             VStack {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("\(recipient.addressLine1 ?? "")")
-                            .foregroundColor(.green)
-                            .padding([.top], 10)
-                            .onAppear {
-                                // swiftlint:disable:next line_length
-                                let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
-                                getLocation(from: addressString) { coordinates in
-
-                                    if let coordinates = coordinates {
-                                        print("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
-                                        
-                                        self.region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-                                    }
-                                }
-                            }
-                        if recipient.addressLine2 != "" {
-                            Text("\(recipient.addressLine2 ?? "")")
-                                .foregroundColor(.green)
+                        if let region = region {
+                            MapView(region: region)
+                                .frame(width: 300, height: 250)
+                                .padding([.leading, .trailing], 10 )
                         }
-                        Text("\(recipient.city ?? ""), \(recipient.state ?? "") \(recipient.zip ?? "")")
-                            .foregroundColor(.green)
-                        Text("\(recipient.country ?? "")")
-                            .foregroundColor(.green)
+
+                        if let addressLine1 = recipient.addressLine1, !addressLine1.isEmpty {
+                            Text(addressLine1)
+                        }
+                        if let addressLine2 = recipient.addressLine2, !addressLine2.isEmpty {
+                            Text(addressLine2)
+                        }
+                        
+                        let cityLine = recipient.city.map { "\($0)," } ?? ""
+                        + (recipient.state ?? "")
+                        + (recipient.zip ?? "")
+                        if !cityLine.isEmpty {
+                            Text(cityLine)
+                        }
+                        
+                        if let countryLine = recipient.country, !countryLine.isEmpty {
+                            Text(countryLine)
+                        }
                     }
-                    .padding([.leading], 5)
-                    Spacer()
-                    if let region = region {
-                        MapView(region: region)
-                            .frame(width: 300)
-                            .frame(maxHeight: 250)
-                            .padding([.leading, .trailing], 10 )
+                    .padding(10)
+                    .foregroundColor(.green)
+                    .onAppear {
+                        // swiftlint:disable:next line_length
+                        let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
+                        getLocation(from: addressString) { coordinates in
+
+                            if let coordinates = coordinates {
+                                print("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
+                                
+                                self.region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+                            }
+                        }
                     }
                 }
+
 
                 List {
                     ForEach(events, id: \.self) { event in
