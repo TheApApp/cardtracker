@@ -25,13 +25,10 @@ struct ViewEventsView: View {
     @State var frontView = false
     @State var backView = false
     @State var frontShown = true
-    @State var addressString = ""
     @State private var frontImageShown: UIImage?
     @State var navBarItemChoosen: NavBarItemChoosen?
 
-    // swiftlint:disable:next line_length
-    @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-    @State var location: CLLocationCoordinate2D?
+    @State var region: MKCoordinateRegion?
 
     static let eventDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -67,38 +64,41 @@ struct ViewEventsView: View {
         GeometryReader { _ in
             VStack {
                 HStack {
-                    VStack(alignment: .leading) {
-                        Text("\(recipient.addressLine1 ?? "")")
-                            .foregroundColor(.green)
-                            .padding([.top], 10)
-                            .onAppear {
-                                // swiftlint:disable:next line_length
-                                addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
-                                self.getLocation(from: addressString) { coordinates in
-
-                                    // swiftlint:disable:next line_length
-                                    print("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
-                                    self.location = coordinates ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-                                    // Assign to a local variable for further processing
-                                    self.region.center.longitude = location?.longitude ?? 0.0
-                                    print("region long = \(self.region.center.longitude)")
-                                    self.region.center.latitude = location?.latitude ?? 0.0
-                                }
-                            }
-                        if recipient.addressLine2 != "" {
-                            Text("\(recipient.addressLine2 ?? "")")
-                                .foregroundColor(.green)
-                        }
-                        Text("\(recipient.city ?? ""), \(recipient.state ?? "") \(recipient.zip ?? "")")
-                            .foregroundColor(.green)
-                        Text("\(recipient.country ?? "")")
-                            .foregroundColor(.green)
+                    if let region = region {
+                        MapView(region: region)
+                            .frame(width: 200, height: 150)
+                            .padding([.leading, .trailing], 10 )
                     }
-                    .padding([.leading], 5)
-                    Spacer()
-                    Map(coordinateRegion: $region)
-                        .frame(width: 300, height: 250)
-                        .padding([.leading, .trailing], 10 )
+                    VStack(alignment: .leading) {
+                        if let addressLine1 = recipient.addressLine1, !addressLine1.isEmpty {
+                            Text(addressLine1)
+                        }
+                        if let addressLine2 = recipient.addressLine2, !addressLine2.isEmpty {
+                            Text(addressLine2)
+                        }
+                        // swiftlint:disable:next line_length
+                        let cityLine = (recipient.city.map {"\($0), "} ?? "") + (recipient.state.map {"\($0) "} ?? "") + (recipient.zip ?? "")
+                        if cityLine != ",  " {
+                            Text(cityLine)
+                        }
+
+                        if let countryLine = recipient.country, !countryLine.isEmpty {
+                            Text(countryLine)
+                        }
+                    }
+                    .padding(10)
+                    .foregroundColor(.green)
+                    .onAppear {
+                        // swiftlint:disable:next line_length
+                        let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
+                        getLocation(from: addressString) { coordinates in
+                            if let coordinates = coordinates {
+                                print("\(addressString)")
+                                // swiftlint:disable:next line_length
+                                self.region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+                            }
+                        }
+                    }
                 }
 
                 List {
@@ -159,6 +159,7 @@ struct ViewEventsView: View {
             }
         }
     }
+
     private func deleteEvent(offsets: IndexSet) {
         withAnimation {
             offsets.map { events[$0] }.forEach(moc.delete)

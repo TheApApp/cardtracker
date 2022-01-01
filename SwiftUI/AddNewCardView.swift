@@ -188,7 +188,6 @@ extension View {
         let controller = UIHostingController(rootView: self)
 
         controller.view.frame = CGRect(x: 0, y: CGFloat(Int.max), width: 1, height: 1)
-//        UIApplication.shared.windows.first!.rootViewController?.view.addSubview(controller.view)
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
         windowScene?.windows.first!.rootViewController?.view.addSubview(controller.view)
