@@ -74,11 +74,11 @@ struct ViewEventsView: View {
                                 let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
                                 getLocation(from: addressString) { coordinates in
 
-                                    // swiftlint:disable:next line_length
-                                    print("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
-                                    let location = coordinates ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-                                    
-                                    self.region = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+                                    if let coordinates = coordinates {
+                                        print("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
+                                        
+                                        self.region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+                                    }
                                 }
                             }
                         if recipient.addressLine2 != "" {
