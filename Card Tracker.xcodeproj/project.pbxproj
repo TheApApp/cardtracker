@@ -28,6 +28,7 @@
 		18A83CCC27753913005ACB5F /* EditAnEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A83CCB27753913005ACB5F /* EditAnEvent.swift */; };
 		18B70D54205608F700EAC1BD /* Card_Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18B70D52205608F600EAC1BD /* Card_Tracker.xcdatamodeld */; };
 		18BE2ADE2585611600419A63 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BE2ADD2585611600419A63 /* CloudKit.framework */; };
+		18CB915A2782268C00FA96ED /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB91592782268C00FA96ED /* AddressView.swift */; };
 		18CC9EEE25EF169300434AF9 /* TextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC9EED25EF169300434AF9 /* TextFieldModifier.swift */; };
 		18D49B872676F59700833E31 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D49B862676F59700833E31 /* CloudKitHelper.swift */; };
 		18E1F6D1276EA07C00BAA1BE /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18E1F6D0276EA07C00BAA1BE /* SwiftUIKit */; };
@@ -64,6 +65,7 @@
 		18A83CCB27753913005ACB5F /* EditAnEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnEvent.swift; sourceTree = "<group>"; };
 		18B70D53205608F600EAC1BD /* Card_Tracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Card_Tracker.xcdatamodel; sourceTree = "<group>"; };
 		18BE2ADD2585611600419A63 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		18CB91592782268C00FA96ED /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		18CC9EED25EF169300434AF9 /* TextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModifier.swift; sourceTree = "<group>"; };
 		18D49B862676F59700833E31 /* CloudKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
 		18EF638325EC7D9800448984 /* EditRecipientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipientView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		184EE4C7258829C4007A23C4 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				18CB91592782268C00FA96ED /* AddressView.swift */,
 				18839B11259FA00D000BB450 /* AddNewCardView.swift */,
 				18839B0E259F9F57000BB450 /* AddNewRecipientView.swift */,
 				184EE4C8258829EB007A23C4 /* CardView.swift */,
@@ -259,6 +262,7 @@
 				1875A37F2780CEAC00911FB4 /* MapView.swift in Sources */,
 				185CC1F125981BAF00CF4A6F /* ViewAnEventView.swift in Sources */,
 				1857028A259A75F2001AA8EA /* ViewRecipientsView.swift in Sources */,
+				18CB915A2782268C00FA96ED /* AddressView.swift in Sources */,
 				1875A3812780DA4600911FB4 /* Coordinator.swift in Sources */,
 				184F7054205CB1F20040204D /* Recipient+CoreDataProperties.swift in Sources */,
 				18CC9EEE25EF169300434AF9 /* TextFieldModifier.swift in Sources */,
@@ -332,7 +336,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -386,7 +390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -403,7 +407,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 902;
+				CURRENT_PROJECT_VERSION = 0;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = LGX23BH474;
 				INFOPLIST_FILE = "Card Tracker/Info.plist";
@@ -412,7 +416,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.theapapp.christmascardtracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -432,7 +436,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 902;
+				CURRENT_PROJECT_VERSION = 0;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = LGX23BH474;
 				INFOPLIST_FILE = "Card Tracker/Info.plist";
@@ -441,7 +445,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.theapapp.christmascardtracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -27,6 +27,8 @@ struct ViewEventsView: View {
     @State var frontShown = true
     @State private var frontImageShown: UIImage?
     @State var navBarItemChoosen: NavBarItemChoosen?
+    private var blankCardFront = UIImage(contentsOfFile: "frontImage")
+    @State var gridLayout: [GridItem] = [ GridItem()]
 
     @State var region: MKCoordinateRegion?
 
@@ -61,74 +63,61 @@ struct ViewEventsView: View {
     }
 
     var body: some View {
-        GeometryReader { _ in
+        GeometryReader { geo in
             VStack {
                 HStack {
                     if let region = region {
                         MapView(region: region)
-                            .frame(width: 200, height: 150)
+                            .frame(width: geo.size.width * 0.25, height: geo.size.height * 0.2)
                             .padding([.leading, .trailing], 10 )
                     }
-                    VStack(alignment: .leading) {
-                        if let addressLine1 = recipient.addressLine1, !addressLine1.isEmpty {
-                            Text(addressLine1)
-                        }
-                        if let addressLine2 = recipient.addressLine2, !addressLine2.isEmpty {
-                            Text(addressLine2)
-                        }
-                        // swiftlint:disable:next line_length
-                        let cityLine = (recipient.city.map {"\($0), "} ?? "") + (recipient.state.map {"\($0) "} ?? "") + (recipient.zip ?? "")
-                        if cityLine != ",  " {
-                            Text(cityLine)
-                        }
-
-                        if let countryLine = recipient.country, !countryLine.isEmpty {
-                            Text(countryLine)
-                        }
-                    }
-                    .padding(10)
-                    .foregroundColor(.green)
-                    .onAppear {
-                        // swiftlint:disable:next line_length
-                        let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
-                        getLocation(from: addressString) { coordinates in
-                            if let coordinates = coordinates {
-                                print("\(addressString)")
-                                // swiftlint:disable:next line_length
-                                self.region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+                    AddressView(recipient: recipient)
+                    Spacer()
+                        .onAppear {
+                            // swiftlint:disable:next line_length
+                            let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
+                            getLocation(from: addressString) { coordinates in
+                                if let coordinates = coordinates {
+                                    print("\(addressString)")
+                                    // swiftlint:disable:next line_length
+                                    self.region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+                                }
                             }
                         }
-                    }
                 }
-
-                List {
-                    ForEach(events, id: \.self) { event in
-                        NavigationLink(destination: ViewAnEventView(event: event, recipient: recipient)) {
-                            HStack {
-                                VStack {
-                                    Spacer()
-                                    Text("\(event.event ?? "Unknown Event")")
-                                        .font(.title)
-                                        .foregroundColor(.green)
-                                    Text("\(event.eventDate!, formatter: Self.eventDateFormatter)")
-                                        .font(.title)
-                                        .foregroundColor(.green)
-                                    Spacer()
-                                }
-                                Spacer()
-                                if event.cardFrontImage != nil {
-                                    Image(uiImage: (event.cardFrontImage ?? UIImage(contentsOfFile: "frontImage"))!)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                } else {
-                                    Image("frontImage")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                }
-                            } .frame(height: 300)
+                ScrollView {
+                    LazyVGrid(columns: gridLayout, alignment: .center, spacing: 10) {
+                        ForEach(events, id: \.self) { event in
+                            NavigationLink(destination: ViewAnEventView(event: event, recipient: recipient)) {
+                                HStack {
+                                    VStack {
+                                        ZStack {
+                                            Spacer()
+                                            Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .ignoresSafeArea(edges: [.vertical, .bottom])
+                                            HStack {
+                                                VStack {
+                                                    Spacer()
+                                                    Text("\(event.event ?? "")")
+                                                    // swiftlint:disable:next line_length
+                                                    Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
+                                                    Spacer()
+                                                }
+                                                .padding(10)
+                                                .font(.title)
+                                                .foregroundColor(.white)
+                                                .shadow(color: .black, radius: 2.0)
+                                            }
+                                        }
+                                    }
+                                } .frame(height: geo.size.width * 0.25)
+                            }
                         }
+                        .onDelete(perform: deleteEvent)
+                        // systemname: "trash.circle"
                     }
-                    .onDelete(perform: deleteEvent)
                 }
                 .navigationTitle("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")")
                 .navigationBarItems(trailing:
@@ -145,6 +134,13 @@ struct ViewEventsView: View {
                     }, label: {
                         Image(systemName: "square.and.pencil")
                             .font(.largeTitle)
+                            .foregroundColor(.green)
+                    })
+                    Button(action: {
+                        self.gridLayout = Array(repeating: .init(.flexible()), count: self.gridLayout.count % 4 + 1)
+                    }, label: {
+                        Image(systemName: "square.grid.2x2")
+                            .font(.title)
                             .foregroundColor(.green)
                     })
                 })

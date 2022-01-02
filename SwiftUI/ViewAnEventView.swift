@@ -63,7 +63,8 @@ struct ViewAnEventView: View {
             HStack {
                 Text("\(event.event ?? "no event")-\(event.eventDate!, formatter: Self.eventDateFormatter)")
                     .font(.title)
-                    .foregroundColor(.green)
+                    .foregroundColor(.white)
+                    .shadow(color: .black, radius: 1.0)
                 Spacer()
                 Button(action: {
                     showCardView = .edit
@@ -74,10 +75,6 @@ struct ViewAnEventView: View {
                 })
             }
             .padding([.leading, .trailing], 10 )
-            HStack {
-                AddressView(recipient: recipient)
-                Spacer()
-            }
             HStack {
                 Button( action: {
                     showCardView = .front
@@ -91,7 +88,8 @@ struct ViewAnEventView: View {
                 .sheet(item: $showCardView) { item in
                     switch item {
                     case .front:
-                        CardView(cardImage: (event.cardFrontImage ?? blankCardFront)!)
+                        // swiftlint:disable:next line_length
+                        CardView(cardImage: (event.cardFrontImage ?? blankCardFront)!, event: event.event ?? "", eventDate: event.eventDate! as Date)
                     case .edit:
                         EditAnEvent(event: event, recipient: recipient)
                     }
@@ -103,26 +101,5 @@ struct ViewAnEventView: View {
 struct ViewAnEventView_Previews: PreviewProvider {
     static var previews: some View {
         ViewAnEventView(event: Event(), recipient: Recipient())
-    }
-}
-
-struct AddressView: View {
-    var recipient: Recipient
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("\(recipient.addressLine1 ?? "")")
-                .padding([.top], 10)
-                .foregroundColor(.green)
-            if recipient.addressLine2 != "" {
-                Text("\(recipient.addressLine2 ?? "")")
-                    .foregroundColor(.green)
-            }
-            Text("\(recipient.city ?? ""), \(recipient.state ?? "") \(recipient.zip ?? "")")
-                .foregroundColor(.green)
-            Text("\(recipient.country ?? "")")
-                .foregroundColor(.green)
-        }
-        .padding([.leading, .trailing], 10 )
     }
 }
