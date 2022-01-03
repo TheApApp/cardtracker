@@ -9,9 +9,9 @@
 
 echo "Pre Xcode Build"
 
-if [[ -n $CI_PULL_REQUEST_NUMBER && $CI_XCODEBUILD_ACTION = 'archive']];
-then
-    echo "Changing To Beta Icon"
+#  if [[ -n $CI_PULL_REQUEST_NUMBER && $CI_XCODEBUILD_ACTION = 'archive']];
+#  then
+    # echo "Changing To Beta Icon"
     # Here we would put the swap like
     # APP_ICON_PATH=$CI_WORKSPACE/Shared/Assets.xcassets/AppIcon.appiconset
 
@@ -21,4 +21,4 @@ then
     # Replace with Beta Icon
     # mv "$CI_WORKSPACE/ci_scripts/AppIcon-Beta.appiconset" $APP_ICON_PATH
 
-fi
+#  fi
