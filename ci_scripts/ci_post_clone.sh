@@ -7,3 +7,5 @@
 #  Copyright © 2022 Michael Rowe. All rights reserved.
 
 echo "Post Clone"
+
+brew install swiftlint
