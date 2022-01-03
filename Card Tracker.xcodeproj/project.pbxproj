@@ -63,6 +63,9 @@
 		18839B11259FA00D000BB450 /* AddNewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCardView.swift; sourceTree = "<group>"; };
 		18A83CCA2775381A005ACB5F /* Card_Tracker 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 6.xcdatamodel"; sourceTree = "<group>"; };
 		18A83CCB27753913005ACB5F /* EditAnEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnEvent.swift; sourceTree = "<group>"; };
+		18B44F7227829BAE008C4AF7 /* ci_post_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_xcodebuild.sh; sourceTree = "<group>"; };
+		18B44F7327829C0C008C4AF7 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
+		18B44F7427829C2C008C4AF7 /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
 		18B70D53205608F600EAC1BD /* Card_Tracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Card_Tracker.xcdatamodel; sourceTree = "<group>"; };
 		18BE2ADD2585611600419A63 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		18CB91592782268C00FA96ED /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
@@ -89,6 +92,7 @@
 			children = (
 				184EE4C7258829C4007A23C4 /* SwiftUI */,
 				185396A0209E454C00435E14 /* Media.xcassets */,
+				18B44F7127829B8A008C4AF7 /* ci_scripts */,
 				18478CC4203887E300C91E22 /* Card Tracker */,
 				18478CC3203887E300C91E22 /* Products */,
 				18BE2ADC2585611600419A63 /* Frameworks */,
@@ -135,6 +139,16 @@
 				18570289259A75F2001AA8EA /* ViewRecipientsView.swift */,
 			);
 			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		18B44F7127829B8A008C4AF7 /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				18B44F7227829BAE008C4AF7 /* ci_post_xcodebuild.sh */,
+				18B44F7327829C0C008C4AF7 /* ci_post_clone.sh */,
+				18B44F7427829C2C008C4AF7 /* ci_pre_xcodebuild.sh */,
+			);
+			path = ci_scripts;
 			sourceTree = "<group>";
 		};
 		18B92EA72055D8B9003DB6B2 /* CoreData */ = {
