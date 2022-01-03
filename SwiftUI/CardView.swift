@@ -43,33 +43,30 @@ struct CardView: View {
 
     var body: some View {
         NavigationView {
-//            VStack {
-                ZStack {
-                    Spacer()
-                    Image(uiImage: cardImage)
-                        .resizable()
-                        .aspectRatio(contentMode: zoomed ? .fit : .fill)
-                        .onTapGesture {
-                            withAnimation {
-                                zoomed.toggle()
-                            }
+            ZStack {
+                Spacer()
+                Image(uiImage: cardImage)
+                    .resizable()
+                    .aspectRatio(contentMode: zoomed ? .fit : .fill)
+                    .onTapGesture {
+                        withAnimation {
+                            zoomed.toggle()
                         }
-                        .ignoresSafeArea(edges: [.vertical, .bottom])
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(event)
-                            Text("\(eventDate, formatter: Self.eventDateFormatter)")
-                            Spacer()
-                        }
-                        .padding(10)
-                        .font(.largeTitle)
-                        .foregroundColor(.white)
-                        .shadow(color: .black, radius: 1.0)
+                    }
+                    .ignoresSafeArea(edges: [.vertical, .bottom])
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(event)
+                        Text("\(eventDate, formatter: Self.eventDateFormatter)")
                         Spacer()
                     }
+                    .padding(10)
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+                    .shadow(color: .black, radius: 1.0)
+                    Spacer()
                 }
-
-//            }
+            }
             .navigationBarItems(trailing:
                                     HStack {
                 Button(action: {

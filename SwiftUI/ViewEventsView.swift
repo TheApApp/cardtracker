@@ -20,14 +20,16 @@ struct ViewEventsView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
     @FetchRequest private var events: FetchedResults<Event>
+
+    private var blankCardFront = UIImage(contentsOfFile: "frontImage")
     private var recipient: Recipient
+
     @State var newEvent = false
     @State var frontView = false
     @State var backView = false
     @State var frontShown = true
     @State private var frontImageShown: UIImage?
     @State var navBarItemChoosen: NavBarItemChoosen?
-    private var blankCardFront = UIImage(contentsOfFile: "frontImage")
     @State var gridLayout: [GridItem] = [ GridItem()]
 
     @State var region: MKCoordinateRegion?
@@ -68,7 +70,7 @@ struct ViewEventsView: View {
                 HStack {
                     if let region = region {
                         MapView(region: region)
-                            .frame(width: geo.size.width * 0.25, height: geo.size.height * 0.2)
+                            .frame(width: geo.size.width * 0.3, height: geo.size.height * 0.2)
                             .padding([.leading, .trailing], 10 )
                     }
                     AddressView(recipient: recipient)
@@ -78,7 +80,6 @@ struct ViewEventsView: View {
                             let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
                             getLocation(from: addressString) { coordinates in
                                 if let coordinates = coordinates {
-                                    print("\(addressString)")
                                     // swiftlint:disable:next line_length
                                     self.region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
                                 }
@@ -86,7 +87,7 @@ struct ViewEventsView: View {
                         }
                 }
                 ScrollView {
-                    LazyVGrid(columns: gridLayout, alignment: .center, spacing: 10) {
+                    LazyVGrid(columns: gridLayout, alignment: .center, spacing: 1) {
                         ForEach(events, id: \.self) { event in
                             NavigationLink(destination: ViewAnEventView(event: event, recipient: recipient)) {
                                 HStack {
