@@ -113,7 +113,7 @@ struct ViewEventsView: View {
                                             }
                                         }
                                     }
-                                } .frame(height: geo.size.width * 0.25)
+                                } .frame(height: geo.size.width * 0.3)
                             }
                         }
                         .onDelete(perform: deleteEvent)
