@@ -30,7 +30,7 @@ struct ViewEventsView: View {
     @State var frontShown = true
     @State private var frontImageShown: UIImage?
     @State var navBarItemChoosen: NavBarItemChoosen?
-    @State var gridLayout: [GridItem] = [ GridItem()]
+    private var gridLayout: [GridItem]
 
     @State var region: MKCoordinateRegion?
 
@@ -62,6 +62,13 @@ struct ViewEventsView: View {
         ]
         request.predicate =  NSPredicate(format: "%K == %@", #keyPath(Event.recipient), recipient)
         _events = FetchRequest<Event>(fetchRequest: request)
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.gridLayout = [GridItem(.flexible()), GridItem(.flexible())]
+        } else {
+            self.gridLayout = [GridItem(.flexible()),
+                               GridItem(.flexible()),
+                               GridItem(.flexible())]
+        }
     }
 
     var body: some View {
@@ -72,19 +79,19 @@ struct ViewEventsView: View {
                         MapView(region: region)
                             .frame(width: geo.size.width * 0.3, height: geo.size.height * 0.2)
                             .padding([.leading, .trailing], 10 )
+                        AddressView(recipient: recipient)
                     }
-                    AddressView(recipient: recipient)
                     Spacer()
-                        .onAppear {
-                            // swiftlint:disable:next line_length
-                            let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
-                            getLocation(from: addressString) { coordinates in
-                                if let coordinates = coordinates {
-                                    // swiftlint:disable:next line_length
-                                    self.region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-                                }
+                    .onAppear {
+                        // swiftlint:disable:next line_length
+                        let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
+                        getLocation(from: addressString) { coordinates in
+                            if let coordinates = coordinates {
+                                // swiftlint:disable:next line_length
+                                self.region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
                             }
                         }
+                    }
                 }
                 ScrollView {
                     LazyVGrid(columns: gridLayout, alignment: .center, spacing: 1) {
@@ -127,23 +134,21 @@ struct ViewEventsView: View {
                         navBarItemChoosen = .newCard
                     }, label: {
                         Image(systemName: "plus.circle.fill")
-                            .font(.largeTitle)
                             .foregroundColor(.green)
                     })
                     Button(action: {
                         navBarItemChoosen = .editRecipient
                     }, label: {
                         Image(systemName: "square.and.pencil")
-                            .font(.largeTitle)
                             .foregroundColor(.green)
                     })
-                    Button(action: {
-                        self.gridLayout = Array(repeating: .init(.flexible()), count: self.gridLayout.count % 4 + 1)
-                    }, label: {
-                        Image(systemName: "square.grid.2x2")
-                            .font(.title)
-                            .foregroundColor(.green)
-                    })
+//                    Button(action: {
+//                        self.gridLayout = Array(repeating: .init(.flexible()), count: self.gridLayout.count % 4 + 1)
+//                    }, label: {
+//                        Image(systemName: "square.grid.2x2")
+//                            .font(.title)
+//                            .foregroundColor(.green)
+//                    })
                 })
             }
             .sheet(item: $navBarItemChoosen ) { item in

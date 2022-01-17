@@ -26,6 +26,7 @@ struct AddNewRecipientView: View {
     @State private var state: String = ""
     @State private var zip: String = ""
     @State private var country: String = ""
+    @State private var presentAlert = false
 
     @State var showPicker = false
 
@@ -116,6 +117,8 @@ struct AddNewRecipientView: View {
                     let contactsPermsissions = checkContactsPermissions()
                     if contactsPermsissions == true {
                         self.showPicker.toggle()
+                    } else {
+                        presentAlert = true
                     }
                 }, label: {
                     Image(systemName: "person.crop.circle.fill")
@@ -139,6 +142,13 @@ struct AddNewRecipientView: View {
                 })
             }
             )
+            .alert(isPresented: $presentAlert, content: {
+                Alert( // 1
+                    title: Text("Contacts Denied"),
+                    message: Text("Please enable access to contacs in Settings"),
+                    dismissButton: .cancel()
+                )
+            })
         }
     }
 
@@ -170,7 +180,6 @@ struct AddNewRecipientView: View {
             return false
         case .denied:
             print("User has denided permissions")
-            // add a popup to say you have denied permissions
             return false
         case .notDetermined:
             print("you need to request authorization via the API now")

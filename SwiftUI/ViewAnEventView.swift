@@ -61,10 +61,9 @@ struct ViewAnEventView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("\(event.event ?? "no event")-\(event.eventDate!, formatter: Self.eventDateFormatter)")
+                Text("\(event.event ?? "no event") - \(event.eventDate!, formatter: Self.eventDateFormatter)")
                     .font(.title)
-                    .foregroundColor(.white)
-                    .shadow(color: .black, radius: 1.0)
+                    .foregroundColor(.green)
                 Spacer()
                 Button(action: {
                     showCardView = .edit
@@ -75,19 +74,14 @@ struct ViewAnEventView: View {
                 })
             }
             .padding([.leading, .trailing], 10 )
-            HStack {
-                Button( action: {
-                    showCardView = .front
-                }, label: {
-                    Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
-                        .resizable()
-                        .aspectRatio(contentMode: zoomed ? .fill : .fit)
-                })
-            }
+            Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
+            .resizable()
+            .aspectRatio(contentMode: zoomed ? .fill : .fit)
             Spacer()
                 .sheet(item: $showCardView) { item in
                     switch item {
                     case .front:
+                        // This is no longer used...
                         // swiftlint:disable:next line_length
                         CardView(cardImage: (event.cardFrontImage ?? blankCardFront)!, event: event.event ?? "", eventDate: event.eventDate! as Date)
                     case .edit:
