@@ -18,7 +18,7 @@
 		1857025D259A1E0B001AA8EA /* ViewEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857025C259A1E0B001AA8EA /* ViewEventsView.swift */; };
 		1857028A259A75F2001AA8EA /* ViewRecipientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18570289259A75F2001AA8EA /* ViewRecipientsView.swift */; };
 		1857028D259A7611001AA8EA /* HolidayCardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857028C259A7611001AA8EA /* HolidayCardApp.swift */; };
-		185C11CE27D41332008AA54A /* FilteringList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185C11CD27D41332008AA54A /* FilteringList.swift */; };
+		185C11CE27D41332008AA54A /* FilteringList-old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185C11CD27D41332008AA54A /* FilteringList-old.swift */; };
 		185CC1F125981BAF00CF4A6F /* ViewAnEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */; };
 		1875A37F2780CEAC00911FB4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1875A37E2780CEAC00911FB4 /* MapView.swift */; };
 		1875A3812780DA4600911FB4 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1875A3802780DA4600911FB4 /* Coordinator.swift */; };
@@ -26,6 +26,7 @@
 		187E4382259D2AD90075AEBF /* PersistentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E4381259D2AD90075AEBF /* PersistentStore.swift */; };
 		18839B0F259F9F57000BB450 /* AddNewRecipientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B0E259F9F57000BB450 /* AddNewRecipientView.swift */; };
 		18839B12259FA00D000BB450 /* AddNewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B11259FA00D000BB450 /* AddNewCardView.swift */; };
+		18A3DEB827D5490200F55921 /* FilteredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A3DEB727D5490200F55921 /* FilteredList.swift */; };
 		18A83CCC27753913005ACB5F /* EditAnEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A83CCB27753913005ACB5F /* EditAnEvent.swift */; };
 		18B70D54205608F700EAC1BD /* Card_Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18B70D52205608F600EAC1BD /* Card_Tracker.xcdatamodeld */; };
 		18BE2ADE2585611600419A63 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BE2ADD2585611600419A63 /* CloudKit.framework */; };
@@ -54,7 +55,7 @@
 		18570280259A58A6001AA8EA /* Card_Tracker 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 5.xcdatamodel"; sourceTree = "<group>"; };
 		18570289259A75F2001AA8EA /* ViewRecipientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRecipientsView.swift; sourceTree = "<group>"; };
 		1857028C259A7611001AA8EA /* HolidayCardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayCardApp.swift; sourceTree = "<group>"; };
-		185C11CD27D41332008AA54A /* FilteringList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringList.swift; sourceTree = "<group>"; };
+		185C11CD27D41332008AA54A /* FilteringList-old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilteringList-old.swift"; sourceTree = "<group>"; };
 		185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnEventView.swift; sourceTree = "<group>"; };
 		185DD0C62363B6B9009B932C /* Card Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Card Tracker.entitlements"; sourceTree = "<group>"; };
 		1875A37E2780CEAC00911FB4 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -63,6 +64,7 @@
 		187E4381259D2AD90075AEBF /* PersistentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStore.swift; sourceTree = "<group>"; };
 		18839B0E259F9F57000BB450 /* AddNewRecipientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRecipientView.swift; sourceTree = "<group>"; };
 		18839B11259FA00D000BB450 /* AddNewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCardView.swift; sourceTree = "<group>"; };
+		18A3DEB727D5490200F55921 /* FilteredList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredList.swift; sourceTree = "<group>"; };
 		18A83CCA2775381A005ACB5F /* Card_Tracker 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 6.xcdatamodel"; sourceTree = "<group>"; };
 		18A83CCB27753913005ACB5F /* EditAnEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnEvent.swift; sourceTree = "<group>"; };
 		18B44F7227829BAE008C4AF7 /* ci_post_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_xcodebuild.sh; sourceTree = "<group>"; };
@@ -139,7 +141,8 @@
 				185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */,
 				1857025C259A1E0B001AA8EA /* ViewEventsView.swift */,
 				18570289259A75F2001AA8EA /* ViewRecipientsView.swift */,
-				185C11CD27D41332008AA54A /* FilteringList.swift */,
+				185C11CD27D41332008AA54A /* FilteringList-old.swift */,
+				18A3DEB727D5490200F55921 /* FilteredList.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -279,7 +282,7 @@
 				1875A37F2780CEAC00911FB4 /* MapView.swift in Sources */,
 				185CC1F125981BAF00CF4A6F /* ViewAnEventView.swift in Sources */,
 				1857028A259A75F2001AA8EA /* ViewRecipientsView.swift in Sources */,
-				185C11CE27D41332008AA54A /* FilteringList.swift in Sources */,
+				185C11CE27D41332008AA54A /* FilteringList-old.swift in Sources */,
 				18CB915A2782268C00FA96ED /* AddressView.swift in Sources */,
 				1875A3812780DA4600911FB4 /* Coordinator.swift in Sources */,
 				184F7054205CB1F20040204D /* Recipient+CoreDataProperties.swift in Sources */,
@@ -295,6 +298,7 @@
 				184F7053205CB1F20040204D /* Recipient+CoreDataClass.swift in Sources */,
 				18839B12259FA00D000BB450 /* AddNewCardView.swift in Sources */,
 				1829EA3D25AB9CAB00774299 /* ImagePicker.swift in Sources */,
+				18A3DEB827D5490200F55921 /* FilteredList.swift in Sources */,
 				187E4382259D2AD90075AEBF /* PersistentStore.swift in Sources */,
 				1849EF3D25902FDB00EE2780 /* ImageTransformer.swift in Sources */,
 			);
@@ -429,7 +433,7 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = LGX23BH474;
 				INFOPLIST_FILE = "Card Tracker/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -459,7 +463,7 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = LGX23BH474;
 				INFOPLIST_FILE = "Card Tracker/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

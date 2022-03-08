@@ -20,7 +20,7 @@ extension Binding {
     }
 }
 
-struct FilteringList<T: Identifiable, Content: View>: View {
+struct FilteringListold<T: Identifiable, Content: View>: View {
     @State private var filteredItems = [T]()
     @State private var filterString = ""
 

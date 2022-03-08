@@ -8,6 +8,9 @@ struct ViewRecipientsView: View {
     @FetchRequest private var recipients: FetchedResults<Recipient>
     @State var newEvent = false
 
+    @State private var lastNameFilter = ""
+    @State private var firstNameFilter = ""
+
     init() {
         let navBarApperance = UINavigationBarAppearance()
         navBarApperance.largeTitleTextAttributes = [
@@ -31,27 +34,25 @@ struct ViewRecipientsView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(recipients, id: \.self) { recipient in
-                    NavigationLink(destination:
-                                    ViewEventsView(recipient: recipient)) {
-                        Text("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")")
-                            .foregroundColor(.green)
-                    }
+            VStack {
+                HStack {
+                    TextField("Filter", text: $lastNameFilter)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
-                .onDelete(perform: deleteRecipient)
+                .padding(.all)
+                FilteredList(filter: lastNameFilter)
             }
             .navigationTitle("Recipient List")
             .navigationBarItems(trailing:
                                     HStack {
-                                        Button(action: {
-                                            self.addNewRecipient.toggle()
-                                        }, label: {
-                                            Image(systemName: "plus.circle.fill")
-                                                .font(.largeTitle)
-                                                .foregroundColor(.green)
-                                        })
-                                    }
+                Button(action: {
+                    self.addNewRecipient.toggle()
+                }, label: {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.largeTitle)
+                        .foregroundColor(.green)
+                })
+            }
             )
             Text("Select a Recipient")
                 .font(.largeTitle)
@@ -63,17 +64,17 @@ struct ViewRecipientsView: View {
         }
     }
 
-    private func deleteRecipient(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { recipients[$0] }.forEach(moc.delete)
-            do {
-                try moc.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
+//    func deleteRecipient(offsets: IndexSet) {
+//        withAnimation {
+//            offsets.map { recipients[$0] }.forEach(moc.delete)
+//            do {
+//                try moc.save()
+//            } catch {
+//                let nsError = error as NSError
+//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+//            }
+//        }
+//    }
 }
 
 struct ContentView_Previews: PreviewProvider {

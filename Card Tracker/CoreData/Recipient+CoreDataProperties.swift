@@ -27,6 +27,14 @@ extension Recipient: Identifiable {
     @NSManaged public var events: NSSet?
     @NSManaged public var id: UUID?
 
+    var wrappedFirstName: String {
+        firstName ?? "Unknown"
+    }
+
+    var wrappedLastName: String {
+        lastName ?? "Unknown"
+    }
+
 }
 
 // MARK: Generated accessors for events
