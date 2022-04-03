@@ -17,6 +17,7 @@ struct ViewAnEventView: View {
     }
 
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.managedObjectContext) var moc
     @State private var zoomed = false
 
     private var event: Event
@@ -72,6 +73,14 @@ struct ViewAnEventView: View {
                         .font(.title)
                         .foregroundColor(.green)
                 })
+                Button {
+                    self.presentationMode.wrappedValue.dismiss()
+                    deleteCard(event: event)
+                } label: {
+                    Image(systemName: "trash")
+                        .font(.title)
+                        .foregroundColor(.red)
+                }
             }
             .padding([.leading, .trailing], 10 )
             Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
@@ -88,6 +97,17 @@ struct ViewAnEventView: View {
                         EditAnEvent(event: event, recipient: recipient)
                     }
                 }
+        }
+    }
+
+    func deleteCard(event: Event) {
+        print("Delete the card \(event)")
+        moc.delete(event)
+        do {
+            try moc.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
 }

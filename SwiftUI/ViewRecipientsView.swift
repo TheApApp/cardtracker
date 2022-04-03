@@ -63,18 +63,6 @@ struct ViewRecipientsView: View {
             AddNewRecipientView()
         }
     }
-
-//    func deleteRecipient(offsets: IndexSet) {
-//        withAnimation {
-//            offsets.map { recipients[$0] }.forEach(moc.delete)
-//            do {
-//                try moc.save()
-//            } catch {
-//                let nsError = error as NSError
-//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//            }
-//        }
-//    }
 }
 
 struct ContentView_Previews: PreviewProvider {

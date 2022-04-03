@@ -107,35 +107,32 @@ struct AddNewCardView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .shadow(radius: 10 )
-                            VStack {
-                                Image(systemName: "camera.fill")
-                                Text("Front")
-                            }
-                            .foregroundColor(.white)
-                            .font(.largeTitle)
-                            .shadow(radius: 10)
-                            .frame(width: geomtry.size.width * 0.45)
-                            .onTapGesture { self.frontPhoto = true }
-                            .actionSheet(isPresented: $frontPhoto) { () -> ActionSheet in
-                                ActionSheet(
-                                    title: Text("Choose mode"),
-                                    message: Text("Select one."),
-                                    buttons: [ActionSheet.Button.default(Text("Camera"), action: {
-                                        self.captureFrontImage.toggle()
-                                        self.shouldPresentCamera = true
-                                    }),
-                                              ActionSheet.Button.default(Text("Photo Library"), action: {
-                                                  self.captureFrontImage.toggle()
-                                                  self.shouldPresentCamera = false
-                                              }),
-                                              ActionSheet.Button.cancel()])
-                            }
-                            .sheet(isPresented: $captureFrontImage) {
-                                ImagePicker(
-                                    sourceType: self.shouldPresentCamera ? .camera : .photoLibrary,
-                                    image: $frontImageSelected,
-                                    isPresented: self.$captureFrontImage)
-                            }
+                            Image(systemName: "camera.fill")
+                                .foregroundColor(.white)
+                                .font(.largeTitle)
+                                .shadow(radius: 10)
+                                .frame(width: geomtry.size.width * 0.45)
+                                .onTapGesture { self.frontPhoto = true }
+                                .actionSheet(isPresented: $frontPhoto) { () -> ActionSheet in
+                                    ActionSheet(
+                                        title: Text("Choose mode"),
+                                        message: Text("Select one."),
+                                        buttons: [ActionSheet.Button.default(Text("Camera"), action: {
+                                            self.captureFrontImage.toggle()
+                                            self.shouldPresentCamera = true
+                                        }),
+                                                  ActionSheet.Button.default(Text("Photo Library"), action: {
+                                                      self.captureFrontImage.toggle()
+                                                      self.shouldPresentCamera = false
+                                                  }),
+                                                  ActionSheet.Button.cancel()])
+                                }
+                                .sheet(isPresented: $captureFrontImage) {
+                                    ImagePicker(
+                                        sourceType: self.shouldPresentCamera ? .camera : .photoLibrary,
+                                        image: $frontImageSelected,
+                                        isPresented: self.$captureFrontImage)
+                                }
                         }
                     }
                     Spacer()

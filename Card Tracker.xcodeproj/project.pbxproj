@@ -18,7 +18,6 @@
 		1857025D259A1E0B001AA8EA /* ViewEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857025C259A1E0B001AA8EA /* ViewEventsView.swift */; };
 		1857028A259A75F2001AA8EA /* ViewRecipientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18570289259A75F2001AA8EA /* ViewRecipientsView.swift */; };
 		1857028D259A7611001AA8EA /* HolidayCardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857028C259A7611001AA8EA /* HolidayCardApp.swift */; };
-		185C11CE27D41332008AA54A /* FilteringList-old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185C11CD27D41332008AA54A /* FilteringList-old.swift */; };
 		185CC1F125981BAF00CF4A6F /* ViewAnEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */; };
 		1875A37F2780CEAC00911FB4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1875A37E2780CEAC00911FB4 /* MapView.swift */; };
 		1875A3812780DA4600911FB4 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1875A3802780DA4600911FB4 /* Coordinator.swift */; };
@@ -55,7 +54,6 @@
 		18570280259A58A6001AA8EA /* Card_Tracker 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 5.xcdatamodel"; sourceTree = "<group>"; };
 		18570289259A75F2001AA8EA /* ViewRecipientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRecipientsView.swift; sourceTree = "<group>"; };
 		1857028C259A7611001AA8EA /* HolidayCardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayCardApp.swift; sourceTree = "<group>"; };
-		185C11CD27D41332008AA54A /* FilteringList-old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilteringList-old.swift"; sourceTree = "<group>"; };
 		185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnEventView.swift; sourceTree = "<group>"; };
 		185DD0C62363B6B9009B932C /* Card Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Card Tracker.entitlements"; sourceTree = "<group>"; };
 		1875A37E2780CEAC00911FB4 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 				185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */,
 				1857025C259A1E0B001AA8EA /* ViewEventsView.swift */,
 				18570289259A75F2001AA8EA /* ViewRecipientsView.swift */,
-				185C11CD27D41332008AA54A /* FilteringList-old.swift */,
 				18A3DEB727D5490200F55921 /* FilteredList.swift */,
 			);
 			path = SwiftUI;
@@ -282,7 +279,6 @@
 				1875A37F2780CEAC00911FB4 /* MapView.swift in Sources */,
 				185CC1F125981BAF00CF4A6F /* ViewAnEventView.swift in Sources */,
 				1857028A259A75F2001AA8EA /* ViewRecipientsView.swift in Sources */,
-				185C11CE27D41332008AA54A /* FilteringList-old.swift in Sources */,
 				18CB915A2782268C00FA96ED /* AddressView.swift in Sources */,
 				1875A3812780DA4600911FB4 /* Coordinator.swift in Sources */,
 				184F7054205CB1F20040204D /* Recipient+CoreDataProperties.swift in Sources */,
@@ -433,7 +429,7 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = LGX23BH474;
 				INFOPLIST_FILE = "Card Tracker/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -462,7 +458,7 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = LGX23BH474;
 				INFOPLIST_FILE = "Card Tracker/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
