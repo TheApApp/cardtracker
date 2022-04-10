@@ -61,16 +61,16 @@ struct EditAnEvent: View {
     @State var shouldPresentCamera = false
 
     init(event: Event, recipient: Recipient) {
-        let navBarApperance = UINavigationBarAppearance()
-        navBarApperance.largeTitleTextAttributes = [
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.largeTitleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
-        navBarApperance.titleTextAttributes = [
+        navBarAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
-        UINavigationBar.appearance().standardAppearance = navBarApperance
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarApperance
-        UINavigationBar.appearance().compactAppearance = navBarApperance
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().compactAppearance = navBarAppearance
         self.event = event
         self.recipient = recipient
         self._firstName = State(initialValue: recipient.firstName ?? "")
@@ -90,7 +90,7 @@ struct EditAnEvent: View {
                         Text("Event")
                         Spacer()
                         Picker(selection: $selectedEvent, label: Text("")) {
-                            ForEach(0 ..< eventChoices.count) {
+                            ForEach(0 ..< eventChoices.count, id: \.self) {
                                 Text(self.eventChoices[$0])
                             }
                         }
@@ -144,25 +144,25 @@ struct EditAnEvent: View {
             }
             .padding([.leading, .trailing], 10)
             .navigationBarTitle("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")")
-            .navigationBarItems(trailing:
-                                    HStack {
-                Button(action: {
-                    saveCard()
-                    self.presentationMode.wrappedValue.dismiss()
-                }, label: {
-                    Image(systemName: "square.and.arrow.down")
-                        .font(.largeTitle)
-                        .foregroundColor(.green)
-                })
-                Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
-                }, label: {
-                    Image(systemName: "chevron.down.circle.fill")
-                        .font(.largeTitle)
-                        .foregroundColor(.green)
-                })
+            .toolbar {
+                ToolbarItemGroup(placement: .automatic) {
+                    Button(action: {
+                        saveCard()
+                        self.presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "square.and.arrow.down")
+                            .font(.title2)
+                            .foregroundColor(.green)
+                    })
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "chevron.down.circle.fill")
+                            .font(.title2)
+                            .foregroundColor(.green)
+                    })
+                }
             }
-            )
         }
     }
 

@@ -17,13 +17,9 @@ extension Event: Identifiable {
         return NSFetchRequest<Event>(entityName: "Event")
     }
 
-    @NSManaged public var cardBackThumbnailURI: String?
     @NSManaged public var cardFrontThumbnailURI: String?
-    @NSManaged public var cardBackImage: UIImage?
     @NSManaged public var cardFrontImage: UIImage?
-    @NSManaged public var cardBackThumbnailImage: UIImage?
     @NSManaged public var cardFrontThumbnailImage: UIImage?
-    @NSManaged public var cardBackURI: String?
     @NSManaged public var cardFrontURI: String?
     @NSManaged public var event: String?
     @NSManaged public var eventDate: NSDate?

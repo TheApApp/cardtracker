@@ -31,16 +31,16 @@ struct AddNewRecipientView: View {
     @State var showPicker = false
 
     init() {
-        let navBarApperance = UINavigationBarAppearance()
-        navBarApperance.largeTitleTextAttributes = [
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.largeTitleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
-        navBarApperance.titleTextAttributes = [
+        navBarAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
-        UINavigationBar.appearance().standardAppearance = navBarApperance
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarApperance
-        UINavigationBar.appearance().compactAppearance = navBarApperance
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().compactAppearance = navBarAppearance
     }
 
     var body: some View {

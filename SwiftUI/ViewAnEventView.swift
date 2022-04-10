@@ -42,19 +42,19 @@ struct ViewAnEventView: View {
     }()
 
     init(event: Event, recipient: Recipient) {
-        let navBarApperance = UINavigationBarAppearance()
-        navBarApperance.largeTitleTextAttributes = [
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.largeTitleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 35)!
         ]
-        navBarApperance.titleTextAttributes = [
+        navBarAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 15)!
         ]
 
-        UINavigationBar.appearance().standardAppearance = navBarApperance
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarApperance
-        UINavigationBar.appearance().compactAppearance = navBarApperance
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().compactAppearance = navBarAppearance
         self.recipient = recipient
         self.event = event
     }
@@ -100,6 +100,8 @@ struct ViewAnEventView: View {
         }
     }
 
+    // todo:  This delete will crash the app, after a successful delete
+    // trying to enable a delete at the LazyVGrid in the ViewEventsView()
     func deleteCard(event: Event) {
         print("Delete the card \(event)")
         moc.delete(event)

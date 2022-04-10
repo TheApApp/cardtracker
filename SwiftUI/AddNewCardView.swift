@@ -67,17 +67,17 @@ struct AddNewCardView: View {
     @State var captureFrontImage = false
 
     init(recipient: Recipient) {
-        let navBarApperance = UINavigationBarAppearance()
-        navBarApperance.largeTitleTextAttributes = [
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.largeTitleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
-        navBarApperance.titleTextAttributes = [
+        navBarAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
 
-        UINavigationBar.appearance().standardAppearance = navBarApperance
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarApperance
-        UINavigationBar.appearance().compactAppearance = navBarApperance
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().compactAppearance = navBarAppearance
         self.recipient = recipient
     }
 
@@ -89,7 +89,7 @@ struct AddNewCardView: View {
                         Text("Event")
                         Spacer()
                         Picker(selection: $selectedEvent, label: Text("")) {
-                            ForEach(0 ..< eventChoices.count) {
+                            ForEach(0 ..< eventChoices.count, id: \.self) {
                                 Text(self.eventChoices[$0])
                             }
                         }
@@ -100,7 +100,7 @@ struct AddNewCardView: View {
                         "Event Date",
                         selection: $eventDate,
                         displayedComponents: [.date])
-                        .padding([.leading, .trailing, .bottom], 10)
+                    .padding([.leading, .trailing, .bottom], 10)
                     HStack {
                         ZStack {
                             frontImageSelected?

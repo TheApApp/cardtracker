@@ -28,16 +28,16 @@ struct EditRecipientView: View {
     @State private var showHome: Bool = false
 
     init(recipient: Recipient) {
-        let navBarApperance = UINavigationBarAppearance()
-        navBarApperance.largeTitleTextAttributes = [
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.largeTitleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
-        navBarApperance.titleTextAttributes = [
+        navBarAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
-        UINavigationBar.appearance().standardAppearance = navBarApperance
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarApperance
-        UINavigationBar.appearance().compactAppearance = navBarApperance
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().compactAppearance = navBarAppearance
 
         self.recipient = recipient
         self._firstName = State(initialValue: recipient.firstName ?? "")
@@ -90,34 +90,34 @@ struct EditRecipientView: View {
             }
             .padding([.leading, .trailing], 10)
             .navigationBarTitle("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")")
-            .navigationBarItems(trailing:
-                                    HStack {
-                                        Button(action: {
-                                            saveRecipient(
-                                                recipient: recipient,
-                                                firstName: firstName,
-                                                lastName: lastName,
-                                                addLine1: addressLine1,
-                                                addLine2: addressLine2,
-                                                city: city,
-                                                state: state,
-                                                zip: zip,
-                                                country: country)
-                                            self.presentationMode.wrappedValue.dismiss()
-                                        }, label: {
-                                            Image(systemName: "square.and.arrow.down")
-                                                .font(.largeTitle)
-                                                .foregroundColor(.green)
-                                        })
-                                        Button(action: {
-                                            self.presentationMode.wrappedValue.dismiss()
-                                        }, label: {
-                                            Image(systemName: "chevron.down.circle.fill")
-                                                .font(.largeTitle)
-                                                .foregroundColor(.green)
-                                        })
-                                    }
-            )
+            .toolbar {
+                ToolbarItemGroup(placement: .automatic) {
+                    Button(action: {
+                        saveRecipient(
+                            recipient: recipient,
+                            firstName: firstName,
+                            lastName: lastName,
+                            addLine1: addressLine1,
+                            addLine2: addressLine2,
+                            city: city,
+                            state: state,
+                            zip: zip,
+                            country: country)
+                        self.presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "square.and.arrow.down")
+                            .font(.title2)
+                            .foregroundColor(.green)
+                    })
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "chevron.down.circle.fill")
+                            .font(.title2)
+                            .foregroundColor(.green)
+                    })
+                }
+            }
         }
     }
 }

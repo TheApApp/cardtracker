@@ -12,17 +12,17 @@ struct ViewRecipientsView: View {
     @State private var firstNameFilter = ""
 
     init() {
-        let navBarApperance = UINavigationBarAppearance()
-        navBarApperance.largeTitleTextAttributes = [
-            .foregroundColor: UIColor.systemGreen,
-            .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
-        navBarApperance.titleTextAttributes = [
-            .foregroundColor: UIColor.systemGreen,
-            .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
+                let navBarAppearance = UINavigationBarAppearance()
+                navBarAppearance.largeTitleTextAttributes = [
+                    .foregroundColor: UIColor.systemGreen,
+                    .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
+                navBarAppearance.titleTextAttributes = [
+                    .foregroundColor: UIColor.systemGreen,
+                    .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
 
-        UINavigationBar.appearance().standardAppearance = navBarApperance
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarApperance
-        UINavigationBar.appearance().compactAppearance = navBarApperance
+                UINavigationBar.appearance().standardAppearance = navBarAppearance
+                UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+                UINavigationBar.appearance().compactAppearance = navBarAppearance
 
         let request: NSFetchRequest<Recipient> = Recipient.fetchRequest()
         request.sortDescriptors = [
@@ -39,25 +39,26 @@ struct ViewRecipientsView: View {
                     TextField("Filter", text: $lastNameFilter)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
-                .padding(.all)
+                .padding([.top, .leading, .trailing])
                 FilteredList(filter: lastNameFilter)
             }
             .navigationTitle("Recipient List")
-            .navigationBarItems(trailing:
-                                    HStack {
-                Button(action: {
-                    self.addNewRecipient.toggle()
-                }, label: {
-                    Image(systemName: "plus.circle.fill")
-                        .font(.largeTitle)
-                        .foregroundColor(.green)
-                })
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Button(action: {
+                        self.addNewRecipient.toggle()
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title2)
+                            .foregroundColor(.green)
+                    })
+                }
             }
-            )
             Text("Select a Recipient")
                 .font(.largeTitle)
                 .foregroundColor(.green)
         }
+        .navigationViewStyle(.automatic)
         .ignoresSafeArea(.all)
         .sheet(isPresented: $addNewRecipient) {
             AddNewRecipientView()

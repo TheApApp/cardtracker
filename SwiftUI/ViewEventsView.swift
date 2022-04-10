@@ -10,7 +10,7 @@ import CoreData
 import MapKit
 
 enum NavBarItemChoosen: Identifiable {
-    case newCard // , editRecipient, deleteCard
+    case newCard, editRecipient, deleteCard
     var id: Int {
         hashValue
     }
@@ -29,8 +29,8 @@ struct ViewEventsView: View {
     @State var backView = false
     @State var frontShown = true
     @State private var frontImageShown: UIImage?
-    @State private var actionSheetPresented = false
 
+    @State private var actionSheetPresented = false
     @State var navBarItemChoosen: NavBarItemChoosen?
     private var gridLayout: [GridItem]
     @State var isEditing = false
@@ -45,19 +45,19 @@ struct ViewEventsView: View {
     }()
 
     init(recipient: Recipient) {
-        let navBarApperance = UINavigationBarAppearance()
-        navBarApperance.largeTitleTextAttributes = [
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.largeTitleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 35)!
         ]
-        navBarApperance.titleTextAttributes = [
+        navBarAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 20)!
         ]
 
-        UINavigationBar.appearance().standardAppearance = navBarApperance
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarApperance
-        UINavigationBar.appearance().compactAppearance = navBarApperance
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().compactAppearance = navBarAppearance
         self.recipient = recipient
         let request: NSFetchRequest<Event> = Event.fetchRequest()
         request.sortDescriptors = [
@@ -100,56 +100,35 @@ struct ViewEventsView: View {
                 ScrollView {
                     LazyVGrid(columns: gridLayout, alignment: .center, spacing: 1) {
                         ForEach(events, id: \.self) { event in
-                            //                            NavigationLink(destination: ViewAnEventView(event: event, recipient: recipient)) {
-                            HStack {
-                                VStack {
-                                    ZStack {
-                                        Spacer()
-                                        Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .ignoresSafeArea(edges: [.vertical, .bottom])
-                                        HStack {
-                                            VStack {
-                                                Spacer()
-                                                Text("\(event.event ?? "")")
-                                                // swiftlint:disable:next line_length
-                                                Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
-                                                Spacer()
+                            NavigationLink(destination: ViewAnEventView(event: event, recipient: recipient)) {
+                                HStack {
+                                    VStack {
+                                        ZStack {
+                                            Spacer()
+                                            Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .ignoresSafeArea(edges: [.vertical, .bottom])
+                                            HStack {
+                                                VStack {
+                                                    Spacer()
+                                                    Text("\(event.event ?? "")")
+                                                    // swiftlint:disable:next line_length
+                                                    Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
+                                                    Spacer()
+                                                }
+                                                .padding(10)
+                                                .font(.title)
+                                                .foregroundColor(.white)
+                                                .shadow(color: .black, radius: 2.0)
                                             }
-                                            .padding(10)
-                                            .font(.title)
-                                            .foregroundColor(.white)
-                                            .shadow(color: .black, radius: 2.0)
                                         }
                                     }
-                                    .contextMenu {
-                                        Button(
-                                            action: {
-                                                print("Edit pressed for \(event)")
-                                            }, label: {
-                                                VStack {
-                                                    Text("Edit")
-                                                    Image(systemName: "square.and.pencil")
-                                                }
-                                            })
-                                        Button(
-                                            action: {
-                                                print("Delete pressed for \(event)")
-                                            }, label: {
-                                                VStack {
-                                                    Text("Delete")
-                                                    Image(systemName: "trash")
-                                                        .foregroundColor(.red)
-                                                }
-                                            })
-                                    }
                                 }
+                                .frame(height: geo.size.width * 0.3)
                             }
-                            .frame(height: geo.size.width * 0.3)
-                            //                            }
                         }
-//                        .onDelete(perform: deleteEvent)
+                        //                        .onDelete(perform: deleteEvent)
                     }
                 }
                 .navigationTitle("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")")
@@ -161,43 +140,46 @@ struct ViewEventsView: View {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.green)
                     })
-                    /*
-                     Button(action: {
-                     navBarItemChoosen = .editRecipient
-                     }, label: {
-                     Image(systemName: "square.and.pencil")
-                     .foregroundColor(.green)
-                     })
-                     Button(action: {
-                     //                        navBarItemChoosen = .deleteCard
-                     isEditing.toggle()
-                     }, label: {
-                     Image(systemName: "trash")
-                     .foregroundColor(.red)
-                     })
-                     */
+                    Button(action: {
+                        navBarItemChoosen = .editRecipient
+                    }, label: {
+                        Image(systemName: "square.and.pencil")
+                            .foregroundColor(.green)
+                    })
+                    Button(action: {
+                        navBarItemChoosen = .deleteCard
+                        isEditing.toggle()
+                    }, label: {
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
+                    })
                 })
             }
             .sheet(item: $navBarItemChoosen ) { item in
                 switch item {
                 case .newCard:
                     AddNewCardView(recipient: recipient)
-                    /*
-                     case .editRecipient:
-                     EditRecipientView(recipient: recipient)
-                     case .deleteCard:
-                     EditButton()
-                     */
+                case .editRecipient:
+                    EditRecipientView(recipient: recipient)
+                case .deleteCard:
+                    EditButton()
                 }
             }
         }
+        .accentColor(.green)
     }
 
-    private func deleteEvent(offsets: IndexSet) {
-        //        withAnimation {
-        //            $events.remove(atOffsets: offsets)
-        //        }
-        print("IndexSet = [\(IndexSet.self)]")
+    private func deleteEvent(event: Event) {
+        let taskContext = moc
+        taskContext.perform {
+            taskContext.delete(event)
+            do {
+                try taskContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
     }
 
     func getLocation(from address: String, completion: @escaping (_ location: CLLocationCoordinate2D?) -> Void) {
@@ -205,9 +187,9 @@ struct ViewEventsView: View {
         geocoder.geocodeAddressString(address) { (placemarks, _) in
             guard let placemarks = placemarks,
                   let location = placemarks.first?.location?.coordinate else {
-                      completion(nil)
-                      return
-                  }
+                completion(nil)
+                return
+            }
             completion(location)
         }
     }
@@ -218,7 +200,7 @@ struct DeleteButton<T>: View where T: Equatable {
 
     let number: T
     @Binding var numbers: [T]
-    let onDelete: (IndexSet) -> ()
+    let onDelete: (IndexSet) -> Void
 
     var body: some View {
         VStack {
@@ -231,7 +213,7 @@ struct DeleteButton<T>: View where T: Equatable {
                     Image(systemName: "minus.circle.filled")
                         .foregroundColor(.red)
                 })
-                    .offset(x: 10, y: -10)
+                .offset(x: 10, y: -10)
             }
         }
     }

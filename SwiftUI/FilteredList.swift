@@ -46,16 +46,11 @@ struct FilteredList: View {
             let recipient = fetchRequest[index]
             moc.delete(recipient)
         }
-        //
-        //        withAnimation {
-        //
-        //            offsets.map { fetchRequest[$0] }.forEach(moc.delete)
         do {
             try moc.save()
         } catch {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
-        //        }
     }
 }
