@@ -10,7 +10,7 @@ import CoreData
 import MapKit
 
 enum NavBarItemChoosen: Identifiable {
-    case newCard, editRecipient, deleteCard
+    case newCard // , editRecipient, deleteCard
     var id: Int {
         hashValue
     }
@@ -23,6 +23,8 @@ struct ViewEventsView: View {
 
     private var blankCardFront = UIImage(contentsOfFile: "frontImage")
     private var recipient: Recipient
+    @State private var isEditActive: Bool = false
+    @State private var isCardActive: Bool = false
 
     @State var newEvent = false
     @State var frontView = false
@@ -100,54 +102,58 @@ struct ViewEventsView: View {
                 ScrollView {
                     LazyVGrid(columns: gridLayout, alignment: .center, spacing: 1) {
                         ForEach(events, id: \.self) { event in
-//                            NavigationLink(destination: ViewAnEventView(event: event, recipient: recipient)) {
-                                HStack {
-                                    VStack {
-                                        ZStack {
-                                            Spacer()
-                                            Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .ignoresSafeArea(edges: [.vertical, .bottom])
-                                            HStack {
-                                                VStack {
-                                                    Spacer()
-                                                    Text("\(event.event ?? "")")
-                                                    // swiftlint:disable:next line_length
-                                                    Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
-                                                    Spacer()
-                                                }
-                                                .padding(10)
-                                                .font(.title)
-                                                .foregroundColor(.white)
-                                                .shadow(color: .black, radius: 2.0)
+                            HStack {
+                                VStack {
+                                    ZStack {
+                                        Spacer()
+                                        Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .ignoresSafeArea(edges: [.vertical, .bottom])
+
+                                        HStack {
+                                            VStack {
+                                                Spacer()
+                                                Text("\(event.event ?? "")")
+                                                // swiftlint:disable:next line_length
+                                                Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
+                                                Spacer()
                                             }
+                                            .padding(10)
+                                            .font(.title)
+                                            .foregroundColor(.white)
+                                            .shadow(color: .black, radius: 2.0)
+                                        }
+                                        VStack {
+                                            HStack {
+                                                Spacer()
+                                                // swiftlint:disable:next line_length
+                                                NavigationLink(destination: EditAnEvent(event: event, recipient: recipient), isActive: $isEditActive, label: {
+                                                    Image(systemName: "square.and.pencil")
+                                                        .foregroundColor(.white)
+                                                        .shadow(color: .black, radius: 2.0)
+                                                })
+                                                // swiftlint:disable:next line_length
+                                                NavigationLink(destination: CardView(cardImage: (event.cardFrontImage ?? blankCardFront)!, event: event.event ?? "Unknown Event", eventDate: event.eventDate! as Date), isActive: $isCardActive, label: {
+                                                    Image(systemName: "doc.text.image")
+                                                        .foregroundColor(.white)
+                                                        .shadow(color: .black, radius: 2.0)
+                                                })
+                                                Button(action: {
+                                                    deleteEvent(event: event)
+                                                }, label: {
+                                                    Image(systemName: "trash")
+                                                        .foregroundColor(.white)
+                                                        .shadow(color: .black, radius: 2.0)
+                                                })
+                                            }
+                                            Spacer()
                                         }
                                     }
                                 }
-                                .frame(height: geo.size.width * 0.3)
-//                            }
-                            .onTapGesture {
-                                // add in logic for view card, edit or delete
-                                // show an actionMenu with the three options
-                                // this should allow me to
-                                // View - ViewAnEventView(event: event, recipient: recipient)
-                                // Edit - EditAnEvent(event: event, recipient: recipient)
-                                // Delete - deleteEvent(event: event)
-                                // The following code won't work however:
-                                /*
-                                Menu {
-                                    Button("View Card", action: ViewAnEventView(event: event, recipient: recipient))
-                                    Button("Edit Card", action: EditAnEvent(event: event, recipient: recipient))
-                                    Button("Delete Card", action: deleteEvent(event: event))
-                                } label: {
-                                    Label("Options")
-                                 }
-                                 */
-                                print("Selected item \(event)")
                             }
+                            .frame(height: geo.size.width * 0.3)
                         }
-                        //                        .onDelete(perform: deleteEvent)
                     }
                 }
                 .navigationTitle("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")")
@@ -159,35 +165,25 @@ struct ViewEventsView: View {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.green)
                     })
-                    /*
-                    Button(action: {
-                        navBarItemChoosen = .editRecipient
-                    }, label: {
-                        Image(systemName: "square.and.pencil")
-                            .foregroundColor(.green)
-                    })
-                    Button(action: {
-                        navBarItemChoosen = .deleteCard
-                        isEditing.toggle()
-                    }, label: {
-                        Image(systemName: "trash")
-                            .foregroundColor(.red)
-                    })
-                     */
+
                 })
             }
             .sheet(item: $navBarItemChoosen ) { item in
                 switch item {
                 case .newCard:
                     AddNewCardView(recipient: recipient)
-                case .editRecipient:
-                    EditRecipientView(recipient: recipient)
-                case .deleteCard:
-                    EditButton()
                 }
             }
         }
         .accentColor(.green)
+    }
+
+    private func displayEvent(event: Event) {
+        print("Display current Event \(event)")
+    }
+
+    private func editEvent(event: Event, recipient: Recipient) {
+        print("Edit Event \(event) for Recipient \(recipient)")
     }
 
     private func deleteEvent(event: Event) {

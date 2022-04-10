@@ -83,91 +83,89 @@ struct EditAnEvent: View {
     }
 
     var body: some View {
-        NavigationView {
-            GeometryReader { geomtry in
-                VStack {
-                    HStack {
-                        Text("Event")
-                        Spacer()
-                        Picker(selection: $selectedEvent, label: Text("")) {
-                            ForEach(0 ..< eventChoices.count, id: \.self) {
-                                Text(self.eventChoices[$0])
-                            }
-                        }
-                        .frame(width: geomtry.size.width * 0.55, height: geomtry.size.height * 0.25)
-                    }
-                    .padding([.leading, .trailing], 10)
-                    DatePicker(
-                        "Event Date",
-                        selection: $eventDate,
-                        displayedComponents: [.date])
-                        .padding([.leading, .trailing, .bottom], 10)
-                    HStack {
-                        ZStack {
-                            frontImageSelected?
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .shadow(radius: 10 )
-                            VStack {
-                                Image(systemName: "camera.fill")
-                                Text("Front")
-                            }
-                            .foregroundColor(.white)
-                            .font(.largeTitle)
-                            .shadow(radius: 10)
-                            .frame(width: geomtry.size.width * 0.45)
-                            .onTapGesture { self.frontPhoto = true }
-                            .actionSheet(isPresented: $frontPhoto) { () -> ActionSheet in
-                                ActionSheet(
-                                    title: Text("Choose mode"),
-                                    message: Text("Select one."),
-                                    buttons: [ActionSheet.Button.default(Text("Camera"), action: {
-                                        self.captureFrontImage.toggle()
-                                        self.shouldPresentCamera = true
-                                    }),
-                                              ActionSheet.Button.default(Text("Photo Library"), action: {
-                                                  self.captureFrontImage.toggle()
-                                                  self.shouldPresentCamera = false
-                                              }),
-                                              ActionSheet.Button.cancel()])
-                            }
-                            .sheet(isPresented: $captureFrontImage) {
-                                ImagePicker(
-                                    sourceType: self.shouldPresentCamera ? .camera : .photoLibrary,
-                                    image: $frontImageSelected,
-                                    isPresented: self.$captureFrontImage)
-                            }
-                        }
-                    }
+        GeometryReader { geomtry in
+            VStack {
+                HStack {
+                    Text("Event")
                     Spacer()
+                    Picker(selection: $selectedEvent, label: Text("")) {
+                        ForEach(0 ..< eventChoices.count, id: \.self) {
+                            Text(self.eventChoices[$0])
+                        }
+                    }
+                    .frame(width: geomtry.size.width * 0.55, height: geomtry.size.height * 0.25)
                 }
+                .padding([.leading, .trailing], 10)
+                DatePicker(
+                    "Event Date",
+                    selection: $eventDate,
+                    displayedComponents: [.date])
+                .padding([.leading, .trailing, .bottom], 10)
+                HStack {
+                    ZStack {
+                        frontImageSelected?
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .shadow(radius: 10 )
+                        VStack {
+                            Image(systemName: "camera.fill")
+                            Text("Front")
+                        }
+                        .foregroundColor(.white)
+                        .font(.largeTitle)
+                        .shadow(radius: 10)
+                        .frame(width: geomtry.size.width * 0.45)
+                        .onTapGesture { self.frontPhoto = true }
+                        .actionSheet(isPresented: $frontPhoto) { () -> ActionSheet in
+                            ActionSheet(
+                                title: Text("Choose mode"),
+                                message: Text("Select one."),
+                                buttons: [ActionSheet.Button.default(Text("Camera"), action: {
+                                    self.captureFrontImage.toggle()
+                                    self.shouldPresentCamera = true
+                                }),
+                                          ActionSheet.Button.default(Text("Photo Library"), action: {
+                                              self.captureFrontImage.toggle()
+                                              self.shouldPresentCamera = false
+                                          }),
+                                          ActionSheet.Button.cancel()])
+                        }
+                        .sheet(isPresented: $captureFrontImage) {
+                            ImagePicker(
+                                sourceType: self.shouldPresentCamera ? .camera : .photoLibrary,
+                                image: $frontImageSelected,
+                                isPresented: self.$captureFrontImage)
+                        }
+                    }
+                }
+                Spacer()
             }
-            .padding([.leading, .trailing], 10)
-            .navigationBarTitle("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")")
-            .toolbar {
-                ToolbarItemGroup(placement: .automatic) {
-                    Button(action: {
-                        saveCard()
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image(systemName: "square.and.arrow.down")
-                            .font(.title2)
-                            .foregroundColor(.green)
-                    })
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image(systemName: "chevron.down.circle.fill")
-                            .font(.title2)
-                            .foregroundColor(.green)
-                    })
-                }
+        }
+        .padding([.leading, .trailing], 10)
+        .navigationBarTitle("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")", displayMode: .inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .automatic) {
+                Button(action: {
+                    saveCard()
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "square.and.arrow.down")
+                        .font(.title2)
+                        .foregroundColor(.green)
+                })
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "chevron.down.circle.fill")
+                        .font(.title2)
+                        .foregroundColor(.green)
+                })
             }
         }
     }
 
     func saveCard() {
-            print("saving event... \(eventName)")
+        print("saving event... \(eventName)")
         event.event = eventChoices[selectedEvent]
         event.eventDate = eventDate as NSDate
         event.cardFrontImage = frontImageSelected?.asUIImage()
