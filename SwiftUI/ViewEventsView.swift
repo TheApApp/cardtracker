@@ -100,7 +100,7 @@ struct ViewEventsView: View {
                 ScrollView {
                     LazyVGrid(columns: gridLayout, alignment: .center, spacing: 1) {
                         ForEach(events, id: \.self) { event in
-                            NavigationLink(destination: ViewAnEventView(event: event, recipient: recipient)) {
+//                            NavigationLink(destination: ViewAnEventView(event: event, recipient: recipient)) {
                                 HStack {
                                     VStack {
                                         ZStack {
@@ -126,6 +126,25 @@ struct ViewEventsView: View {
                                     }
                                 }
                                 .frame(height: geo.size.width * 0.3)
+//                            }
+                            .onTapGesture {
+                                // add in logic for view card, edit or delete
+                                // show an actionMenu with the three options
+                                // this should allow me to
+                                // View - ViewAnEventView(event: event, recipient: recipient)
+                                // Edit - EditAnEvent(event: event, recipient: recipient)
+                                // Delete - deleteEvent(event: event)
+                                // The following code won't work however:
+                                /*
+                                Menu {
+                                    Button("View Card", action: ViewAnEventView(event: event, recipient: recipient))
+                                    Button("Edit Card", action: EditAnEvent(event: event, recipient: recipient))
+                                    Button("Delete Card", action: deleteEvent(event: event))
+                                } label: {
+                                    Label("Options")
+                                 }
+                                 */
+                                print("Selected item \(event)")
                             }
                         }
                         //                        .onDelete(perform: deleteEvent)
@@ -140,6 +159,7 @@ struct ViewEventsView: View {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.green)
                     })
+                    /*
                     Button(action: {
                         navBarItemChoosen = .editRecipient
                     }, label: {
@@ -153,6 +173,7 @@ struct ViewEventsView: View {
                         Image(systemName: "trash")
                             .foregroundColor(.red)
                     })
+                     */
                 })
             }
             .sheet(item: $navBarItemChoosen ) { item in
