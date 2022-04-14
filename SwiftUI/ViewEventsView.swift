@@ -25,6 +25,7 @@ struct ViewEventsView: View {
     private var recipient: Recipient
     @State private var isEditActive: Bool = false
     @State private var isCardActive: Bool = false
+    @State private var areYouSure: Bool = false
 
     @State var newEvent = false
     @State var frontView = false
@@ -130,22 +131,44 @@ struct ViewEventsView: View {
                                                 // swiftlint:disable:next line_length
                                                 NavigationLink(destination: EditAnEvent(event: event, recipient: recipient), isActive: $isEditActive, label: {
                                                     Image(systemName: "square.and.pencil")
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(.green)
                                                         .shadow(color: .black, radius: 2.0)
+                                                        .font(.title)
                                                 })
+                                                .padding(5)
                                                 // swiftlint:disable:next line_length
                                                 NavigationLink(destination: CardView(cardImage: (event.cardFrontImage ?? blankCardFront)!, event: event.event ?? "Unknown Event", eventDate: event.eventDate! as Date), isActive: $isCardActive, label: {
                                                     Image(systemName: "doc.text.image")
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(.green)
                                                         .shadow(color: .black, radius: 2.0)
+                                                        .font(.title)
                                                 })
+                                                .padding(5)
                                                 Button(action: {
-                                                    deleteEvent(event: event)
+                                                    areYouSure.toggle()
                                                 }, label: {
                                                     Image(systemName: "trash")
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(.red)
                                                         .shadow(color: .black, radius: 2.0)
+                                                        .font(.title)
+                                                        .padding(5)
                                                 })
+                                                // swiftlint:disable:next line_length
+                                                .confirmationDialog("Are you Sure", isPresented: $areYouSure, titleVisibility: .visible) {
+                                                    Button("Yes") {
+                                                        withAnimation {
+                                                            // swiftlint:disable:next line_length
+                                                            print("Deleting Event \(event.description) \(String(describing: event.eventDate))")
+                                                            deleteEvent(event: event)
+                                                        }
+                                                    }
+                                                    Button("No", role: .cancel) {
+                                                        withAnimation {
+                                                            // swiftlint:disable:next line_length
+                                                            print("Cancelled delete of \(event.description) \(String(describing: event.eventDate))")
+                                                        }
+                                                    } .keyboardShortcut(.defaultAction)
+                                                }
                                             }
                                             Spacer()
                                         }
@@ -178,15 +201,8 @@ struct ViewEventsView: View {
         .accentColor(.green)
     }
 
-    private func displayEvent(event: Event) {
-        print("Display current Event \(event)")
-    }
-
-    private func editEvent(event: Event, recipient: Recipient) {
-        print("Edit Event \(event) for Recipient \(recipient)")
-    }
-
     private func deleteEvent(event: Event) {
+        // do I want to add a "Are you sure" message?
         let taskContext = moc
         taskContext.perform {
             taskContext.delete(event)

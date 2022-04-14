@@ -142,6 +142,7 @@ struct EditAnEvent: View {
             }
         }
         .padding([.leading, .trailing], 10)
+        // swiftlint:disable:next line_length
         .navigationBarTitle("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")", displayMode: .inline)
         .toolbar {
             ToolbarItemGroup(placement: .automatic) {
