@@ -111,7 +111,8 @@ struct ViewEventsView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .ignoresSafeArea(edges: [.vertical, .bottom])
-
+                                            .padding(.top, 37)
+                                            .padding([.bottom, .leading, .trailing], 15)
                                         HStack {
                                             VStack {
                                                 Spacer()
@@ -121,7 +122,7 @@ struct ViewEventsView: View {
                                                 Spacer()
                                             }
                                             .padding(10)
-                                            .font(.title)
+                                            .font(.title2)
                                             .foregroundColor(.white)
                                             .shadow(color: .black, radius: 2.0)
                                         }
@@ -133,7 +134,7 @@ struct ViewEventsView: View {
                                                     Image(systemName: "square.and.pencil")
                                                         .foregroundColor(.green)
                                                         .shadow(color: .black, radius: 2.0)
-                                                        .font(.title)
+                                                        .font(.title2)
                                                 })
                                                 .padding(5)
                                                 // swiftlint:disable:next line_length
@@ -141,7 +142,7 @@ struct ViewEventsView: View {
                                                     Image(systemName: "doc.text.image")
                                                         .foregroundColor(.green)
                                                         .shadow(color: .black, radius: 2.0)
-                                                        .font(.title)
+                                                        .font(.title2)
                                                 })
                                                 .padding(5)
                                                 Button(action: {
@@ -150,7 +151,7 @@ struct ViewEventsView: View {
                                                     Image(systemName: "trash")
                                                         .foregroundColor(.red)
                                                         .shadow(color: .black, radius: 2.0)
-                                                        .font(.title)
+                                                        .font(.title2)
                                                         .padding(5)
                                                 })
                                                 // swiftlint:disable:next line_length
@@ -158,24 +159,30 @@ struct ViewEventsView: View {
                                                     Button("Yes") {
                                                         withAnimation {
                                                             // swiftlint:disable:next line_length
-                                                            print("Deleting Event \(event.description) \(String(describing: event.eventDate))")
+                                                            print("Deleting Event \(String(describing: event.event)) \(String(describing: event.eventDate))")
                                                             deleteEvent(event: event)
                                                         }
                                                     }
-                                                    Button("No", role: .cancel) {
+                                                    Button("No") {
                                                         withAnimation {
                                                             // swiftlint:disable:next line_length
-                                                            print("Cancelled delete of \(event.description) \(String(describing: event.eventDate))")
+                                                            print("Cancelled delete of \(String(describing: event.event)) \(String(describing: event.eventDate))")
                                                         }
                                                     } .keyboardShortcut(.defaultAction)
                                                 }
                                             }
+                                            .padding(5)
                                             Spacer()
                                         }
                                     }
                                 }
                             }
-                            .frame(height: geo.size.width * 0.3)
+                            .frame(width: geo.size.width * 0.3, height: geo.size.width * 0.3)
+                            .background(Color(.systemGray5))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.white, lineWidth: 20)
+                            )
                         }
                     }
                 }
@@ -202,7 +209,6 @@ struct ViewEventsView: View {
     }
 
     private func deleteEvent(event: Event) {
-        // do I want to add a "Are you sure" message?
         let taskContext = moc
         taskContext.perform {
             taskContext.delete(event)
