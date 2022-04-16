@@ -33,6 +33,7 @@
 		18CC9EEE25EF169300434AF9 /* TextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC9EED25EF169300434AF9 /* TextFieldModifier.swift */; };
 		18D49B872676F59700833E31 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D49B862676F59700833E31 /* CloudKitHelper.swift */; };
 		18E1F6D1276EA07C00BAA1BE /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18E1F6D0276EA07C00BAA1BE /* SwiftUIKit */; };
+		18E674C8280B472B001F2BF8 /* MenuOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E674C7280B472B001F2BF8 /* MenuOverlayView.swift */; };
 		18EF638425EC7D9800448984 /* EditRecipientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF638325EC7D9800448984 /* EditRecipientView.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		18CB91592782268C00FA96ED /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		18CC9EED25EF169300434AF9 /* TextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModifier.swift; sourceTree = "<group>"; };
 		18D49B862676F59700833E31 /* CloudKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
+		18E674C7280B472B001F2BF8 /* MenuOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOverlayView.swift; sourceTree = "<group>"; };
 		18EF638325EC7D9800448984 /* EditRecipientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +140,7 @@
 				18CC9EED25EF169300434AF9 /* TextFieldModifier.swift */,
 				185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */,
 				1857025C259A1E0B001AA8EA /* ViewEventsView.swift */,
+				18E674C7280B472B001F2BF8 /* MenuOverlayView.swift */,
 				18570289259A75F2001AA8EA /* ViewRecipientsView.swift */,
 				18A3DEB727D5490200F55921 /* FilteredList.swift */,
 			);
@@ -297,6 +300,7 @@
 				18A3DEB827D5490200F55921 /* FilteredList.swift in Sources */,
 				187E4382259D2AD90075AEBF /* PersistentStore.swift in Sources */,
 				1849EF3D25902FDB00EE2780 /* ImageTransformer.swift in Sources */,
+				18E674C8280B472B001F2BF8 /* MenuOverlayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

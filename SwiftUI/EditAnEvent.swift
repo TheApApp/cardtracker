@@ -171,6 +171,7 @@ struct EditAnEvent: View {
         event.eventDate = eventDate as NSDate
         event.cardFrontImage = frontImageSelected?.asUIImage()
         event.recipient = recipient
+        event.id = UUID()
         let context = PersistentCloudKitContainer.persistentContainer.viewContext
         do {
             try context.save()

@@ -164,6 +164,8 @@ struct AddNewRecipientView: View {
             recipient.city = city.capitalized(with: NSLocale.current)
             recipient.zip = zip
             recipient.country = country.capitalized(with: NSLocale.current)
+            recipient.id = UUID()
+            print("recipient id = \(recipient.id)")
         }
         do {
             try moc.save()

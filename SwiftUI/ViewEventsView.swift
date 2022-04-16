@@ -38,6 +38,7 @@ struct ViewEventsView: View {
     private var gridLayout: [GridItem]
     @State var isEditing = false
     @State var num: Int = 0
+    private var deviceiPhone = false
 
     @State var region: MKCoordinateRegion?
 
@@ -74,6 +75,7 @@ struct ViewEventsView: View {
                                GridItem(.flexible()),
                                GridItem(.flexible())]
         } else {
+            deviceiPhone = true
             self.gridLayout = [GridItem(.flexible()), GridItem(.flexible())]
         }
     }
@@ -122,62 +124,64 @@ struct ViewEventsView: View {
                                                 Spacer()
                                             }
                                             .padding(10)
-                                            .font(.title2)
+                                            .font(deviceiPhone ? .title2 : .title)
                                             .foregroundColor(.white)
                                             .shadow(color: .black, radius: 2.0)
                                         }
                                         VStack {
-                                            HStack {
-                                                Spacer()
-                                                // swiftlint:disable:next line_length
-                                                NavigationLink(destination: EditAnEvent(event: event, recipient: recipient), isActive: $isEditActive, label: {
-                                                    Image(systemName: "square.and.pencil")
-                                                        .foregroundColor(.green)
-                                                        .shadow(color: .black, radius: 2.0)
-                                                        .font(.title2)
-                                                })
-                                                .padding(5)
-                                                // swiftlint:disable:next line_length
-                                                NavigationLink(destination: CardView(cardImage: (event.cardFrontImage ?? blankCardFront)!, event: event.event ?? "Unknown Event", eventDate: event.eventDate! as Date), isActive: $isCardActive, label: {
-                                                    Image(systemName: "doc.text.image")
-                                                        .foregroundColor(.green)
-                                                        .shadow(color: .black, radius: 2.0)
-                                                        .font(.title2)
-                                                })
-                                                .padding(5)
-                                                Button(action: {
-                                                    areYouSure.toggle()
-                                                }, label: {
-                                                    Image(systemName: "trash")
-                                                        .foregroundColor(.red)
-                                                        .shadow(color: .black, radius: 2.0)
-                                                        .font(.title2)
-                                                        .padding(5)
-                                                })
-                                                // swiftlint:disable:next line_length
-                                                .confirmationDialog("Are you Sure", isPresented: $areYouSure, titleVisibility: .visible) {
-                                                    Button("Yes") {
-                                                        withAnimation {
-                                                            // swiftlint:disable:next line_length
-                                                            print("Deleting Event \(String(describing: event.event)) \(String(describing: event.eventDate))")
-                                                            deleteEvent(event: event)
-                                                        }
-                                                    }
-                                                    Button("No") {
-                                                        withAnimation {
-                                                            // swiftlint:disable:next line_length
-                                                            print("Cancelled delete of \(String(describing: event.event)) \(String(describing: event.eventDate))")
-                                                        }
-                                                    } .keyboardShortcut(.defaultAction)
-                                                }
-                                            }
+//                                            HStack {
+//                                                Spacer()
+//                                                // swiftlint:disable:next line_length
+//                                                NavigationLink(destination: EditAnEvent(event: event, recipient: recipient), isActive: $isEditActive, label: {
+//                                                    Image(systemName: "square.and.pencil")
+//                                                        .foregroundColor(.green)
+//                                                        .shadow(color: .black, radius: 2.0)
+//                                                        .font(deviceiPhone ? .title2 : .title)
+//                                                })
+//                                                .padding(5)
+//                                                // swiftlint:disable:next line_length
+//                                                NavigationLink(destination: CardView(cardImage: (event.cardFrontImage ?? blankCardFront)!, event: event.event ?? "Unknown Event", eventDate: event.eventDate! as Date), isActive: $isCardActive, label: {
+//                                                    Image(systemName: "doc.text.image")
+//                                                        .foregroundColor(.green)
+//                                                        .shadow(color: .black, radius: 2.0)
+//                                                        .font(deviceiPhone ? .title2 : .title)
+//                                                })
+//                                                .padding(5)
+//                                                Button(action: {
+//                                                    areYouSure.toggle()
+//                                                }, label: {
+//                                                    Image(systemName: "trash")
+//                                                        .foregroundColor(.red)
+//                                                        .shadow(color: .black, radius: 2.0)
+//                                                        .font(deviceiPhone ? .title2 : .title)
+//                                                        .padding(5)
+//                                                })
+//                                                // swiftlint:disable:next line_length
+//                                                .confirmationDialog("Are you Sure", isPresented: $areYouSure, titleVisibility: .visible) {
+//                                                    Button("Yes", role: .destructive) {
+//                                                        withAnimation {
+//                                                            // swiftlint:disable:next line_length
+//                                                            print("Deleting Event \(String(describing: event.event)) \(String(describing: event.eventDate))")
+//                                                            deleteEvent(event: event)
+//                                                        }
+//                                                    }
+//                                                    Button("No") {
+//                                                        withAnimation {
+//                                                            // swiftlint:disable:next line_length
+//                                                            print("Cancelled delete of \(String(describing: event.event)) \(String(describing: event.eventDate))")
+//                                                        }
+//                                                    } .keyboardShortcut(.defaultAction)
+//                                                }
+//                                            }
+                                            MenuOverlayView(recipient: recipient, event: event)
                                             .padding(5)
                                             Spacer()
                                         }
                                     }
                                 }
                             }
-                            .frame(width: geo.size.width * 0.3, height: geo.size.width * 0.3)
+                            // swiftlint:disable:next line_length
+                            .frame(width: deviceiPhone ? geo.size.width * 0.5 : geo.size.width * 0.3, height: deviceiPhone ? geo.size.width * 0.5 : geo.size.width * 0.3)
                             .background(Color(.systemGray5))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 20)
