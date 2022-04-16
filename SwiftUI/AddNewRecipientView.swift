@@ -6,6 +6,7 @@
 //  Copyright © 2021 Michael Rowe. All rights reserved.
 //
 
+import os
 import SwiftUI
 import SwiftUIKit
 import ContactsUI
@@ -153,7 +154,8 @@ struct AddNewRecipientView: View {
     }
 
     func saveRecipient() {
-        print("Saving...")
+        let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "AddNewRecipientView.SavRecipient")
+        logger.log("Saving...")
         if firstName != "" {
             let recipient = Recipient(context: self.moc)
             recipient.firstName = firstName
@@ -165,40 +167,40 @@ struct AddNewRecipientView: View {
             recipient.zip = zip
             recipient.country = country.capitalized(with: NSLocale.current)
             recipient.id = UUID()
-            print("recipient id = \(recipient.id)")
         }
         do {
             try moc.save()
         } catch let error as NSError {
-            print("Save error: \(error), \(error.userInfo)")
+            logger.log("Save error: \(error), \(error.userInfo)")
         }
     }
 
     func checkContactsPermissions() -> Bool {
+        let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "AddNewRecipientView.checkContctsPermissions")
         let authStatus = CNContactStore.authorizationStatus(for: .contacts)
         switch authStatus {
         case .restricted:
-            print("User cannot grant premission, e.g. parental controls are in force.")
+            logger.log("User cannot grant premission, e.g. parental controls are in force.")
             return false
         case .denied:
-            print("User has denided permissions")
+            logger.log("User has denided permissions")
             return false
         case .notDetermined:
-            print("you need to request authorization via the API now")
+            logger.log("you need to request authorization via the API now")
         case .authorized:
-            print("already authorized")
+            logger.log("already authorized")
         @unknown default:
-            print("unknown error")
+            logger.log("unknown error")
             return false
         }
         let store = CNContactStore()
         if authStatus == .notDetermined {
             store.requestAccess(for: .contacts) {success, error in
                 if !success {
-                    print("Not authorized to access contacts. Error = \(String(describing: error))")
+                    logger.log("Not authorized to access contacts. Error = \(String(describing: error))")
                     exit(1)
                 }
-                print("Authorized")
+                logger.log("Authorized")
             }
         }
         return true

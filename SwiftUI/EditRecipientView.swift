@@ -6,6 +6,7 @@
 //  Copyright © 2021 Michael Rowe. All rights reserved.
 //
 
+import os
 import SwiftUI
 
 struct EditRecipientView: View {
@@ -134,6 +135,7 @@ func saveRecipient(
     zip: String,
     country: String) {
 
+    let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "EditRecipient.SaveRecipient")
     let context = PersistentCloudKitContainer.persistentContainer.viewContext
     recipient.firstName = firstName
     recipient.lastName  = lastName
@@ -147,7 +149,7 @@ func saveRecipient(
     do {
         try context.save()
     } catch {
-        print(error.localizedDescription)
+        logger.log("Error during Save ... \(error.localizedDescription)")
     }
 }
 struct EditRecipientView_Previews: PreviewProvider {

@@ -5,7 +5,7 @@
 //  Created by Michael Rowe on 1/1/21.
 //  Copyright © 2021 Michael Rowe. All rights reserved.
 //
-
+import os
 import SwiftUI
 
 struct AddNewCardView: View {
@@ -163,17 +163,18 @@ struct AddNewCardView: View {
     }
 
     func saveCard() {
-        print("saving...")
+        let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "AddNewCardView")
+        logger.log("saving...")
         let event = Event(context: moc)
         event.event = eventChoices[selectedEvent]
         event.eventDate = eventDate as NSDate
         event.cardFrontImage = frontImageSelected?.asUIImage()
         event.recipient = recipient
         do {
-            print(event)
+            logger.log("Saved \(event)")
             try moc.save()
         } catch let error as NSError {
-            print("Save error \(error), \(error.userInfo)")
+            logger.log("Save error \(error), \(error.userInfo)")
         }
     }
 }

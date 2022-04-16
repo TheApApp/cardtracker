@@ -6,6 +6,7 @@
 //  Copyright © 2021 Michael Rowe. All rights reserved.
 //
 
+import os
 import SwiftUI
 
 struct EditAnEvent: View {
@@ -166,7 +167,8 @@ struct EditAnEvent: View {
     }
 
     func saveCard() {
-        print("saving event... \(eventName)")
+        let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "EditAnEvent.saveCard")
+        logger.log("saving event... \(eventName)")
         event.event = eventChoices[selectedEvent]
         event.eventDate = eventDate as NSDate
         event.cardFrontImage = frontImageSelected?.asUIImage()
@@ -176,7 +178,7 @@ struct EditAnEvent: View {
         do {
             try context.save()
         } catch let error as NSError {
-            print("Save error \(error), \(error.userInfo)")
+            logger.log("Save error \(error), \(error.userInfo)")
         }
     }
 }

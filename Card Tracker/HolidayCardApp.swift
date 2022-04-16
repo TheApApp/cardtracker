@@ -5,11 +5,11 @@
 //  Created by Michael Rowe on 12/28/20.
 //  Copyright © 2020 Michael Rowe. All rights reserved.
 //
+
 import SwiftUI
 
 @main
 struct HolidayCardApp: App {
-
     @Environment(\.scenePhase) private var scenePhase
     let context = PersistentCloudKitContainer.persistentContainer.viewContext
 

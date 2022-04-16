@@ -5,6 +5,7 @@
 //  Created by Michael Rowe on 12/30/20.
 //
 
+import os
 import SwiftUI
 import CoreData
 import MapKit
@@ -29,7 +30,6 @@ struct ViewEventsView: View {
 
     @State var newEvent = false
     @State var frontView = false
-    @State var backView = false
     @State var frontShown = true
     @State private var frontImageShown: UIImage?
 
@@ -129,50 +129,6 @@ struct ViewEventsView: View {
                                             .shadow(color: .black, radius: 2.0)
                                         }
                                         VStack {
-//                                            HStack {
-//                                                Spacer()
-//                                                // swiftlint:disable:next line_length
-//                                                NavigationLink(destination: EditAnEvent(event: event, recipient: recipient), isActive: $isEditActive, label: {
-//                                                    Image(systemName: "square.and.pencil")
-//                                                        .foregroundColor(.green)
-//                                                        .shadow(color: .black, radius: 2.0)
-//                                                        .font(deviceiPhone ? .title2 : .title)
-//                                                })
-//                                                .padding(5)
-//                                                // swiftlint:disable:next line_length
-//                                                NavigationLink(destination: CardView(cardImage: (event.cardFrontImage ?? blankCardFront)!, event: event.event ?? "Unknown Event", eventDate: event.eventDate! as Date), isActive: $isCardActive, label: {
-//                                                    Image(systemName: "doc.text.image")
-//                                                        .foregroundColor(.green)
-//                                                        .shadow(color: .black, radius: 2.0)
-//                                                        .font(deviceiPhone ? .title2 : .title)
-//                                                })
-//                                                .padding(5)
-//                                                Button(action: {
-//                                                    areYouSure.toggle()
-//                                                }, label: {
-//                                                    Image(systemName: "trash")
-//                                                        .foregroundColor(.red)
-//                                                        .shadow(color: .black, radius: 2.0)
-//                                                        .font(deviceiPhone ? .title2 : .title)
-//                                                        .padding(5)
-//                                                })
-//                                                // swiftlint:disable:next line_length
-//                                                .confirmationDialog("Are you Sure", isPresented: $areYouSure, titleVisibility: .visible) {
-//                                                    Button("Yes", role: .destructive) {
-//                                                        withAnimation {
-//                                                            // swiftlint:disable:next line_length
-//                                                            print("Deleting Event \(String(describing: event.event)) \(String(describing: event.eventDate))")
-//                                                            deleteEvent(event: event)
-//                                                        }
-//                                                    }
-//                                                    Button("No") {
-//                                                        withAnimation {
-//                                                            // swiftlint:disable:next line_length
-//                                                            print("Cancelled delete of \(String(describing: event.event)) \(String(describing: event.eventDate))")
-//                                                        }
-//                                                    } .keyboardShortcut(.defaultAction)
-//                                                }
-//                                            }
                                             MenuOverlayView(recipient: recipient, event: event)
                                             .padding(5)
                                             Spacer()
@@ -213,6 +169,7 @@ struct ViewEventsView: View {
     }
 
     private func deleteEvent(event: Event) {
+        let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "ViewEventsView.DeleteEvent")
         let taskContext = moc
         taskContext.perform {
             taskContext.delete(event)
@@ -220,6 +177,7 @@ struct ViewEventsView: View {
                 try taskContext.save()
             } catch {
                 let nsError = error as NSError
+                logger.log("Unresolved error \(nsError), \(nsError.userInfo)")
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
@@ -234,30 +192,6 @@ struct ViewEventsView: View {
                 return
             }
             completion(location)
-        }
-    }
-}
-
-struct DeleteButton<T>: View where T: Equatable {
-    @Environment(\.editMode) var editMode
-
-    let number: T
-    @Binding var numbers: [T]
-    let onDelete: (IndexSet) -> Void
-
-    var body: some View {
-        VStack {
-            if self.editMode?.wrappedValue == .active {
-                Button(action: {
-                    if let index = numbers.firstIndex(of: number) {
-                        self.onDelete(IndexSet(integer: index))
-                    }
-                }, label: {
-                    Image(systemName: "minus.circle.filled")
-                        .foregroundColor(.red)
-                })
-                .offset(x: 10, y: -10)
-            }
         }
     }
 }

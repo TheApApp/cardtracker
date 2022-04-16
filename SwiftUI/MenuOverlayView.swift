@@ -6,6 +6,7 @@
 //  Copyright © 2022 Michael Rowe. All rights reserved.
 //
 
+import os
 import SwiftUI
 
 struct MenuOverlayView: View {
@@ -76,6 +77,7 @@ struct MenuOverlayView: View {
     }
 
     private func deleteEvent(event: Event) {
+        let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "MenuOverlayView.deleteEvent")
         let taskContext = moc
         taskContext.perform {
             taskContext.delete(event)
@@ -83,6 +85,7 @@ struct MenuOverlayView: View {
                 try taskContext.save()
             } catch {
                 let nsError = error as NSError
+                logger.log("Unresolved error \(nsError), \(nsError.userInfo)")
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
