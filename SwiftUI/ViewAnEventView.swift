@@ -101,7 +101,6 @@ struct ViewAnEventView: View {
         }
     }
 
-
     func deleteCard(event: Event) {
         print("Delete the card \(event)")
         moc.delete(event)
