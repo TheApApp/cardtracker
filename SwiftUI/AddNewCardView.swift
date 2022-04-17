@@ -13,40 +13,6 @@ struct AddNewCardView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
 
-    private var eventChoices = [
-        "Anniversary",
-        "Bereavement",
-        "Birthday",
-        "Bon Voyage",
-        "Bridal Shower",
-        "Chanukah",
-        "Christmas",
-        "Congratulations",
-        "Divorce",
-        "Easter",
-        "Engagement",
-        "Father’s Day",
-        "Flag Day",
-        "Fourth of July",
-        "Friendship",
-        "Get Well",
-        "Graduation",
-        "Halloween",
-        "Kwanza",
-        "Love",
-        "Mother’s Day",
-        "New Baby",
-        "New Home",
-        "Passover",
-        "Sorry",
-        "St. Patrick’s Day",
-        "St. Valentine’s Day",
-        "Sympathy",
-        "Thank you",
-        "Thanksgiving",
-        "Thinking of You",
-        "Wedding"
-    ]
     private var eventValue = "Anniversary"
 
     @State private var zoomed = false
@@ -90,7 +56,7 @@ struct AddNewCardView: View {
                         Spacer()
                         Picker(selection: $selectedEvent, label: Text("")) {
                             ForEach(0 ..< eventChoices.count, id: \.self) {
-                                Text(self.eventChoices[$0])
+                                Text(eventChoices[$0])
                             }
                         }
                         .frame(width: geomtry.size.width * 0.55, height: geomtry.size.height * 0.25)

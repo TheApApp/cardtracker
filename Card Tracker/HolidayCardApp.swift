@@ -6,6 +6,7 @@
 //  Copyright © 2020 Michael Rowe. All rights reserved.
 //
 
+import os
 import SwiftUI
 
 @main
@@ -22,8 +23,10 @@ struct HolidayCardApp: App {
             switch phase {
             case .active:
                 print("\(#function) REPORTS - App change of scenePhase to ACTIVE")
+                saveContext()
             case .inactive:
                 print("\(#function) REPORTS - App change of scenePhase to INACTIVE")
+                saveContext()
             case .background:
                 print("\(#function) REPORTS - App change of scenePhase to BACKGROUND")
                 saveContext()
@@ -34,11 +37,13 @@ struct HolidayCardApp: App {
     }
 
     func saveContext() {
+        let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "HolidayCardApp")
         if context.hasChanges {
             do {
                 try context.save()
             } catch {
                 let nserror = error as NSError
+                logger.log("unresolved errorL \(nserror), \(nserror.userInfo)")
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }

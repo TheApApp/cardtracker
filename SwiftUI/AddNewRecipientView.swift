@@ -176,6 +176,7 @@ struct AddNewRecipientView: View {
     }
 
     func checkContactsPermissions() -> Bool {
+        // swiftlint:disable:next line_length
         let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "AddNewRecipientView.checkContctsPermissions")
         let authStatus = CNContactStore.authorizationStatus(for: .contacts)
         switch authStatus {

@@ -5,7 +5,7 @@
 //  Created by Michael Rowe on 12/26/20.
 //  Copyright © 2020 Michael Rowe. All rights reserved.
 //
-// Depricated view - should remove this one
+// Deprecated view - should remove this one
 
 import SwiftUI
 
@@ -101,8 +101,7 @@ struct ViewAnEventView: View {
         }
     }
 
-    // todo:  This delete will crash the app, after a successful delete
-    // trying to enable a delete at the LazyVGrid in the ViewEventsView()
+
     func deleteCard(event: Event) {
         print("Delete the card \(event)")
         moc.delete(event)
