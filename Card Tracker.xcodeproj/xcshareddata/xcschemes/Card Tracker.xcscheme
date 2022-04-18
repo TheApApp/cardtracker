@@ -97,7 +97,7 @@
          <EnvironmentVariable
             key = "MallocNanoZone"
             value = "0"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "SQLITE_ENABLE_THREAD_ASSERTIONS"
