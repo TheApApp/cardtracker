@@ -5,24 +5,6 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
-      <PostActions>
-         <ExecutionAction
-            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
-            <ActionContent
-               title = "Run Script"
-               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;PLIST=&quot;${PROJECT_DIR}/${INFOPLIST_FILE}&quot; &#10;PLB=/usr/libexec/PlistBuddy &#10;LAST_NUMBER=$($PLB -c &quot;Print CFBundleVersion&quot; &quot;$PLIST&quot;) &#10;NEW_VERSION=$(($LAST_NUMBER + 1)) &#10;$PLB -c &quot;Set :CFBundleVersion $NEW_VERSION&quot; &quot;$PLIST&quot;&#10;">
-               <EnvironmentBuildable>
-                  <BuildableReference
-                     BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "18478CC1203887E300C91E22"
-                     BuildableName = "Card Tracker.app"
-                     BlueprintName = "Card Tracker"
-                     ReferencedContainer = "container:Card Tracker.xcodeproj">
-                  </BuildableReference>
-               </EnvironmentBuildable>
-            </ActionContent>
-         </ExecutionAction>
-      </PostActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
