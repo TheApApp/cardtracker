@@ -39,6 +39,7 @@ struct ViewRecipientsView: View {
                     TextField("Filter", text: $lastNameFilter)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
+                .background(Color(UIColor.systemGroupedBackground))
                 .padding([.top, .leading, .trailing])
                 FilteredList(filter: lastNameFilter)
             }

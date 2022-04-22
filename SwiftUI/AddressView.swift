@@ -10,6 +10,14 @@ import SwiftUI
 
 struct AddressView: View {
     var recipient: Recipient
+    private var deviceiPhone = false
+
+    init(recipient: Recipient) {
+        self.recipient = recipient
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            deviceiPhone = true
+        }
+    }
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -29,7 +37,7 @@ struct AddressView: View {
                 Text(countryLine)
             }
         }
-        .font(.title)
+        .font(deviceiPhone ? .title2 : .title)
         .foregroundColor(.green)
         .padding([.leading, .trailing], 10 )
     }

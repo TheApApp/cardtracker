@@ -87,7 +87,8 @@ struct ViewEventsView: View {
                     if let region = region {
                         MapView(region: region)
                             .frame(width: geo.size.width * 0.3, height: geo.size.height * 0.2)
-                            .padding([.leading, .trailing], 10 )
+                            .mask(RoundedRectangle(cornerRadius: 25))
+                            .padding([.leading, .trailing], 30 )
                         AddressView(recipient: recipient)
                     }
                     Spacer()
@@ -107,42 +108,31 @@ struct ViewEventsView: View {
                         ForEach(events, id: \.self) { event in
                             HStack {
                                 VStack {
-                                    ZStack {
-                                        Spacer()
-                                        Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .ignoresSafeArea(edges: [.vertical, .bottom])
-                                            .padding(.top, 37)
-                                            .padding([.bottom, .leading, .trailing], 15)
-                                        HStack {
-                                            VStack {
-                                                Spacer()
-                                                Text("\(event.event ?? "")")
-                                                // swiftlint:disable:next line_length
-                                                Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
-                                                Spacer()
-                                            }
-                                            .padding(10)
-                                            .font(deviceiPhone ? .title2 : .title)
-                                            .foregroundColor(.white)
-                                            .shadow(color: .black, radius: 2.0)
+                                    Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .padding(.top, deviceiPhone ? 5: 15)
+                                    HStack {
+                                        VStack {
+                                            Text("\(event.event ?? "")")
+                                            // swiftlint:disable:next line_length
+                                            Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
                                         }
+                                        .padding(deviceiPhone ? 5 : 15)
+                                        .font(deviceiPhone ? .caption : .title2)
+                                        .foregroundColor(.primary)
                                         VStack {
                                             MenuOverlayView(recipient: recipient, event: event)
-                                            .padding(5)
-                                            Spacer()
+                                                .padding(deviceiPhone ? 5: 15)
                                         }
                                     }
                                 }
                             }
                             // swiftlint:disable:next line_length
                             .frame(width: deviceiPhone ? geo.size.width * 0.5 : geo.size.width * 0.3, height: deviceiPhone ? geo.size.width * 0.5 : geo.size.width * 0.3)
-                            .background(Color(.systemGray5))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color.white, lineWidth: 20)
-                            )
+                            .background(Color(UIColor.systemGroupedBackground))
+                            .mask(RoundedRectangle(cornerRadius: 20))
+                            .padding(15)
                         }
                     }
                 }

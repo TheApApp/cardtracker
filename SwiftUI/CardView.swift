@@ -42,29 +42,28 @@ struct CardView: View {
     }()
 
     var body: some View {
-        ZStack {
-            Spacer()
-            Image(uiImage: cardImage)
-                .resizable()
-                .aspectRatio(contentMode: zoomed ? .fit : .fill)
-                .onTapGesture {
-                    withAnimation {
-                        zoomed.toggle()
-                    }
-                }
-                .ignoresSafeArea(edges: [.vertical, .bottom])
+        VStack {
             HStack {
-                VStack(alignment: .leading) {
-                    Text(event)
-                    Text("\(eventDate, formatter: Self.eventDateFormatter)")
-                    Spacer()
-                }
-                .padding(10)
-                .font(.largeTitle)
-                .foregroundColor(.white)
-                .shadow(color: .black, radius: 1.0)
+                Spacer()
+                Image(uiImage: cardImage)
+                    .resizable()
+                    .aspectRatio(contentMode: zoomed ? .fit : .fill)
+                    .mask(RoundedRectangle(cornerRadius: 25))
+                    .padding(10)
+                    .onTapGesture {
+                        withAnimation {
+                            zoomed.toggle()
+                        }
+                    }
                 Spacer()
             }
+            VStack(alignment: .center) {
+                Text(event)
+                Text("\(eventDate, formatter: Self.eventDateFormatter)")
+            }
+            .padding(10)
+            .font(.largeTitle)
+            .foregroundColor(.primary)
         }
     }
 }
