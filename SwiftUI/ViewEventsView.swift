@@ -88,7 +88,7 @@ struct ViewEventsView: View {
                         MapView(region: region)
                             .frame(width: geo.size.width * 0.3, height: geo.size.height * 0.2)
                             .mask(RoundedRectangle(cornerRadius: 25))
-                            .padding([.leading, .trailing], 30 )
+                            .padding([.top, .leading], 15 )
                         AddressView(recipient: recipient)
                     }
                     Spacer()
