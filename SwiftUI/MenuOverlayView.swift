@@ -17,7 +17,7 @@ struct MenuOverlayView: View {
     @State var isEditActive: Bool = false
     @State var isCardActive: Bool = false
 
-    private var blankCardFront = UIImage(contentsOfFile: "frontImage")
+    private let blankCardFront = UIImage(contentsOfFile: "frontImage")
     private var deviceiPhone = false
     private var event: Event
     private var recipient: Recipient

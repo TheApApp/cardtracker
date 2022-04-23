@@ -24,7 +24,7 @@ struct ViewAnEventView: View {
     private var event: Event
     private var recipient: Recipient
 
-    private var blankCardFront = UIImage(contentsOfFile: "frontImage")
+    private let blankCardFront = UIImage(contentsOfFile: "frontImage")
 
     @State var navBarItemChoosen: NavBarItemChoosen?
 

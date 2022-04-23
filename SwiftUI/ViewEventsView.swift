@@ -22,7 +22,7 @@ struct ViewEventsView: View {
     @Environment(\.presentationMode) var presentationMode
     @FetchRequest private var events: FetchedResults<Event>
 
-    private var blankCardFront = UIImage(contentsOfFile: "frontImage")
+    private let blankCardFront = UIImage(contentsOfFile: "frontImage")
     private var recipient: Recipient
     @State private var isEditActive: Bool = false
     @State private var isCardActive: Bool = false

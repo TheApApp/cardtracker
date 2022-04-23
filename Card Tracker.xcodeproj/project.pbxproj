@@ -14,6 +14,7 @@
 		184F7054205CB1F20040204D /* Recipient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F7050205CB1F20040204D /* Recipient+CoreDataProperties.swift */; };
 		184F7055205CB1F20040204D /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F7051205CB1F20040204D /* Event+CoreDataClass.swift */; };
 		184F7056205CB1F20040204D /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F7052205CB1F20040204D /* Event+CoreDataProperties.swift */; };
+		184F74B328145AAF00DACD53 /* ImageCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F74B228145AAF00DACD53 /* ImageCompressor.swift */; };
 		185396A1209E454C00435E14 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 185396A0209E454C00435E14 /* Media.xcassets */; };
 		1857025D259A1E0B001AA8EA /* ViewEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857025C259A1E0B001AA8EA /* ViewEventsView.swift */; };
 		1857028A259A75F2001AA8EA /* ViewRecipientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18570289259A75F2001AA8EA /* ViewRecipientsView.swift */; };
@@ -51,6 +52,7 @@
 		184F7050205CB1F20040204D /* Recipient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipient+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		184F7051205CB1F20040204D /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
 		184F7052205CB1F20040204D /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		184F74B228145AAF00DACD53 /* ImageCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressor.swift; sourceTree = "<group>"; };
 		185396A0209E454C00435E14 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		1857025C259A1E0B001AA8EA /* ViewEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEventsView.swift; sourceTree = "<group>"; };
 		18570280259A58A6001AA8EA /* Card_Tracker 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 5.xcdatamodel"; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				184EE4C8258829EB007A23C4 /* CardView.swift */,
 				1875A3802780DA4600911FB4 /* Coordinator.swift */,
 				18A83CCB27753913005ACB5F /* EditAnEvent.swift */,
+				184F74B228145AAF00DACD53 /* ImageCompressor.swift */,
 				18F47D9E280C712200CAE03B /* Constants.swift */,
 				18EF638325EC7D9800448984 /* EditRecipientView.swift */,
 				1829EA3C25AB9CAB00774299 /* ImagePicker.swift */,
@@ -294,6 +297,7 @@
 				184F7056205CB1F20040204D /* Event+CoreDataProperties.swift in Sources */,
 				184EE4C9258829EB007A23C4 /* CardView.swift in Sources */,
 				187AAC712596A9E700BC7682 /* UIImage+Extensions.swift in Sources */,
+				184F74B328145AAF00DACD53 /* ImageCompressor.swift in Sources */,
 				18B70D54205608F700EAC1BD /* Card_Tracker.xcdatamodeld in Sources */,
 				18D49B872676F59700833E31 /* CloudKitHelper.swift in Sources */,
 				18EF638425EC7D9800448984 /* EditRecipientView.swift in Sources */,

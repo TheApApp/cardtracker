@@ -137,14 +137,19 @@ struct EditAnEvent: View {
         logger.log("saving event... \(eventName)")
         event.event = eventChoices[selectedEvent]
         event.eventDate = eventDate as NSDate
-        event.cardFrontImage = frontImageSelected?.asUIImage()
-        event.recipient = recipient
-        event.id = UUID()
-        let context = PersistentCloudKitContainer.persistentContainer.viewContext
-        do {
-            try context.save()
-        } catch let error as NSError {
-            logger.log("Save error \(error), \(error.userInfo)")
+        ImageCompressor.compress(image: (frontImageSelected?.asUIImage())!, maxByte: 4000000) { image in
+            guard image != nil else {
+                logger.log("Error compressing image")
+                return
+            }
+            event.cardFrontImage = image
+            event.recipient = recipient
+            do {
+                logger.log("Saved \(event)")
+                try moc.save()
+            } catch let error as NSError {
+                logger.log("Save error \(error), \(error.userInfo)")
+            }
         }
     }
 }
