@@ -37,16 +37,17 @@ struct MenuOverlayView: View {
             NavigationLink(destination: EditAnEvent(event: event, recipient: recipient), isActive: $isEditActive, label: {
                 Image(systemName: "square.and.pencil")
                     .foregroundColor(.green)
-//                    .shadow(color: .black, radius: 2.0)
-                    .font(deviceiPhone ? .body : .title2)
+                    .font(deviceiPhone ? .body : .title3)
             })
             .padding(deviceiPhone ? 1 : 4)
-            // swiftlint:disable:next line_length
-            NavigationLink(destination: CardView(cardImage: (event.cardFrontImage ?? blankCardFront)!, event: event.event ?? "Unknown Event", eventDate: event.eventDate! as Date), isActive: $isCardActive, label: {
+            NavigationLink(destination: CardView(
+                cardImage: (event.cardFrontImage ?? blankCardFront)!,
+                event: event.event ?? "Unknown Event",
+                eventDate: event.eventDate! as Date),
+                           isActive: $isCardActive, label: {
                 Image(systemName: "doc.text.image")
                     .foregroundColor(.green)
-//                    .shadow(color: .black, radius: 2.0)
-                    .font(deviceiPhone ? .body : .title2)
+                    .font(deviceiPhone ? .body : .title3)
             })
             .padding(deviceiPhone ? 1 : 4)
             Button(action: {
@@ -54,8 +55,7 @@ struct MenuOverlayView: View {
             }, label: {
                 Image(systemName: "trash")
                     .foregroundColor(.red)
-//                    .shadow(color: .black, radius: 2.0)
-                    .font(deviceiPhone ? .body : .title2)
+                    .font(deviceiPhone ? .body : .title3)
                     .padding(deviceiPhone ? 1 : 4)
             })
             .confirmationDialog("Are you Sure", isPresented: $areYouSure, titleVisibility: .visible) {

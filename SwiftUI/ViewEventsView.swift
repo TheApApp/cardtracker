@@ -97,8 +97,9 @@ struct ViewEventsView: View {
                             let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
                             getLocation(from: addressString) { coordinates in
                                 if let coordinates = coordinates {
-                                    // swiftlint:disable:next line_length
-                                    self.region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+                                    self.region = MKCoordinateRegion(
+                                        center: coordinates,
+                                        span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
                                 }
                             }
                         }
@@ -119,7 +120,7 @@ struct ViewEventsView: View {
                                             Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
                                         }
                                         .padding(deviceiPhone ? 5 : 15)
-                                        .font(deviceiPhone ? .caption : .title2)
+                                        .font(deviceiPhone ? .caption : .title3)
                                         .foregroundColor(.primary)
                                         VStack {
                                             MenuOverlayView(recipient: recipient, event: event)
@@ -128,8 +129,8 @@ struct ViewEventsView: View {
                                     }
                                 }
                             }
-                            // swiftlint:disable:next line_length
-                            .frame(width: deviceiPhone ? geo.size.width * 0.5 : geo.size.width * 0.3, height: deviceiPhone ? geo.size.width * 0.5 : geo.size.width * 0.3)
+                            .frame(width: deviceiPhone ? geo.size.width * 0.5 : geo.size.width * 0.3,
+                                   height: deviceiPhone ? geo.size.width * 0.5 : geo.size.width * 0.3)
                             .background(Color(UIColor.systemGroupedBackground))
                             .mask(RoundedRectangle(cornerRadius: 20))
                             .padding(15)

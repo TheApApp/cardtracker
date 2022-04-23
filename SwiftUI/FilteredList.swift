@@ -27,7 +27,6 @@ struct FilteredList: View {
     }
 
     var body: some View {
-
         List {
             ForEach(fetchRequest, id: \.self) { recipient in
                 NavigationLink(destination:

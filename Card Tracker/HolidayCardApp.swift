@@ -19,11 +19,16 @@ struct HolidayCardApp: App {
             ViewRecipientsView().accentColor(.green)
                 .environment(\.managedObjectContext, context)
         }
+        .commands {
+            CommandGroup(replacing: .help) {
+                EmptyView()
+            }
+        }
         .onChange(of: scenePhase) { phase in
             switch phase {
             case .active:
                 print("\(#function) REPORTS - App change of scenePhase to ACTIVE")
-                saveContext()
+                //                saveContext()
             case .inactive:
                 print("\(#function) REPORTS - App change of scenePhase to INACTIVE")
                 saveContext()

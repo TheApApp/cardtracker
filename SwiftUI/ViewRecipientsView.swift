@@ -12,17 +12,17 @@ struct ViewRecipientsView: View {
     @State private var firstNameFilter = ""
 
     init() {
-                let navBarAppearance = UINavigationBarAppearance()
-                navBarAppearance.largeTitleTextAttributes = [
-                    .foregroundColor: UIColor.systemGreen,
-                    .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
-                navBarAppearance.titleTextAttributes = [
-                    .foregroundColor: UIColor.systemGreen,
-                    .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.largeTitleTextAttributes = [
+            .foregroundColor: UIColor.systemGreen,
+            .font: UIFont(name: "ArialRoundedMTBold", size: 35)!]
+        navBarAppearance.titleTextAttributes = [
+            .foregroundColor: UIColor.systemGreen,
+            .font: UIFont(name: "ArialRoundedMTBold", size: 20)!]
 
-                UINavigationBar.appearance().standardAppearance = navBarAppearance
-                UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
-                UINavigationBar.appearance().compactAppearance = navBarAppearance
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().compactAppearance = navBarAppearance
 
         let request: NSFetchRequest<Recipient> = Recipient.fetchRequest()
         request.sortDescriptors = [
@@ -35,17 +35,15 @@ struct ViewRecipientsView: View {
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
-                    TextField("Filter", text: $lastNameFilter)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
-                .background(Color(UIColor.systemGroupedBackground))
-                .padding([.top, .leading, .trailing])
+                TextField("Filter", text: $lastNameFilter)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding([.top, .leading, .trailing, .bottom])
+                    .background(Color(UIColor.systemGroupedBackground))
                 FilteredList(filter: lastNameFilter)
             }
             .navigationTitle("Recipient List")
             .toolbar {
-                ToolbarItem(placement: .automatic) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         self.addNewRecipient.toggle()
                     }, label: {

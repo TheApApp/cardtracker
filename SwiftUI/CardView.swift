@@ -61,8 +61,8 @@ struct CardView: View {
                 Text(event)
                 Text("\(eventDate, formatter: Self.eventDateFormatter)")
             }
-            .padding(10)
-            .font(.largeTitle)
+            .padding(5)
+            .font(.title)
             .foregroundColor(.primary)
         }
     }
