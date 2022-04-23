@@ -34,7 +34,7 @@ struct ViewRecipientsView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 0) {
                 TextField("Filter", text: $lastNameFilter)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding([.top, .leading, .trailing, .bottom])
