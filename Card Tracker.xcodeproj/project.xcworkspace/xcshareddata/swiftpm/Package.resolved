@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/youjinp/SwiftUIKit",
       "state" : {
-        "revision" : "90c0ec689b3b415630a8a71748637588a097609d",
-        "version" : "0.0.16"
+        "revision" : "a83aedd996bcb59ca846346bb507f090a7350e34",
+        "version" : "0.0.17"
       }
     }
   ],
