@@ -9,7 +9,7 @@
 import SwiftUI
 import CoreData
 
-struct FilteredList: View {
+struct FilteredList: View { 
     @Environment(\.managedObjectContext) var moc
     @FetchRequest var fetchRequest: FetchedResults<Recipient>
 
