@@ -28,7 +28,7 @@ struct HolidayCardApp: App {
             switch phase {
             case .active:
                 print("\(#function) REPORTS - App change of scenePhase to ACTIVE")
-                //                saveContext()
+                saveContext()
             case .inactive:
                 print("\(#function) REPORTS - App change of scenePhase to INACTIVE")
                 saveContext()
