@@ -32,7 +32,7 @@ struct FilteredList: View {
                 NavigationLink(destination:
                                 ViewEventsView(recipient: recipient)) {
                     Text("\(recipient.wrappedFirstName) \(recipient.wrappedLastName)")
-                        .foregroundColor(.green)
+                        .foregroundColor(Color(red: 0.138, green: 0.545, blue: 0.282))
                 }
             }
             .onDelete(perform: deleteRecipient)
