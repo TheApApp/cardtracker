@@ -71,12 +71,14 @@ struct ViewEventsView: View {
         request.predicate =  NSPredicate(format: "%K == %@", #keyPath(Event.recipient), recipient)
         _events = FetchRequest<Event>(fetchRequest: request)
         if UIDevice.current.userInterfaceIdiom != .phone {
-            self.gridLayout = [GridItem(.flexible()),
-                               GridItem(.flexible()),
-                               GridItem(.flexible())]
+            self.gridLayout = [
+                GridItem(.adaptive(minimum: 250))
+            ]
         } else {
             deviceiPhone = true
-            self.gridLayout = [GridItem(.flexible()), GridItem(.flexible())]
+            self.gridLayout = [
+                GridItem(.adaptive(minimum: 150))
+            ]
         }
     }
 
@@ -112,6 +114,8 @@ struct ViewEventsView: View {
                                     Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
+                                        .scaledToFit()
+                                        .frame(width: 100, height: 100)
                                         .padding(.top, deviceiPhone ? 5: 15)
                                     HStack {
                                         VStack {
@@ -129,8 +133,8 @@ struct ViewEventsView: View {
                                     }
                                 }
                             }
-                            .frame(width: deviceiPhone ? geo.size.width * 0.5 : geo.size.width * 0.3,
-                                   height: deviceiPhone ? geo.size.width * 0.5 : geo.size.width * 0.3)
+                            .frame(width: deviceiPhone ? 150 : 250,
+                                   height: deviceiPhone ? 150 : 250)
                             .background(Color(UIColor.systemGroupedBackground))
                             .mask(RoundedRectangle(cornerRadius: 20))
                             .padding(15)
