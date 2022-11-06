@@ -72,7 +72,7 @@ struct ViewEventsView: View {
         _events = FetchRequest<Event>(fetchRequest: request)
         if UIDevice.current.userInterfaceIdiom != .phone {
             self.gridLayout = [
-                GridItem(.adaptive(minimum: 250))
+                GridItem(.adaptive(minimum: 250), spacing: 20, alignment: .center)
             ]
         } else {
             deviceiPhone = true
@@ -107,7 +107,7 @@ struct ViewEventsView: View {
                         }
                 }
                 ScrollView {
-                    LazyVGrid(columns: gridLayout, alignment: .center, spacing: 1) {
+                    LazyVGrid(columns: gridLayout, alignment: .center, spacing: 20) {
                         ForEach(events, id: \.self) { event in
                             HStack {
                                 VStack {
@@ -115,30 +115,36 @@ struct ViewEventsView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .scaledToFit()
-                                        .frame(width: 100, height: 100)
+                                        .frame(width: deviceiPhone ? 100 : 200, height: deviceiPhone ? 100 : 200)
                                         .padding(.top, deviceiPhone ? 5: 15)
                                     HStack {
                                         VStack {
                                             Text("\(event.event ?? "")")
+                                                .font(.headline)
+                                                .foregroundColor(.green)
                                             // swiftlint:disable:next line_length
                                             Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
+                                                .font(.subheadline)
+                                                .foregroundColor(.green)
                                         }
-                                        .padding(deviceiPhone ? 5 : 15)
+                                        .padding(deviceiPhone ? 5 : 10)
                                         .font(deviceiPhone ? .caption : .title3)
                                         .foregroundColor(.primary)
                                         VStack {
                                             MenuOverlayView(recipient: recipient, event: event)
-                                                .padding(deviceiPhone ? 5: 15)
+                                                .padding(deviceiPhone ? 5: 10)
                                         }
                                     }
                                 }
                             }
-                            .frame(width: deviceiPhone ? 150 : 250,
-                                   height: deviceiPhone ? 150 : 250)
+                            .padding()
+                            .frame(maxWidth: .infinity,
+                                   minHeight: deviceiPhone ? 150 : 300)
                             .background(Color(UIColor.systemGroupedBackground))
                             .mask(RoundedRectangle(cornerRadius: 20))
                             .padding(15)
                         }
+                        .padding()
                     }
                 }
                 .navigationTitle("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")")
