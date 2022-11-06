@@ -37,9 +37,9 @@ struct MenuOverlayView: View {
             NavigationLink(destination: EditAnEvent(event: event, recipient: recipient), isActive: $isEditActive, label: {
                 Image(systemName: "square.and.pencil")
                     .foregroundColor(.green)
-                    .font(deviceiPhone ? .body : .title3)
+                    .fixedSize()
             })
-            .padding(deviceiPhone ? 1 : 4)
+//            .padding(deviceiPhone ? 1 : 4)
             NavigationLink(destination: CardView(
                 cardImage: (event.cardFrontImage ?? blankCardFront)!,
                 event: event.event ?? "Unknown Event",
@@ -47,16 +47,16 @@ struct MenuOverlayView: View {
                            isActive: $isCardActive, label: {
                 Image(systemName: "doc.text.image")
                     .foregroundColor(.green)
-                    .font(deviceiPhone ? .body : .title3)
+                    .fixedSize()
             })
-            .padding(deviceiPhone ? 1 : 4)
+//            .padding(deviceiPhone ? 1 : 4)
             Button(action: {
                 areYouSure.toggle()
             }, label: {
                 Image(systemName: "trash")
                     .foregroundColor(.red)
-                    .font(deviceiPhone ? .body : .title3)
-                    .padding(deviceiPhone ? 1 : 4)
+                    .fixedSize()
+//                    .padding(deviceiPhone ? 1 : 4)
             })
             .confirmationDialog("Are you Sure", isPresented: $areYouSure, titleVisibility: .visible) {
                 Button("Yes", role: .destructive) {

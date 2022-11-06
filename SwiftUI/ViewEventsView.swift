@@ -72,12 +72,12 @@ struct ViewEventsView: View {
         _events = FetchRequest<Event>(fetchRequest: request)
         if UIDevice.current.userInterfaceIdiom != .phone {
             self.gridLayout = [
-                GridItem(.adaptive(minimum: 250), spacing: 20, alignment: .center)
+                GridItem(.adaptive(minimum: 320), spacing: 20, alignment: .center)
             ]
         } else {
             deviceiPhone = true
             self.gridLayout = [
-                GridItem(.adaptive(minimum: 150))
+                GridItem(.adaptive(minimum: 160), spacing: 10, alignment: .center)
             ]
         }
     }
@@ -107,7 +107,7 @@ struct ViewEventsView: View {
                         }
                 }
                 ScrollView {
-                    LazyVGrid(columns: gridLayout, alignment: .center, spacing: 20) {
+                    LazyVGrid(columns: gridLayout, alignment: .center, spacing: 10) {
                         ForEach(events, id: \.self) { event in
                             HStack {
                                 VStack {
@@ -120,29 +120,29 @@ struct ViewEventsView: View {
                                     HStack {
                                         VStack {
                                             Text("\(event.event ?? "")")
-                                                .font(.headline)
+                                                .fixedSize()
                                                 .foregroundColor(.green)
                                             // swiftlint:disable:next line_length
                                             Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
-                                                .font(.subheadline)
+                                                .fixedSize()
                                                 .foregroundColor(.green)
                                         }
-                                        .padding(deviceiPhone ? 5 : 10)
+//                                        .padding(deviceiPhone ? 1 : 5)
                                         .font(deviceiPhone ? .caption : .title3)
                                         .foregroundColor(.primary)
                                         VStack {
                                             MenuOverlayView(recipient: recipient, event: event)
-                                                .padding(deviceiPhone ? 5: 10)
+//                                                .padding(deviceiPhone ? 1: 5)
                                         }
                                     }
                                 }
                             }
                             .padding()
-                            .frame(maxWidth: .infinity,
-                                   minHeight: deviceiPhone ? 150 : 300)
+                            .frame(minWidth: deviceiPhone ? 160 : 320, maxWidth: .infinity,
+                                   minHeight: deviceiPhone ? 160 : 320, maxHeight: .infinity)
                             .background(Color(UIColor.systemGroupedBackground))
                             .mask(RoundedRectangle(cornerRadius: 20))
-                            .padding(15)
+                            .padding(deviceiPhone ? 15: 30)
                         }
                         .padding()
                     }
