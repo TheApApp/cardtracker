@@ -2,7 +2,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=xcode
 
 ### Xcode ###
-## User settings
+## User 
+.DS_Store
 xcuserdata/
 
 ## Xcode 8 and earlier
