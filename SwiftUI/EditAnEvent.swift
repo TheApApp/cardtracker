@@ -15,6 +15,7 @@ struct EditAnEvent: View {
 
     var event: Event
     var recipient: Recipient
+    var defaultImage = UIImage(named: "frontImage")
 
     @State private var cardFrontImage: Image?
     @State var frontImageSelected: Image?
@@ -42,7 +43,7 @@ struct EditAnEvent: View {
         self.recipient = recipient
         self._firstName = State(initialValue: recipient.firstName ?? "")
         self._lastName = State(initialValue: recipient.lastName ?? "")
-        self._cardFrontImage = State(initialValue: Image(uiImage: event.cardFrontImage!))
+        self._cardFrontImage = State(initialValue: Image(uiImage: event.cardFrontImage ?? defaultImage!))
         self._frontImageSelected = State(initialValue: Image(uiImage: event.cardFrontImage!))
         self._eventDate = State(initialValue: event.eventDate! as Date)
         self._eventName = State(initialValue: event.event ?? "")
