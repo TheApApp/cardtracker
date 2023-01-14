@@ -33,24 +33,23 @@ struct MenuOverlayView: View {
     var body: some View {
         HStack {
             Spacer()
-            NavigationLink(
-                destination: EditAnEvent(event: event, recipient: recipient),
-                isActive: $isEditActive,
-                label: {
-                    Image(systemName: "square.and.pencil")
-                        .foregroundColor(.green)
-                        .fixedSize()
-            })
-            NavigationLink(
-                destination: CardView(
+            NavigationLink {
+                EditAnEvent(event: event, recipient: recipient)
+            } label: {
+                Image(systemName: "square.and.pencil")
+                    .foregroundColor(.green)
+                    .fixedSize()
+            }
+            NavigationLink {
+                CardView(
                     cardImage: (event.cardFrontImage ?? blankCardFront)!,
                     event: event.event ?? "Unknown Event",
-                    eventDate: event.eventDate! as Date),
-                isActive: $isCardActive, label: {
-                    Image(systemName: "doc.text.image")
-                        .foregroundColor(.green)
-                        .fixedSize()
-            })
+                    eventDate: event.eventDate! as Date)
+            } label: {
+                Image(systemName: "doc.text.image")
+                    .foregroundColor(.green)
+                    .fixedSize()
+            }
             Button(action: {
                 areYouSure.toggle()
             }, label: {
