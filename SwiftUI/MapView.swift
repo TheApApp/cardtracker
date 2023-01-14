@@ -34,7 +34,7 @@ struct MapView: View {
 
     var body: some View {
         Map(coordinateRegion: $region, showsUserLocation: false, annotationItems: places) { place in
-            MapPin(coordinate: place.coordinate, tint: .green)
+            MapMarker(coordinate: place.coordinate, tint: .green)
         }
     }
 }

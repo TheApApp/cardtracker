@@ -1,4 +1,3 @@
-// swiftlint:disable orphaned_doc_comment
 /// Copyright (c) 2018 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy

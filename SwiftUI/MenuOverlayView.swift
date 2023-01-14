@@ -33,30 +33,30 @@ struct MenuOverlayView: View {
     var body: some View {
         HStack {
             Spacer()
-            // swiftlint:disable:next line_length
-            NavigationLink(destination: EditAnEvent(event: event, recipient: recipient), isActive: $isEditActive, label: {
-                Image(systemName: "square.and.pencil")
-                    .foregroundColor(.green)
-                    .fixedSize()
+            NavigationLink(
+                destination: EditAnEvent(event: event, recipient: recipient),
+                isActive: $isEditActive,
+                label: {
+                    Image(systemName: "square.and.pencil")
+                        .foregroundColor(.green)
+                        .fixedSize()
             })
-//            .padding(deviceiPhone ? 1 : 4)
-            NavigationLink(destination: CardView(
-                cardImage: (event.cardFrontImage ?? blankCardFront)!,
-                event: event.event ?? "Unknown Event",
-                eventDate: event.eventDate! as Date),
-                           isActive: $isCardActive, label: {
-                Image(systemName: "doc.text.image")
-                    .foregroundColor(.green)
-                    .fixedSize()
+            NavigationLink(
+                destination: CardView(
+                    cardImage: (event.cardFrontImage ?? blankCardFront)!,
+                    event: event.event ?? "Unknown Event",
+                    eventDate: event.eventDate! as Date),
+                isActive: $isCardActive, label: {
+                    Image(systemName: "doc.text.image")
+                        .foregroundColor(.green)
+                        .fixedSize()
             })
-//            .padding(deviceiPhone ? 1 : 4)
             Button(action: {
                 areYouSure.toggle()
             }, label: {
                 Image(systemName: "trash")
                     .foregroundColor(.red)
                     .fixedSize()
-//                    .padding(deviceiPhone ? 1 : 4)
             })
             .confirmationDialog("Are you Sure", isPresented: $areYouSure, titleVisibility: .visible) {
                 Button("Yes", role: .destructive) {
