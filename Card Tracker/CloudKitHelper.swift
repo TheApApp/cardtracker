@@ -27,17 +27,14 @@ public class CloudKitHelper {
             if nserror.domain == NSCocoaErrorDomain {
                 if nserror.code == 4097 {
                     logger.log("cloudd is dead")
-                    
                     return 6.0
                 }
             }
-            
             logger.log("Determine Retry - Unexpected error: \(error.localizedDescription)")
         }
-        
         return nil
     }
-    
+
     public static func modifyRecordZonesOperation(
         database: CKDatabase,
         recordZonesToSave: [CKRecordZone]?,
@@ -68,7 +65,7 @@ public class CloudKitHelper {
             }
             database.add(operation)
         }
-    
+
     public static func modifyRecords(
         database: CKDatabase,
         records: [CKRecord],
@@ -82,7 +79,7 @@ public class CloudKitHelper {
                     completion(savedRecords, error)
                 }
         }
-    
+
     public static func deleteRecords(
         database: CKDatabase,
         recordIDs: [CKRecord.ID],
@@ -97,7 +94,7 @@ public class CloudKitHelper {
                 completion(deletedRecords, error)
             }
     }
-    
+
     public static func modifyAndDeleteRecords(
         database: CKDatabase,
         records: [CKRecord]?,

@@ -34,6 +34,10 @@ extension Recipient: Identifiable {
     var wrappedLastName: String {
         lastName ?? "Unknown"
     }
+    
+    var fullName: String {
+        String("\(firstName) \(lastName)")
+    }
 
 }
 
