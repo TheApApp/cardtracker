@@ -23,6 +23,7 @@ struct MenuOverlayView: View {
     private var recipient: Recipient
 
     init(recipient: Recipient, event: Event) {
+        /// Todo - update device to use @Environment
         if UIDevice.current.userInterfaceIdiom == .phone {
             deviceiPhone = true
         }
@@ -38,7 +39,8 @@ struct MenuOverlayView: View {
             } label: {
                 Image(systemName: "square.and.pencil")
                     .foregroundColor(.green)
-                    .fixedSize()
+                    .font(deviceiPhone ? .caption : .title3)
+//                    .fixedSize()
             }
             NavigationLink {
                 CardView(
@@ -48,14 +50,16 @@ struct MenuOverlayView: View {
             } label: {
                 Image(systemName: "doc.text.image")
                     .foregroundColor(.green)
-                    .fixedSize()
+                    .font(deviceiPhone ? .caption : .title3)
+//                    .fixedSize()
             }
             Button(action: {
                 areYouSure.toggle()
             }, label: {
                 Image(systemName: "trash")
                     .foregroundColor(.red)
-                    .fixedSize()
+                    .font(deviceiPhone ? .caption : .title3)
+//                    .fixedSize()
             })
             .confirmationDialog("Are you Sure", isPresented: $areYouSure, titleVisibility: .visible) {
                 Button("Yes", role: .destructive) {

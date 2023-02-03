@@ -49,7 +49,7 @@ struct CardView: View {
                     .resizable()
                     .aspectRatio(contentMode: zoomed ? .fit : .fill)
                     .mask(RoundedRectangle(cornerRadius: 25))
-                    .padding(10)
+                    .padding(2)
                     .onTapGesture {
                         withAnimation {
                             zoomed.toggle()

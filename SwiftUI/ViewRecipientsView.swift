@@ -35,6 +35,7 @@ struct ViewRecipientsView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
+                /// todo: change to Searchable 
                 TextField("Filter", text: $lastNameFilter)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding([.top, .leading, .trailing, .bottom])

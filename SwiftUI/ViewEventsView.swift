@@ -107,7 +107,7 @@ struct ViewEventsView: View {
                         }
                 }
                 ScrollView {
-                    LazyVGrid(columns: gridLayout, alignment: .center, spacing: 10) {
+                    LazyVGrid(columns: gridLayout, alignment: .center, spacing: 5) {
                         ForEach(events, id: \.self) { event in
                             HStack {
                                 VStack {
@@ -115,25 +115,28 @@ struct ViewEventsView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .scaledToFit()
-                                        .frame(width: deviceiPhone ? 100 : 200, height: deviceiPhone ? 100 : 200)
-                                        .padding(.top, deviceiPhone ? 5: 15)
+                                        .frame(width: deviceiPhone ? 120 : 200, height: deviceiPhone ? 120 : 200)
+                                        .padding(.top, deviceiPhone ? 2: 5)
                                     HStack {
                                         VStack {
                                             Text("\(event.event ?? "")")
-                                                .fixedSize()
+//                                                .fixedSize()
                                                 .foregroundColor(.green)
-                                            // swiftlint:disable:next line_length
-                                            Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
-                                                .fixedSize()
-                                                .foregroundColor(.green)
+                                            Spacer()
+                                            HStack {
+                                                Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
+                                                    .fixedSize()
+                                                    .foregroundColor(.green)
+                                                MenuOverlayView(recipient: recipient, event: event)
+                                            }
                                         }
-//                                        .padding(deviceiPhone ? 1 : 5)
+                                        .padding(deviceiPhone ? 1 : 5)
                                         .font(deviceiPhone ? .caption : .title3)
                                         .foregroundColor(.primary)
-                                        VStack {
-                                            MenuOverlayView(recipient: recipient, event: event)
-//                                                .padding(deviceiPhone ? 1: 5)
-                                        }
+//                                        VStack {
+//                                            MenuOverlayView(recipient: recipient, event: event)
+////                                                .padding(deviceiPhone ? 1: 5)
+//                                        }
                                     }
                                 }
                             }
@@ -142,7 +145,8 @@ struct ViewEventsView: View {
                                    minHeight: deviceiPhone ? 160 : 320, maxHeight: .infinity)
                             .background(Color(UIColor.systemGroupedBackground))
                             .mask(RoundedRectangle(cornerRadius: 20))
-                            .padding(deviceiPhone ? 15: 30)
+                            .shadow(radius: 5)
+                            .padding(deviceiPhone ? 5: 10)
                         }
                         .padding()
                     }
