@@ -21,7 +21,7 @@ struct FilteredList: View {
         } else {
             _fetchRequest = FetchRequest<Recipient>(
                 sortDescriptors: [SortDescriptor(\.lastName), SortDescriptor(\.firstName)],
-                predicate: NSPredicate(format: "lastName CONTAINS[c] %@", filter)
+                predicate: NSPredicate(format: "lastName CONTAINS[c] %@ || firstName CONTAINS[c] %@", filter, filter)
             )
         }
     }

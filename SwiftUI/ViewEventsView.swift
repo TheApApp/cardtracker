@@ -124,6 +124,7 @@ struct ViewEventsView: View {
                                                 .foregroundColor(.green)
                                             Spacer()
                                             HStack {
+                                                // swiftlint:disable:next line_length
                                                 Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
                                                     .fixedSize()
                                                     .foregroundColor(.green)
