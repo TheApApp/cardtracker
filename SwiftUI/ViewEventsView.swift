@@ -29,7 +29,7 @@ struct ViewEventsView: View {
     @State private var areYouSure: Bool = false
 
     @State var newEvent = false
-    @State var frontView = false
+    @State var frontView = false 
     @State var frontShown = true
     @State private var frontImageShown: UIImage?
 
