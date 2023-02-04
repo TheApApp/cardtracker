@@ -51,7 +51,7 @@ struct EditAnEvent: View {
     }
 
     var body: some View {
-        GeometryReader { geomtry in
+        GeometryReader { geo in
             VStack {
                 HStack {
                     Text("Event")
@@ -61,7 +61,7 @@ struct EditAnEvent: View {
                             Text(eventChoices[$0])
                         }
                     }
-                    .frame(width: geomtry.size.width * 0.55, height: geomtry.size.height * 0.25)
+                    .frame(width: geo.size.width * 0.55, height: geo.size.height * 0.25)
                 }
                 .padding([.leading, .trailing], 10)
                 DatePicker(
@@ -82,7 +82,7 @@ struct EditAnEvent: View {
                         .foregroundColor(.white)
                         .font(.largeTitle)
                         .shadow(radius: 10)
-                        .frame(width: geomtry.size.width * 0.45)
+                        .frame(width: geo.size.width * 0.45)
                         .onTapGesture { self.frontPhoto = true }
                         .actionSheet(isPresented: $frontPhoto) { () -> ActionSheet in
                             ActionSheet(
@@ -110,8 +110,10 @@ struct EditAnEvent: View {
             }
         }
         .padding([.leading, .trailing], 10)
-        // swiftlint:disable:next line_length
-        .navigationBarTitle("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")", displayMode: .inline)
+        .navigationBarTitle(
+            "\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")",
+                            displayMode: .inline
+        )
         .toolbar {
             ToolbarItemGroup(placement: .automatic) {
                 Button(action: {

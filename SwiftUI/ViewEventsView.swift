@@ -38,7 +38,7 @@ struct ViewEventsView: View {
     private var gridLayout: [GridItem]
     @State var isEditing = false
     @State var num: Int = 0
-    private var deviceiPhone = false
+    private var iPhone = false
 
     @State var region: MKCoordinateRegion?
 
@@ -70,12 +70,12 @@ struct ViewEventsView: View {
         ]
         request.predicate =  NSPredicate(format: "%K == %@", #keyPath(Event.recipient), recipient)
         _events = FetchRequest<Event>(fetchRequest: request)
-        if UIDevice.current.userInterfaceIdiom != .phone {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             self.gridLayout = [
                 GridItem(.adaptive(minimum: 320), spacing: 20, alignment: .center)
             ]
         } else {
-            deviceiPhone = true
+            iPhone = true
             self.gridLayout = [
                 GridItem(.adaptive(minimum: 160), spacing: 10, alignment: .center)
             ]
@@ -96,7 +96,7 @@ struct ViewEventsView: View {
                     Spacer()
                         .onAppear {
                             // swiftlint:disable:next line_length
-                            let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
+                            let addressString = String("\(recipient.addressLine1 ?? "One Apple Park Way") \(recipient.city ?? "Cupertino") \(recipient.state ?? "CA") \(recipient.zip ?? "95014") \(recipient.country ?? "")")
                             getLocation(from: addressString) { coordinates in
                                 if let coordinates = coordinates {
                                     self.region = MKCoordinateRegion(
@@ -115,12 +115,11 @@ struct ViewEventsView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .scaledToFit()
-                                        .frame(width: deviceiPhone ? 120 : 200, height: deviceiPhone ? 120 : 200)
-                                        .padding(.top, deviceiPhone ? 2: 5)
+                                        .frame(width: iPhone ? 120 : 200, height: iPhone ? 120 : 200)
+                                        .padding(.top, iPhone ? 2: 5)
                                     HStack {
                                         VStack {
                                             Text("\(event.event ?? "")")
-//                                                .fixedSize()
                                                 .foregroundColor(.green)
                                             Spacer()
                                             HStack {
@@ -131,23 +130,19 @@ struct ViewEventsView: View {
                                                 MenuOverlayView(recipient: recipient, event: event)
                                             }
                                         }
-                                        .padding(deviceiPhone ? 1 : 5)
-                                        .font(deviceiPhone ? .caption : .title3)
+                                        .padding(iPhone ? 1 : 5)
+                                        .font(iPhone ? .caption : .title3)
                                         .foregroundColor(.primary)
-//                                        VStack {
-//                                            MenuOverlayView(recipient: recipient, event: event)
-////                                                .padding(deviceiPhone ? 1: 5)
-//                                        }
                                     }
                                 }
                             }
                             .padding()
-                            .frame(minWidth: deviceiPhone ? 160 : 320, maxWidth: .infinity,
-                                   minHeight: deviceiPhone ? 160 : 320, maxHeight: .infinity)
+                            .frame(minWidth: iPhone ? 160 : 320, maxWidth: .infinity,
+                                   minHeight: iPhone ? 160 : 320, maxHeight: .infinity)
                             .background(Color(UIColor.systemGroupedBackground))
                             .mask(RoundedRectangle(cornerRadius: 20))
                             .shadow(radius: 5)
-                            .padding(deviceiPhone ? 5: 10)
+                            .padding(iPhone ? 5: 10)
                         }
                         .padding()
                     }
@@ -170,6 +165,7 @@ struct ViewEventsView: View {
                     AddNewCardView(recipient: recipient)
                 }
             }
+            let _ = Self._printChanges()
         }
         .accentColor(.green)
     }

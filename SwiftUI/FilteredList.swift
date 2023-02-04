@@ -19,9 +19,11 @@ struct FilteredList: View {
                 sortDescriptors: [SortDescriptor(\.lastName), SortDescriptor(\.firstName)]
             )
         } else {
+            // c = lower case
+            // d = diacritic-insensitive for example - (ignore ü and just use u)
             _fetchRequest = FetchRequest<Recipient>(
                 sortDescriptors: [SortDescriptor(\.lastName), SortDescriptor(\.firstName)],
-                predicate: NSPredicate(format: "lastName CONTAINS[c] %@ || firstName CONTAINS[c] %@", filter, filter)
+                predicate: NSPredicate(format: "lastName CONTAINS[cd] %@ OR firstName CONTAINS[cd] %@", filter, filter)
             )
         }
     }

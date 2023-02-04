@@ -8,8 +8,7 @@ struct ViewRecipientsView: View {
     @FetchRequest private var recipients: FetchedResults<Recipient>
     @State var newEvent = false
 
-    @State private var lastNameFilter = ""
-    @State private var firstNameFilter = ""
+    @State private var nameFilter = ""
 
     init() {
         let navBarAppearance = UINavigationBarAppearance()
@@ -36,11 +35,11 @@ struct ViewRecipientsView: View {
         NavigationView {
             VStack(spacing: 0) {
                 /// todo: change to Searchable 
-                TextField("Filter", text: $lastNameFilter)
+                TextField("Filter", text: $nameFilter)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding([.top, .leading, .trailing, .bottom])
                     .background(Color(UIColor.systemGroupedBackground))
-                FilteredList(filter: lastNameFilter)
+                FilteredList(filter: nameFilter)
             }
             .navigationTitle("Recipient List")
             .toolbar {

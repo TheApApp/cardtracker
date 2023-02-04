@@ -10,12 +10,12 @@ import SwiftUI
 
 struct AddressView: View {
     var recipient: Recipient
-    private var deviceiPhone = false
+    private var iPhone = false
 
     init(recipient: Recipient) {
         self.recipient = recipient
         if UIDevice.current.userInterfaceIdiom == .phone {
-            deviceiPhone = true
+            iPhone = true
         }
     }
 
@@ -37,7 +37,7 @@ struct AddressView: View {
                 Text(countryLine)
             }
         }
-        .font(deviceiPhone ? .title2 : .title)
+        .font(iPhone ? .title2 : .title)
         .foregroundColor(.green)
         .padding([.leading, .trailing], 10 )
     }

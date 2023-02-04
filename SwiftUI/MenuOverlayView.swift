@@ -18,14 +18,13 @@ struct MenuOverlayView: View {
     @State var isCardActive: Bool = false
 
     private let blankCardFront = UIImage(contentsOfFile: "frontImage")
-    private var deviceiPhone = false
+    private var iPhone = false
     private var event: Event
     private var recipient: Recipient
 
     init(recipient: Recipient, event: Event) {
-        /// Todo - update device to use @Environment
         if UIDevice.current.userInterfaceIdiom == .phone {
-            deviceiPhone = true
+            iPhone = true
         }
         self.recipient = recipient
         self.event = event
@@ -39,8 +38,7 @@ struct MenuOverlayView: View {
             } label: {
                 Image(systemName: "square.and.pencil")
                     .foregroundColor(.green)
-                    .font(deviceiPhone ? .caption : .title3)
-//                    .fixedSize()
+                    .font(iPhone ? .caption : .title3)
             }
             NavigationLink {
                 CardView(
@@ -50,16 +48,14 @@ struct MenuOverlayView: View {
             } label: {
                 Image(systemName: "doc.text.image")
                     .foregroundColor(.green)
-                    .font(deviceiPhone ? .caption : .title3)
-//                    .fixedSize()
+                    .font(iPhone ? .caption : .title3)
             }
             Button(action: {
                 areYouSure.toggle()
             }, label: {
                 Image(systemName: "trash")
                     .foregroundColor(.red)
-                    .font(deviceiPhone ? .caption : .title3)
-//                    .fixedSize()
+                    .font(iPhone ? .caption : .title3)
             })
             .confirmationDialog("Are you Sure", isPresented: $areYouSure, titleVisibility: .visible) {
                 Button("Yes", role: .destructive) {
