@@ -114,6 +114,7 @@ public class CloudKitHelper {
                                 recordIDs: recordIDs,
                                 completion: completion)
                         }
+                        // swiftlint:disable:next line_length
                         logger.log("modifyAndDeleteRecord Error \(error.localizedDescription), trying delayed retry of \(delay)")
                     } else {
                         completion(savedRecords, deletedRecordIDs, error)

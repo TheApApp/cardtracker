@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 import MapKit
 
-enum NavBarItemChoosen: Identifiable {
+enum NavBarItemChosen: Identifiable {
     case newCard // , editRecipient, deleteCard
     var id: Int {
         hashValue
@@ -29,12 +29,12 @@ struct ViewEventsView: View {
     @State private var areYouSure: Bool = false
 
     @State var newEvent = false
-    @State var frontView = false 
+    @State var frontView = false
     @State var frontShown = true
     @State private var frontImageShown: UIImage?
 
     @State private var actionSheetPresented = false
-    @State var navBarItemChoosen: NavBarItemChoosen?
+    @State var navBarItemChosen: NavBarItemChosen?
     private var gridLayout: [GridItem]
     @State var isEditing = false
     @State var num: Int = 0
@@ -80,6 +80,11 @@ struct ViewEventsView: View {
                 GridItem(.adaptive(minimum: 160), spacing: 10, alignment: .center)
             ]
         }
+//        _region = State(initialValue:
+//                            MKCoordinateRegion(
+//                                center: CLLocationCoordinate2D(latitude: 37.332279, longitude: -122.010979),
+//                                span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+//        )
     }
 
     var body: some View {
@@ -96,7 +101,7 @@ struct ViewEventsView: View {
                     Spacer()
                         .onAppear {
                             // swiftlint:disable:next line_length
-                            let addressString = String("\(recipient.addressLine1 ?? "One Apple Park Way") \(recipient.city ?? "Cupertino") \(recipient.state ?? "CA") \(recipient.zip ?? "95014") \(recipient.country ?? "")")
+                            let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
                             getLocation(from: addressString) { coordinates in
                                 if let coordinates = coordinates {
                                     self.region = MKCoordinateRegion(
@@ -151,7 +156,7 @@ struct ViewEventsView: View {
                 .navigationBarItems(trailing:
                                         HStack {
                     Button(action: {
-                        navBarItemChoosen = .newCard
+                        navBarItemChosen = .newCard
                     }, label: {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.green)
@@ -159,13 +164,12 @@ struct ViewEventsView: View {
 
                 })
             }
-            .sheet(item: $navBarItemChoosen ) { item in
+            .sheet(item: $navBarItemChosen ) { item in
                 switch item {
                 case .newCard:
                     AddNewCardView(recipient: recipient)
                 }
             }
-            let _ = Self._printChanges()
         }
         .accentColor(.green)
     }

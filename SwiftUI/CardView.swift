@@ -48,8 +48,8 @@ struct CardView: View {
                 Image(uiImage: cardImage)
                     .resizable()
                     .aspectRatio(contentMode: zoomed ? .fit : .fill)
-                    .mask(RoundedRectangle(cornerRadius: 25))
                     .padding(2)
+                    .mask(RoundedRectangle(cornerRadius: 25))
                     .onTapGesture {
                         withAnimation {
                             zoomed.toggle()
