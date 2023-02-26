@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1829EA3D25AB9CAB00774299 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829EA3C25AB9CAB00774299 /* ImagePicker.swift */; };
+		18499CC429996E86001A07EE /* ImageTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18499CC329996E86001A07EE /* ImageTransformerTests.swift */; };
+		18499CC629996F49001A07EE /* UIImage+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18499CC529996F49001A07EE /* UIImage+ExtensionsTests.swift */; };
+		18499CC729997608001A07EE /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AAC702596A9E700BC7682 /* UIImage+Extensions.swift */; };
 		1849EF3D25902FDB00EE2780 /* ImageTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849EF3C25902FDB00EE2780 /* ImageTransformer.swift */; };
 		184EE4C9258829EB007A23C4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184EE4C8258829EB007A23C4 /* CardView.swift */; };
 		184F7053205CB1F20040204D /* Recipient+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F704F205CB1F20040204D /* Recipient+CoreDataClass.swift */; };
@@ -39,11 +42,24 @@
 		18F47D9F280C712200CAE03B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F47D9E280C712200CAE03B /* Constants.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		18499CBE29996AF3001A07EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18478CBA203887E300C91E22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18478CC1203887E300C91E22;
+			remoteInfo = "Card Tracker";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		1829EA3C25AB9CAB00774299 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		1836313A20C9D2B100E2E15E /* Card_Tracker 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 2.xcdatamodel"; sourceTree = "<group>"; };
 		18478CC2203887E300C91E22 /* Card Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Card Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18478CD6203887E300C91E22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18499CBA29996AF3001A07EE /* Card TrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Card TrackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18499CC329996E86001A07EE /* ImageTransformerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformerTests.swift; sourceTree = "<group>"; };
+		18499CC529996F49001A07EE /* UIImage+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		1849EF35258FF40600EE2780 /* Card_Tracker 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 3.xcdatamodel"; sourceTree = "<group>"; };
 		1849EF3C25902FDB00EE2780 /* ImageTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformer.swift; sourceTree = "<group>"; };
 		1849EF402590307900EE2780 /* Card_Tracker 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 4.xcdatamodel"; sourceTree = "<group>"; };
@@ -92,6 +108,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		18499CB729996AF3001A07EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -102,6 +125,7 @@
 				185396A0209E454C00435E14 /* Media.xcassets */,
 				18B44F7127829B8A008C4AF7 /* ci_scripts */,
 				18478CC4203887E300C91E22 /* Card Tracker */,
+				18499CBB29996AF3001A07EE /* Card TrackerTests */,
 				18478CC3203887E300C91E22 /* Products */,
 				18BE2ADC2585611600419A63 /* Frameworks */,
 			);
@@ -111,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				18478CC2203887E300C91E22 /* Card Tracker.app */,
+				18499CBA29996AF3001A07EE /* Card TrackerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,6 +152,15 @@
 				187AAC702596A9E700BC7682 /* UIImage+Extensions.swift */,
 			);
 			path = "Card Tracker";
+			sourceTree = "<group>";
+		};
+		18499CBB29996AF3001A07EE /* Card TrackerTests */ = {
+			isa = PBXGroup;
+			children = (
+				18499CC329996E86001A07EE /* ImageTransformerTests.swift */,
+				18499CC529996F49001A07EE /* UIImage+ExtensionsTests.swift */,
+			);
+			path = "Card TrackerTests";
 			sourceTree = "<group>";
 		};
 		184EE4C7258829C4007A23C4 /* SwiftUI */ = {
@@ -208,19 +242,41 @@
 			productReference = 18478CC2203887E300C91E22 /* Card Tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
+		18499CB929996AF3001A07EE /* Card TrackerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18499CC229996AF3001A07EE /* Build configuration list for PBXNativeTarget "Card TrackerTests" */;
+			buildPhases = (
+				18499CB629996AF3001A07EE /* Sources */,
+				18499CB729996AF3001A07EE /* Frameworks */,
+				18499CB829996AF3001A07EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18499CBF29996AF3001A07EE /* PBXTargetDependency */,
+			);
+			name = "Card TrackerTests";
+			productName = "Card TrackerTests";
+			productReference = 18499CBA29996AF3001A07EE /* Card TrackerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		18478CBA203887E300C91E22 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1300;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = "Michael Rowe";
 				TargetAttributes = {
 					18478CC1203887E300C91E22 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1020;
+					};
+					18499CB929996AF3001A07EE = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 18478CC1203887E300C91E22;
 					};
 				};
 			};
@@ -241,6 +297,7 @@
 			projectRoot = "";
 			targets = (
 				18478CC1203887E300C91E22 /* Card Tracker */,
+				18499CB929996AF3001A07EE /* Card TrackerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,6 +308,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				185396A1209E454C00435E14 /* Media.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18499CB829996AF3001A07EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,7 +377,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		18499CB629996AF3001A07EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18499CC429996E86001A07EE /* ImageTransformerTests.swift in Sources */,
+				18499CC629996F49001A07EE /* UIImage+ExtensionsTests.swift in Sources */,
+				18499CC729997608001A07EE /* UIImage+Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		18499CBF29996AF3001A07EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18478CC1203887E300C91E22 /* Card Tracker */;
+			targetProxy = 18499CBE29996AF3001A07EE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		18478CD7203887E300C91E22 /* Debug */ = {
@@ -488,6 +570,51 @@
 			};
 			name = Release;
 		};
+		18499CC029996AF3001A07EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LGX23BH474;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.theapapp.Card-TrackerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Card Tracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Card Tracker";
+			};
+			name = Debug;
+		};
+		18499CC129996AF3001A07EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LGX23BH474;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.theapapp.Card-TrackerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Card Tracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Card Tracker";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -505,6 +632,15 @@
 			buildConfigurations = (
 				18478CDA203887E300C91E22 /* Debug */,
 				18478CDB203887E300C91E22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18499CC229996AF3001A07EE /* Build configuration list for PBXNativeTarget "Card TrackerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18499CC029996AF3001A07EE /* Debug */,
+				18499CC129996AF3001A07EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

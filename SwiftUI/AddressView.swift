@@ -27,8 +27,10 @@ struct AddressView: View {
             if let addressLine2 = recipient.addressLine2, !addressLine2.isEmpty {
                 Text(addressLine2)
             }
-            // swiftlint:disable:next line_length
-            let cityLine = (recipient.city.map {"\($0), "} ?? "") + (recipient.state.map {"\($0) "} ?? "") + (recipient.zip ?? "")
+            let cityLine =
+                (recipient.city.map {"\($0), "} ?? "") +
+                (recipient.state.map {"\($0) "} ?? "") +
+                (recipient.zip ?? "")
             if cityLine != ",  " {
                 Text(cityLine)
             }

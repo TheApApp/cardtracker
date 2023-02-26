@@ -68,13 +68,13 @@ struct CardView: View {
     }
 }
 
-class SheetDismisserProtocol: ObservableObject {
-    weak var host: UIHostingController<AnyView>?
-
-    func dismiss() {
-        host?.dismiss(animated: true)
-    }
-}
+// class SheetDismisserProtocol: ObservableObject {
+//    weak var host: UIHostingController<AnyView>?
+//
+//    func dismiss() {
+//        host?.dismiss(animated: true)
+//    }
+// }
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {

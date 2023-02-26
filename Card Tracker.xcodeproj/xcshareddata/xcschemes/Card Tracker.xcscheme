@@ -37,6 +37,28 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "18499CB929996AF3001A07EE"
+               BuildableName = "Card TrackerTests.xctest"
+               BlueprintName = "Card TrackerTests"
+               ReferencedContainer = "container:Card Tracker.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "18499CCB299977E4001A07EE"
+               BuildableName = "Card TrackerUITests.xctest"
+               BlueprintName = "Card TrackerUITests"
+               ReferencedContainer = "container:Card Tracker.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

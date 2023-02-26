@@ -42,3 +42,5 @@ let eventChoices = [
     "Thinking of You",
     "Wedding"
 ]
+
+let maxBytes = 4000000

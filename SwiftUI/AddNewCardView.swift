@@ -33,6 +33,7 @@ struct AddNewCardView: View {
     @State var captureFrontImage = false
 
     init(recipient: Recipient) {
+        /// todo: convert navBarAppearance to an extension so it is the same across all views
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.largeTitleTextAttributes = [
             .foregroundColor: UIColor.systemGreen,
@@ -49,7 +50,7 @@ struct AddNewCardView: View {
 
     var body: some View {
         NavigationView {
-            GeometryReader { geomtry in
+            GeometryReader { geo in
                 VStack {
                     HStack {
                         Text("Event")
@@ -59,7 +60,7 @@ struct AddNewCardView: View {
                                 Text(eventChoices[$0])
                             }
                         }
-                        .frame(width: geomtry.size.width * 0.55, height: geomtry.size.height * 0.25)
+                        .frame(width: geo.size.width * 0.55, height: geo.size.height * 0.25)
                     }
                     .padding([.leading, .trailing], 10)
                     DatePicker(
@@ -77,7 +78,7 @@ struct AddNewCardView: View {
                                 .foregroundColor(.white)
                                 .font(.largeTitle)
                                 .shadow(radius: 10)
-                                .frame(width: geomtry.size.width * 0.45)
+                                .frame(width: geo.size.width * 0.45)
                                 .onTapGesture { self.frontPhoto = true }
                                 .actionSheet(isPresented: $frontPhoto) { () -> ActionSheet in
                                     ActionSheet(
@@ -134,7 +135,7 @@ struct AddNewCardView: View {
         let event = Event(context: moc)
         event.event = eventChoices[selectedEvent]
         event.eventDate = eventDate as NSDate
-        ImageCompressor.compress(image: (frontImageSelected?.asUIImage())!, maxByte: 4000000) { image in
+        ImageCompressor.compress(image: (frontImageSelected?.asUIImage())!, maxByte: maxBytes) { image in
             guard image != nil else {
                 logger.log("Error compressing image")
                 return

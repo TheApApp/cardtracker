@@ -53,7 +53,7 @@ struct EditRecipientView: View {
 
     var body: some View {
         NavigationView {
-            GeometryReader { geomtry in
+            GeometryReader { geo in
                 VStack {
                     Spacer()
                     HStack {
@@ -73,15 +73,15 @@ struct EditRecipientView: View {
                     HStack {
                         TextField("City", text: $city)
                             .customTextField()
-                            .frame(width: geomtry.size.width * 0.48)
+                            .frame(width: geo.size.width * 0.48)
                         Spacer()
                         TextField("ST", text: $state)
                             .customTextField()
-                            .frame(width: geomtry.size.width * 0.18)
+                            .frame(width: geo.size.width * 0.18)
                         Spacer()
                         TextField("Zip", text: $zip)
                             .customTextField()
-                            .frame(width: geomtry.size.width * 0.28)
+                            .frame(width: geo.size.width * 0.28)
                     }
                     TextField("Country", text: $country)
                         .customTextField()

@@ -92,8 +92,11 @@ struct ViewAnEventView: View {
                     switch item {
                     case .front:
                         // This is no longer used...
-                        // swiftlint:disable:next line_length
-                        CardView(cardImage: (event.cardFrontImage ?? blankCardFront)!, event: event.event ?? "", eventDate: event.eventDate! as Date)
+                        CardView(
+                            cardImage: (event.cardFrontImage ?? blankCardFront)!,
+                            event: event.event ?? "",
+                            eventDate: event.eventDate! as Date
+                        )
                     case .edit:
                         EditAnEvent(event: event, recipient: recipient)
                     }

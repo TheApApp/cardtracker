@@ -46,7 +46,7 @@ struct AddNewRecipientView: View {
 
     var body: some View {
         NavigationView {
-            GeometryReader { geomtry in
+            GeometryReader { geo in
                 ContactPicker(showPicker: $showPicker, onSelectContact: {contact in
                     firstName = contact.givenName
                     lastName = contact.familyName
@@ -55,8 +55,8 @@ struct AddNewRecipientView: View {
                             ((contact.postalAddresses[0] as AnyObject).value(forKey: "labelValuePair")
                              as AnyObject).value(forKey: "value"))
                             as? CNPostalAddress {
-                            // swiftlint:disable:next line_length
-                            let mailAddress = CNPostalAddressFormatter.string(from: addressString, style: .mailingAddress)
+                            let mailAddress =
+                                CNPostalAddressFormatter.string(from: addressString, style: .mailingAddress)
                             addressLine1 = "\(addressString.street)"
                             addressLine2 = ""
                             city = "\(addressString.city)"
@@ -95,15 +95,15 @@ struct AddNewRecipientView: View {
                     HStack {
                         TextField("City", text: $city)
                             .customTextField()
-                            .frame(width: geomtry.size.width * 0.48)
+                            .frame(width: geo.size.width * 0.48)
                         Spacer()
                         TextField("ST", text: $state)
                             .customTextField()
-                            .frame(width: geomtry.size.width * 0.18)
+                            .frame(width: geo.size.width * 0.18)
                         Spacer()
                         TextField("Zip", text: $zip)
                             .customTextField()
-                            .frame(width: geomtry.size.width * 0.28)
+                            .frame(width: geo.size.width * 0.28)
                     }
                     TextField("Country", text: $country)
                         .customTextField()
@@ -115,8 +115,8 @@ struct AddNewRecipientView: View {
             .navigationBarItems(trailing:
                                     HStack {
                 Button(action: {
-                    let contactsPermsissions = checkContactsPermissions()
-                    if contactsPermsissions == true {
+                    let contactsPermissions = checkContactsPermissions()
+                    if contactsPermissions == true {
                         self.showPicker.toggle()
                     } else {
                         presentAlert = true
@@ -177,14 +177,14 @@ struct AddNewRecipientView: View {
 
     func checkContactsPermissions() -> Bool {
         // swiftlint:disable:next line_length
-        let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "AddNewRecipientView.checkContctsPermissions")
+        let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "AddNewRecipientView.checkContactsPermissions")
         let authStatus = CNContactStore.authorizationStatus(for: .contacts)
         switch authStatus {
         case .restricted:
-            logger.log("User cannot grant premission, e.g. parental controls are in force.")
+            logger.log("User cannot grant permission, e.g. parental controls are in force.")
             return false
         case .denied:
-            logger.log("User has denided permissions")
+            logger.log("User has denied permissions")
             return false
         case .notDetermined:
             logger.log("you need to request authorization via the API now")
