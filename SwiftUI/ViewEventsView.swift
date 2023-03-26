@@ -80,11 +80,6 @@ struct ViewEventsView: View {
                 GridItem(.adaptive(minimum: 160), spacing: 10, alignment: .center)
             ]
         }
-//        _region = State(initialValue:
-//                            MKCoordinateRegion(
-//                                center: CLLocationCoordinate2D(latitude: 37.332279, longitude: -122.010979),
-//                                span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-//        )
     }
 
     var body: some View {
@@ -129,7 +124,7 @@ struct ViewEventsView: View {
                                             Spacer()
                                             HStack {
                                                 // swiftlint:disable:next line_length
-                                                Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
+                                                Text("\(event.wrappedEventDate, formatter: ViewEventsView.eventDateFormatter)")
                                                     .fixedSize()
                                                     .foregroundColor(.green)
                                                 MenuOverlayView(recipient: recipient, event: event)

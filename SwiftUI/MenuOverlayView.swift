@@ -43,8 +43,8 @@ struct MenuOverlayView: View {
             NavigationLink {
                 CardView(
                     cardImage: (event.cardFrontImage ?? blankCardFront)!,
-                    event: event.event ?? "Unknown Event",
-                    eventDate: event.eventDate! as Date)
+                    event: event.wrappedEvent,
+                    eventDate: event.wrappedEventDate as Date)
             } label: {
                 Image(systemName: "doc.text.image")
                     .foregroundColor(.green)
@@ -60,15 +60,13 @@ struct MenuOverlayView: View {
             .confirmationDialog("Are you Sure", isPresented: $areYouSure, titleVisibility: .visible) {
                 Button("Yes", role: .destructive) {
                     withAnimation {
-                        // swiftlint:disable:next line_length
-                        print("Deleting Event \(String(describing: event.event)) \(String(describing: event.eventDate))")
+                        print("Deleting Event \(event.wrappedEvent) \(event.wrappedEventDate)")
                         deleteEvent(event: event)
                     }
                 }
                 Button("No") {
                     withAnimation {
-                        // swiftlint:disable:next line_length
-                        print("Cancelled delete of \(String(describing: event.event)) \(String(describing: event.eventDate))")
+                        print("Cancelled delete of \(event.wrappedEvent) \(event.wrappedEventDate)")
                     }
                 } .keyboardShortcut(.defaultAction)
             }

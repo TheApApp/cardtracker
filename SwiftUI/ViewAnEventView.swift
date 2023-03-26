@@ -10,7 +10,7 @@
 import SwiftUI
 
 struct ViewAnEventView: View {
-    enum NavBarItemChoosen: Identifiable {
+    enum NavBarItemChosen: Identifiable {
         case editEvent
         var id: Int {
             hashValue
@@ -26,7 +26,7 @@ struct ViewAnEventView: View {
 
     private let blankCardFront = UIImage(contentsOfFile: "frontImage")
 
-    @State var navBarItemChoosen: NavBarItemChoosen?
+    @State var navBarItemChosen: NavBarItemChosen?
 
     enum ShowCardView: Identifiable {
         case front, edit
@@ -63,7 +63,7 @@ struct ViewAnEventView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("\(event.event ?? "no event") - \(event.eventDate!, formatter: Self.eventDateFormatter)")
+                Text("\(event.wrappedEvent) - \(event.wrappedEventDate, formatter: Self.eventDateFormatter)")
                     .font(.title)
                     .foregroundColor(.green)
                 Spacer()
@@ -94,8 +94,8 @@ struct ViewAnEventView: View {
                         // This is no longer used...
                         CardView(
                             cardImage: (event.cardFrontImage ?? blankCardFront)!,
-                            event: event.event ?? "",
-                            eventDate: event.eventDate! as Date
+                            event: event.wrappedEvent,
+                            eventDate: event.wrappedEventDate as Date
                         )
                     case .edit:
                         EditAnEvent(event: event, recipient: recipient)

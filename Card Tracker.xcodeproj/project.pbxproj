@@ -11,7 +11,6 @@
 		18499CC429996E86001A07EE /* ImageTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18499CC329996E86001A07EE /* ImageTransformerTests.swift */; };
 		18499CC629996F49001A07EE /* UIImage+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18499CC529996F49001A07EE /* UIImage+ExtensionsTests.swift */; };
 		18499CC729997608001A07EE /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AAC702596A9E700BC7682 /* UIImage+Extensions.swift */; };
-		1849EF3D25902FDB00EE2780 /* ImageTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849EF3C25902FDB00EE2780 /* ImageTransformer.swift */; };
 		184EE4C9258829EB007A23C4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184EE4C8258829EB007A23C4 /* CardView.swift */; };
 		184F7053205CB1F20040204D /* Recipient+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F704F205CB1F20040204D /* Recipient+CoreDataClass.swift */; };
 		184F7054205CB1F20040204D /* Recipient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F7050205CB1F20040204D /* Recipient+CoreDataProperties.swift */; };
@@ -38,6 +37,7 @@
 		18D49B872676F59700833E31 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D49B862676F59700833E31 /* CloudKitHelper.swift */; };
 		18E1F6D1276EA07C00BAA1BE /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18E1F6D0276EA07C00BAA1BE /* SwiftUIKit */; };
 		18E674C8280B472B001F2BF8 /* MenuOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E674C7280B472B001F2BF8 /* MenuOverlayView.swift */; };
+		18ED7A6529AC07D2000A3970 /* ImageTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849EF3C25902FDB00EE2780 /* ImageTransformer.swift */; };
 		18EF638425EC7D9800448984 /* EditRecipientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF638325EC7D9800448984 /* EditRecipientView.swift */; };
 		18F47D9F280C712200CAE03B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F47D9E280C712200CAE03B /* Constants.swift */; };
 /* End PBXBuildFile section */
@@ -170,19 +170,19 @@
 				18839B11259FA00D000BB450 /* AddNewCardView.swift */,
 				18839B0E259F9F57000BB450 /* AddNewRecipientView.swift */,
 				184EE4C8258829EB007A23C4 /* CardView.swift */,
+				18F47D9E280C712200CAE03B /* Constants.swift */,
 				1875A3802780DA4600911FB4 /* Coordinator.swift */,
 				18A83CCB27753913005ACB5F /* EditAnEvent.swift */,
-				184F74B228145AAF00DACD53 /* ImageCompressor.swift */,
-				18F47D9E280C712200CAE03B /* Constants.swift */,
 				18EF638325EC7D9800448984 /* EditRecipientView.swift */,
+				18A3DEB727D5490200F55921 /* FilteredList.swift */,
+				184F74B228145AAF00DACD53 /* ImageCompressor.swift */,
 				1829EA3C25AB9CAB00774299 /* ImagePicker.swift */,
 				1875A37E2780CEAC00911FB4 /* MapView.swift */,
+				18E674C7280B472B001F2BF8 /* MenuOverlayView.swift */,
 				18CC9EED25EF169300434AF9 /* TextFieldModifier.swift */,
 				185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */,
 				1857025C259A1E0B001AA8EA /* ViewEventsView.swift */,
-				18E674C7280B472B001F2BF8 /* MenuOverlayView.swift */,
 				18570289259A75F2001AA8EA /* ViewRecipientsView.swift */,
-				18A3DEB727D5490200F55921 /* FilteredList.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -266,8 +266,9 @@
 		18478CBA203887E300C91E22 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "Michael Rowe";
 				TargetAttributes = {
 					18478CC1203887E300C91E22 = {
@@ -360,6 +361,7 @@
 				18CC9EEE25EF169300434AF9 /* TextFieldModifier.swift in Sources */,
 				18A83CCC27753913005ACB5F /* EditAnEvent.swift in Sources */,
 				184F7056205CB1F20040204D /* Event+CoreDataProperties.swift in Sources */,
+				18ED7A6529AC07D2000A3970 /* ImageTransformer.swift in Sources */,
 				184EE4C9258829EB007A23C4 /* CardView.swift in Sources */,
 				187AAC712596A9E700BC7682 /* UIImage+Extensions.swift in Sources */,
 				184F74B328145AAF00DACD53 /* ImageCompressor.swift in Sources */,
@@ -372,7 +374,6 @@
 				1829EA3D25AB9CAB00774299 /* ImagePicker.swift in Sources */,
 				18A3DEB827D5490200F55921 /* FilteredList.swift in Sources */,
 				187E4382259D2AD90075AEBF /* PersistentStore.swift in Sources */,
-				1849EF3D25902FDB00EE2780 /* ImageTransformer.swift in Sources */,
 				18E674C8280B472B001F2BF8 /* MenuOverlayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

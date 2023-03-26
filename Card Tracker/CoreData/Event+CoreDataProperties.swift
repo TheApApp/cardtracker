@@ -26,4 +26,12 @@ extension Event: Identifiable {
     @NSManaged public var recipient: Recipient?
     @NSManaged public var id: UUID?
 
+    public var wrappedEvent: String {
+        event ?? "Unknown Event"
+    }
+
+    public var wrappedEventDate: NSDate {
+        eventDate ?? Date() as NSDate
+    }
+    
 }
