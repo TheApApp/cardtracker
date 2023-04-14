@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1802F90029D9F4D500325240 /* EventTypes+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1802F8FE29D9F4D500325240 /* EventTypes+CoreDataClass.swift */; };
+		1802F90129D9F4D500325240 /* EventTypes+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1802F8FF29D9F4D500325240 /* EventTypes+CoreDataProperties.swift */; };
 		1829EA3D25AB9CAB00774299 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829EA3C25AB9CAB00774299 /* ImagePicker.swift */; };
 		18499CC429996E86001A07EE /* ImageTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18499CC329996E86001A07EE /* ImageTransformerTests.swift */; };
 		18499CC629996F49001A07EE /* UIImage+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18499CC529996F49001A07EE /* UIImage+ExtensionsTests.swift */; };
@@ -53,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1802F8FD29D9F22400325240 /* Card_Tracker 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 7.xcdatamodel"; sourceTree = "<group>"; };
+		1802F8FE29D9F4D500325240 /* EventTypes+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventTypes+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1802F8FF29D9F4D500325240 /* EventTypes+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventTypes+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1829EA3C25AB9CAB00774299 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		1836313A20C9D2B100E2E15E /* Card_Tracker 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 2.xcdatamodel"; sourceTree = "<group>"; };
 		18478CC2203887E300C91E22 /* Card Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Card Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +208,8 @@
 				18B70D52205608F600EAC1BD /* Card_Tracker.xcdatamodeld */,
 				184F7051205CB1F20040204D /* Event+CoreDataClass.swift */,
 				184F7052205CB1F20040204D /* Event+CoreDataProperties.swift */,
+				1802F8FE29D9F4D500325240 /* EventTypes+CoreDataClass.swift */,
+				1802F8FF29D9F4D500325240 /* EventTypes+CoreDataProperties.swift */,
 				187E4381259D2AD90075AEBF /* PersistentStore.swift */,
 				184F704F205CB1F20040204D /* Recipient+CoreDataClass.swift */,
 				184F7050205CB1F20040204D /* Recipient+CoreDataProperties.swift */,
@@ -266,8 +273,9 @@
 		18478CBA203887E300C91E22 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "Michael Rowe";
 				TargetAttributes = {
 					18478CC1203887E300C91E22 = {
@@ -356,6 +364,7 @@
 				18CB915A2782268C00FA96ED /* AddressView.swift in Sources */,
 				18F47D9F280C712200CAE03B /* Constants.swift in Sources */,
 				1875A3812780DA4600911FB4 /* Coordinator.swift in Sources */,
+				1802F90129D9F4D500325240 /* EventTypes+CoreDataProperties.swift in Sources */,
 				184F7054205CB1F20040204D /* Recipient+CoreDataProperties.swift in Sources */,
 				18CC9EEE25EF169300434AF9 /* TextFieldModifier.swift in Sources */,
 				18A83CCC27753913005ACB5F /* EditAnEvent.swift in Sources */,
@@ -371,6 +380,7 @@
 				18839B12259FA00D000BB450 /* AddNewCardView.swift in Sources */,
 				1829EA3D25AB9CAB00774299 /* ImagePicker.swift in Sources */,
 				18A3DEB827D5490200F55921 /* FilteredList.swift in Sources */,
+				1802F90029D9F4D500325240 /* EventTypes+CoreDataClass.swift in Sources */,
 				187E4382259D2AD90075AEBF /* PersistentStore.swift in Sources */,
 				1849EF3D25902FDB00EE2780 /* ImageTransformer.swift in Sources */,
 				18E674C8280B472B001F2BF8 /* MenuOverlayView.swift in Sources */,
@@ -670,6 +680,7 @@
 		18B70D52205608F600EAC1BD /* Card_Tracker.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				1802F8FD29D9F22400325240 /* Card_Tracker 7.xcdatamodel */,
 				18A83CCA2775381A005ACB5F /* Card_Tracker 6.xcdatamodel */,
 				18570280259A58A6001AA8EA /* Card_Tracker 5.xcdatamodel */,
 				1849EF402590307900EE2780 /* Card_Tracker 4.xcdatamodel */,
