@@ -83,7 +83,7 @@ struct ViewAnEventView: View {
                         .foregroundColor(.red)
                 }
             }
-            .padding([.leading, .trailing], 10 )
+            .padding([.leading, .trailing], 5 )
             Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
             .resizable()
             .aspectRatio(contentMode: zoomed ? .fill : .fit)
@@ -91,7 +91,6 @@ struct ViewAnEventView: View {
                 .sheet(item: $showCardView) { item in
                     switch item {
                     case .front:
-                        // This is no longer used...
                         CardView(
                             cardImage: (event.cardFrontImage ?? blankCardFront)!,
                             event: event.event ?? "",
@@ -107,6 +106,7 @@ struct ViewAnEventView: View {
     func deleteCard(event: Event) {
         print("Delete the card \(event)")
         moc.delete(event)
+        // how do we trigger removal from the prior screen's 
         do {
             try moc.save()
         } catch {

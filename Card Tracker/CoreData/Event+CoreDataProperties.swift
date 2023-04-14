@@ -5,7 +5,7 @@
 //  Created by Michael Rowe on 3/16/18.
 //  Copyright © 2018 Michael Rowe. All rights reserved.
 //
-//
+//  Adding comment
 
 import Foundation
 import UIKit
@@ -26,4 +26,11 @@ extension Event: Identifiable {
     @NSManaged public var recipient: Recipient?
     @NSManaged public var id: UUID?
 
+    public var wrappedEvent: String {
+        event ?? "Unknown Event"
+    }
+
+    public var wrappedEventDate: NSDate {
+        eventDate ?? Date() as NSDate
+    }
 }

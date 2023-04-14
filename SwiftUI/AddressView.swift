@@ -21,6 +21,12 @@ struct AddressView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            HStack {
+                Text(recipient.wrappedFirstName)
+                    .frame(width: .infinity)
+                Text(recipient.wrappedLastName)
+                    .frame(width: .infinity)
+            }
             if let addressLine1 = recipient.addressLine1, !addressLine1.isEmpty {
                 Text(addressLine1)
             }
@@ -39,7 +45,7 @@ struct AddressView: View {
                 Text(countryLine)
             }
         }
-        .font(iPhone ? .title2 : .title)
+        .scaledToFit()
         .foregroundColor(.green)
         .padding([.leading, .trailing], 10 )
     }
