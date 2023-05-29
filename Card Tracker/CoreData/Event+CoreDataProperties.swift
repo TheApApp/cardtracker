@@ -33,5 +33,4 @@ extension Event: Identifiable {
     public var wrappedEventDate: NSDate {
         eventDate ?? Date() as NSDate
     }
-    
 }
