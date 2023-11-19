@@ -36,9 +36,16 @@ extension Recipient: Identifiable {
     }
 
     var fullName: String {
-        String("\(firstName) \(lastName)")
+        String("\(wrappedFirstName) \(wrappedLastName)")
     }
 
+    public var eventArray: [Event] {
+        let set = events as? Set<Event> ?? []
+
+        return set.sorted {
+            $0.wrappedEvent < $1.wrappedEvent
+        }
+    }
 }
 
 // MARK: Generated accessors for events

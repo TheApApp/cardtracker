@@ -11,40 +11,72 @@ import CoreData
 
 struct FilteredList: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest var fetchRequest: FetchedResults<Recipient>
+    @FetchRequest var recipients: FetchedResults<Recipient>
+    @FetchRequest var events: FetchedResults<Event>
+    private var eventList = false
 
-    init(filter: String) {
+    static let eventDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter
+    }()
+
+    init(filter: String, eventList: Bool) {
+        self.eventList = eventList
         if filter.isEmpty {
-            _fetchRequest = FetchRequest<Recipient>(
+            _recipients = FetchRequest<Recipient>(
                 sortDescriptors: [SortDescriptor(\.lastName), SortDescriptor(\.firstName)]
+            )
+            _events = FetchRequest<Event>(
+                sortDescriptors: [SortDescriptor(\.event)]
             )
         } else {
             // c = lower case
             // d = diacritic-insensitive for example - (ignore ü and just use u)
-            _fetchRequest = FetchRequest<Recipient>(
+            _recipients = FetchRequest<Recipient>(
                 sortDescriptors: [SortDescriptor(\.lastName), SortDescriptor(\.firstName)],
                 predicate: NSPredicate(format: "lastName CONTAINS[cd] %@ OR firstName CONTAINS[cd] %@", filter, filter)
+            )
+            _events = FetchRequest<Event>(
+                sortDescriptors: [SortDescriptor(\.event)],
+                predicate: NSPredicate(format: "event CONTAINS[cd] %@", filter)
             )
         }
     }
 
     var body: some View {
         List {
-            ForEach(fetchRequest, id: \.self) { recipient in
-                NavigationLink(destination:
-                                ViewEventsView(recipient: recipient)) {
-                    Text("\(recipient.wrappedFirstName) \(recipient.wrappedLastName)")
-                        .foregroundColor(Color(red: 0.138, green: 0.545, blue: 0.282))
+            if eventList {
+                ForEach(events, id: \.self) { event in
+                    Section(event.recipient?.fullName ?? "Unknown") {
+                        ForEach(event.recipient?.eventArray ?? [], id: \.self) { eventName in
+                            NavigationLink(destination:
+                                            ViewAnEventView(event: event, recipient: event.recipient!)) {
+                                // swiftlint:disable line_length
+                                Text("\(eventName.wrappedEvent) \(eventName.wrappedEventDate, formatter: FilteredList.eventDateFormatter)")
+                                    .foregroundColor(Color(red: 0.138, green: 0.545, blue: 0.282))
+                            }
+                        }
+
+                    }
                 }
+            } else {
+                ForEach(recipients, id: \.self) { recipient in
+                    NavigationLink(destination:
+                                    ViewEventsView(recipient: recipient)) {
+                        Text("\(recipient.wrappedFirstName) \(recipient.wrappedLastName)")
+                            .foregroundColor(Color(red: 0.138, green: 0.545, blue: 0.282))
+                    }
+                }
+                .onDelete(perform: deleteRecipient)
             }
-            .onDelete(perform: deleteRecipient)
         }
     }
 
     func deleteRecipient(offsets: IndexSet) {
 
         for index in offsets {
-            let recipient = fetchRequest[index]
+            let recipient = recipients[index]
             moc.delete(recipient)
         }
         do {

@@ -130,7 +130,7 @@ struct ViewEventsView: View {
                                             Spacer()
                                             HStack {
                                                 // swiftlint:disable:next line_length
-                                                Text("\(event.eventDate ?? NSDate(), formatter: ViewEventsView.eventDateFormatter)")
+                                                Text("\(event.wrappedEventDate, formatter: ViewEventsView.eventDateFormatter)")
                                                     .fixedSize()
                                                     .foregroundColor(.green)
                                                 MenuOverlayView(recipient: recipient, event: event)
