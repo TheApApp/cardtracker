@@ -168,10 +168,9 @@ struct ViewEventsView: View {
                         //                        print(convertToScrollView(content: {
                         //                            self
                         //                        }).contentSize)
-                        exportPDF {
-                            self
-                        } completion: { status, url in
+                        exportPDF { self } completion: { status, url in
                             if let url = url, status {
+                                print("Button Pressed for \(url)")
                                 PDFUrl = url
                                 showShareSheet.toggle()
                             } else {

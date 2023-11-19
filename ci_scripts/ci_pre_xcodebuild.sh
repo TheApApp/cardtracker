@@ -13,12 +13,12 @@ echo "Pre Xcode Build"
 #  then
     # echo "Changing To Beta Icon"
     # Here we would put the swap like
-    # APP_ICON_PATH=$CI_WORKSPACE/Shared/Assets.xcassets/AppIcon.appiconset
+    # APP_ICON_PATH=$CI_PRIMARY_REPOSITORY_PATH/Shared/Assets.xcassets/AppIcon.appiconset
 
     # Remove existing App Icon
     # rm -rf $APP_ICON_PATH
 
     # Replace with Beta Icon
-    # mv "$CI_WORKSPACE/ci_scripts/AppIcon-Beta.appiconset" $APP_ICON_PATH
+    # mv "$CI_PRIMARY_REPOSITORY_PATH/ci_scripts/AppIcon-Beta.appiconset" $APP_ICON_PATH
 
 #  fi

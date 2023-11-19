@@ -40,7 +40,7 @@ extension View {
         // MARK: Temp URL
         let documentDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
         // MARK: To Generate New File whenever generated
-        let outputFileURL = documentDirectory.appendingPathComponent("YourPDFName\(UUID().uuidString).pdf")
+        let outputFileURL = documentDirectory.appendingPathComponent("Holiday-Tracker\(UUID().uuidString).pdf")
 
         // MARK: PDF View
         let pdfView = convertToScrollView {
@@ -48,6 +48,7 @@ extension View {
         }
         pdfView.tag = 1009
         let size = pdfView.contentSize
+        print("Size is \(size)")
         // Removing Safe Area Top Value
         pdfView.frame = CGRect(x: 0, y: getSafeArea().top, width: size.width, height: size.height)
 
@@ -56,18 +57,21 @@ extension View {
 
         // MARK: Rendering PDF
         let renderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        print("Renderer = \(renderer)")
 
         do {
             try renderer.writePDF(to: outputFileURL, withActions: { context in
+                print("Layering = \(context)")
                 context.beginPage()
+                print("Begin page = \(context.beginPage())")
                 pdfView.layer.render(in: context.cgContext)
             })
-
+            print("Completion for file \(outputFileURL)")
             completion(true, outputFileURL)
 
         } catch {
-            completion(false, nil)
             print(error.localizedDescription)
+            completion(false, nil)
         }
         // Removing the added View
         getRootController().view.subviews.forEach { view in
@@ -86,22 +90,19 @@ extension View {
         guard let screen = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
             return .init()
         }
-
         guard let root = screen.windows.first?.rootViewController else {
             return .init()
         }
-
         return root
     }
+    
     func getSafeArea() -> UIEdgeInsets {
         guard let screen = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
             return .zero
         }
-
         guard let safeArea = screen.windows.first?.safeAreaInsets else {
             return .zero
         }
-
         return safeArea
     }
 }
