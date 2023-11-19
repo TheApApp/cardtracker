@@ -24,8 +24,8 @@ struct HolidayCardApp: App {
                 EmptyView()
             }
         }
-        .onChange(of: scenePhase) { phase in
-            switch phase {
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            switch newPhase {
             case .active:
                 print("\(#function) REPORTS - App change of scenePhase to ACTIVE")
 //                saveContext()
