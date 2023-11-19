@@ -22,33 +22,32 @@ struct MapView: View {
         }
     }
     
+    @State private var position: MapCameraPosition
     @State private var region: MKCoordinateRegion
     var places = [
         Place(name: "", latitude: 0.0, longitude: 0.0  )
     ]
     
     init(region: MKCoordinateRegion) {
-        self.region = region
-        self.region.span = MKCoordinateSpan(latitudeDelta: CLLocationDegrees(0.1), longitudeDelta: CLLocationDegrees(0.1))
+        var region = region
+        region.span = MKCoordinateSpan(latitudeDelta: CLLocationDegrees(0.08), longitudeDelta: CLLocationDegrees(0.08))
+        self._region = State(initialValue: region)
+        self._position = State(initialValue: MapCameraPosition.region(region))
         places[0].longitude = region.center.longitude
         places[0].latitude = region.center.latitude
     }
 
     var body: some View {
-        Map  {
-            Annotation (
-                "\(places[0].name)",
-                coordinate: places[0].coordinate,
-                anchor: .bottom
-            ) {
+        Map(position: $position) {
+            Annotation("\(places[0].name)", coordinate: places[0].coordinate) {
                 Image(systemName: "house")
                     .padding(4)
                     .foregroundStyle(.white)
-                    .background(Color.green)
+                    .background(Color.accentColor)
                     .cornerRadius(4)
             }
         }
-        .mapStyle(.standard(elevation: .realistic))
+        .mapStyle(.hybrid(elevation: .realistic))
         .onMapCameraChange { context in
             region = context.region
         }
