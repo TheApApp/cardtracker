@@ -21,33 +21,37 @@ struct ViewEventsView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
     @FetchRequest private var events: FetchedResults<Event>
-
+    
     private let blankCardFront = UIImage(contentsOfFile: "frontImage")
     private var recipient: Recipient
     @State private var isEditActive: Bool = false
     @State private var isCardActive: Bool = false
     @State private var areYouSure: Bool = false
-
+    
     @State var newEvent = false
     @State var frontView = false
     @State var frontShown = true
     @State private var frontImageShown: UIImage?
-
+    
     @State private var actionSheetPresented = false
     @State var navBarItemChosen: NavBarItemChosen?
     private var gridLayout: [GridItem]
     @State var isEditing = false
     @State var num: Int = 0
     private var iPhone = false
-
+    
     @State var region: MKCoordinateRegion?
-
+    
     static let eventDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         return formatter
     }()
-
+    
+    // MARK: PDF Properties
+    @State var PDFUrl: URL?
+    @State var showShareSheet: Bool = false
+    
     init(recipient: Recipient) {
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.largeTitleTextAttributes = [
@@ -58,7 +62,7 @@ struct ViewEventsView: View {
             .foregroundColor: UIColor.systemGreen,
             .font: UIFont(name: "ArialRoundedMTBold", size: 20)!
         ]
-
+        
         UINavigationBar.appearance().standardAppearance = navBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
         UINavigationBar.appearance().compactAppearance = navBarAppearance
@@ -81,17 +85,19 @@ struct ViewEventsView: View {
             ]
         }
     }
-
+    
     var body: some View {
-        GeometryReader { geo in
+        ScrollView {
             VStack {
                 HStack {
                     if let region = region {
                         MapView(region: region)
-                            .frame(width: geo.size.width * 0.3, height: geo.size.height * 0.2)
+                            .frame(width: iPhone ? 120 : 200, height: 150)
                             .mask(RoundedRectangle(cornerRadius: 25))
                             .padding([.top, .leading], 15 )
                         AddressView(recipient: recipient)
+                            .scaledToFit()
+                            .frame(width: 250, height: 150)
                     }
                     Spacer()
                         .onAppear {
@@ -147,7 +153,7 @@ struct ViewEventsView: View {
                         .padding()
                     }
                 }
-                .navigationTitle("\(recipient.firstName ?? "no first name") \(recipient.lastName ?? "no last name")")
+                .navigationBarTitleDisplayMode(.inline)
                 .navigationBarItems(trailing:
                                         HStack {
                     Button(action: {
@@ -156,7 +162,27 @@ struct ViewEventsView: View {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.green)
                     })
-
+                    Button(action: {
+                        // MARK: self is Current View
+                        // You can give whatever View to Conver
+                        //                        print(convertToScrollView(content: {
+                        //                            self
+                        //                        }).contentSize)
+                        exportPDF {
+                            self
+                        } completion: { status, url in
+                            if let url = url, status {
+                                PDFUrl = url
+                                showShareSheet.toggle()
+                            } else {
+                                print("Failed to Produce PDF")
+                            }
+                        }
+                    }, label: {
+                        Image(systemName: "square.and.arrow.up.fill")
+                            .font(.title2)
+                            .foregroundColor(.green)
+                    })
                 })
             }
             .sheet(item: $navBarItemChosen ) { item in
@@ -165,10 +191,17 @@ struct ViewEventsView: View {
                     AddNewCardView(recipient: recipient)
                 }
             }
+            .sheet(isPresented: $showShareSheet) {
+                PDFUrl = nil
+            } content: {
+                if let PDFUrl = PDFUrl {
+                    ShareSheet(urls: [PDFUrl])
+                }
+            }
         }
         .accentColor(.green)
     }
-
+    
     private func deleteEvent(event: Event) {
         let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "ViewEventsView.DeleteEvent")
         let taskContext = moc
@@ -183,7 +216,7 @@ struct ViewEventsView: View {
             }
         }
     }
-
+    
     func getLocation(from address: String, completion: @escaping (_ location: CLLocationCoordinate2D?) -> Void) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { (placemarks, _) in
@@ -200,5 +233,19 @@ struct ViewEventsView: View {
 struct ViewEventsView_Previews: PreviewProvider {
     static var previews: some View {
         ViewEventsView(recipient: Recipient())
+    }
+}
+
+// MARK: Share Sheet
+struct ShareSheet: UIViewControllerRepresentable {
+    var urls: [Any]
+    
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: urls, applicationActivities: nil)
+        return controller
+    }
+    
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
+        
     }
 }

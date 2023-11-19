@@ -140,7 +140,7 @@ struct EditAnEvent: View {
         logger.log("saving event... \(eventName)")
         event.event = eventChoices[selectedEvent]
         event.eventDate = eventDate as NSDate
-        ImageCompressor.compress(image: (frontImageSelected?.asUIImage())!, maxByte: 4000000) { image in
+        ImageCompressor.compress(image: (frontImageSelected?.asUIImage())!, maxByte: 2_000_000) { image in
             guard image != nil else {
                 logger.log("Error compressing image")
                 return

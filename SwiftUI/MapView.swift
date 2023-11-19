@@ -21,20 +21,36 @@ struct MapView: View {
             CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         }
     }
+    
     @State private var region: MKCoordinateRegion
     var places = [
         Place(name: "", latitude: 0.0, longitude: 0.0  )
     ]
-
+    
     init(region: MKCoordinateRegion) {
         self.region = region
+        self.region.span = MKCoordinateSpan(latitudeDelta: CLLocationDegrees(0.1), longitudeDelta: CLLocationDegrees(0.1))
         places[0].longitude = region.center.longitude
         places[0].latitude = region.center.latitude
     }
 
     var body: some View {
-        Map(coordinateRegion: $region, showsUserLocation: false, annotationItems: places) { place in
-            MapMarker(coordinate: place.coordinate, tint: .green)
+        Map  {
+            Annotation (
+                "\(places[0].name)",
+                coordinate: places[0].coordinate,
+                anchor: .bottom
+            ) {
+                Image(systemName: "house")
+                    .padding(4)
+                    .foregroundStyle(.white)
+                    .background(Color.green)
+                    .cornerRadius(4)
+            }
+        }
+        .mapStyle(.standard(elevation: .realistic))
+        .onMapCameraChange { context in
+            region = context.region
         }
     }
 }

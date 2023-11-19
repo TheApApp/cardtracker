@@ -55,7 +55,7 @@ class ImageTransformer: ValueTransformer {
                 return nil
             }
 
-            return image.jpegData(compressionQuality: 1.0)
+            return image.jpegData(compressionQuality: 0.75)
         }
     }
 

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
+<<<<<<< HEAD
+   LastUpgradeVersion = "1500"
+=======
    LastUpgradeVersion = "1430"
+>>>>>>> 125001837440e218defb73b0a8aead2f65f4e5ad
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -85,11 +89,19 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-com.apple.CoreData.ConcurrencyDebug 1"
+            argument = "-com.apple.CoreData.ConcurrencyDebug 3"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-com.apple.CoreData.SQLDebug 1"
+            argument = "-com.apple.CoreData.SQLDebug 3"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-com.apple.CoreData.MigrationDebug 3"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-com.apple.CoreData.MigrationDebug 3"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>

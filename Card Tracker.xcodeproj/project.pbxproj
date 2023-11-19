@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1802F90029D9F4D500325240 /* EventTypes+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1802F8FE29D9F4D500325240 /* EventTypes+CoreDataClass.swift */; };
+		1802F90129D9F4D500325240 /* EventTypes+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1802F8FF29D9F4D500325240 /* EventTypes+CoreDataProperties.swift */; };
 		1829EA3D25AB9CAB00774299 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829EA3C25AB9CAB00774299 /* ImagePicker.swift */; };
+		1846EAD72ABE3F77006ACD5C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1846EAD62ABE3F77006ACD5C /* Extensions.swift */; };
 		18499CC429996E86001A07EE /* ImageTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18499CC329996E86001A07EE /* ImageTransformerTests.swift */; };
 		18499CC629996F49001A07EE /* UIImage+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18499CC529996F49001A07EE /* UIImage+ExtensionsTests.swift */; };
 		18499CC729997608001A07EE /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AAC702596A9E700BC7682 /* UIImage+Extensions.swift */; };
@@ -21,7 +24,6 @@
 		1857025D259A1E0B001AA8EA /* ViewEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857025C259A1E0B001AA8EA /* ViewEventsView.swift */; };
 		1857028A259A75F2001AA8EA /* ViewRecipientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18570289259A75F2001AA8EA /* ViewRecipientsView.swift */; };
 		1857028D259A7611001AA8EA /* HolidayCardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857028C259A7611001AA8EA /* HolidayCardApp.swift */; };
-		185CC1F125981BAF00CF4A6F /* ViewAnEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */; };
 		1875A37F2780CEAC00911FB4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1875A37E2780CEAC00911FB4 /* MapView.swift */; };
 		1875A3812780DA4600911FB4 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1875A3802780DA4600911FB4 /* Coordinator.swift */; };
 		187AAC712596A9E700BC7682 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AAC702596A9E700BC7682 /* UIImage+Extensions.swift */; };
@@ -53,8 +55,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1802F8FD29D9F22400325240 /* Card_Tracker 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 7.xcdatamodel"; sourceTree = "<group>"; };
+		1802F8FE29D9F4D500325240 /* EventTypes+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventTypes+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1802F8FF29D9F4D500325240 /* EventTypes+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventTypes+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1829EA3C25AB9CAB00774299 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		1836313A20C9D2B100E2E15E /* Card_Tracker 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 2.xcdatamodel"; sourceTree = "<group>"; };
+		1846EAD62ABE3F77006ACD5C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		18478CC2203887E300C91E22 /* Card Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Card Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18478CD6203887E300C91E22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18499CBA29996AF3001A07EE /* Card TrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Card TrackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,7 +80,6 @@
 		18570280259A58A6001AA8EA /* Card_Tracker 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 5.xcdatamodel"; sourceTree = "<group>"; };
 		18570289259A75F2001AA8EA /* ViewRecipientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRecipientsView.swift; sourceTree = "<group>"; };
 		1857028C259A7611001AA8EA /* HolidayCardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayCardApp.swift; sourceTree = "<group>"; };
-		185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnEventView.swift; sourceTree = "<group>"; };
 		185DD0C62363B6B9009B932C /* Card Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Card Tracker.entitlements"; sourceTree = "<group>"; };
 		1875A37E2780CEAC00911FB4 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		1875A3802780DA4600911FB4 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -118,6 +123,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1846EAD52ABE3F3C006ACD5C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1875A3802780DA4600911FB4 /* Coordinator.swift */,
+				18F47D9E280C712200CAE03B /* Constants.swift */,
+				1846EAD62ABE3F77006ACD5C /* Extensions.swift */,
+				184F74B228145AAF00DACD53 /* ImageCompressor.swift */,
+				1829EA3C25AB9CAB00774299 /* ImagePicker.swift */,
+				18CC9EED25EF169300434AF9 /* TextFieldModifier.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		18478CB9203887E300C91E22 = {
 			isa = PBXGroup;
 			children = (
@@ -167,9 +185,15 @@
 			isa = PBXGroup;
 			children = (
 				18CB91592782268C00FA96ED /* AddressView.swift */,
+				1846EAD52ABE3F3C006ACD5C /* Helpers */,
 				18839B11259FA00D000BB450 /* AddNewCardView.swift */,
 				18839B0E259F9F57000BB450 /* AddNewRecipientView.swift */,
 				184EE4C8258829EB007A23C4 /* CardView.swift */,
+<<<<<<< HEAD
+				18A83CCB27753913005ACB5F /* EditAnEvent.swift */,
+				18EF638325EC7D9800448984 /* EditRecipientView.swift */,
+				1875A37E2780CEAC00911FB4 /* MapView.swift */,
+=======
 				18F47D9E280C712200CAE03B /* Constants.swift */,
 				1875A3802780DA4600911FB4 /* Coordinator.swift */,
 				18A83CCB27753913005ACB5F /* EditAnEvent.swift */,
@@ -181,6 +205,7 @@
 				18E674C7280B472B001F2BF8 /* MenuOverlayView.swift */,
 				18CC9EED25EF169300434AF9 /* TextFieldModifier.swift */,
 				185CC1F025981BAF00CF4A6F /* ViewAnEventView.swift */,
+>>>>>>> 125001837440e218defb73b0a8aead2f65f4e5ad
 				1857025C259A1E0B001AA8EA /* ViewEventsView.swift */,
 				18570289259A75F2001AA8EA /* ViewRecipientsView.swift */,
 			);
@@ -203,6 +228,8 @@
 				18B70D52205608F600EAC1BD /* Card_Tracker.xcdatamodeld */,
 				184F7051205CB1F20040204D /* Event+CoreDataClass.swift */,
 				184F7052205CB1F20040204D /* Event+CoreDataProperties.swift */,
+				1802F8FE29D9F4D500325240 /* EventTypes+CoreDataClass.swift */,
+				1802F8FF29D9F4D500325240 /* EventTypes+CoreDataProperties.swift */,
 				187E4381259D2AD90075AEBF /* PersistentStore.swift */,
 				184F704F205CB1F20040204D /* Recipient+CoreDataClass.swift */,
 				184F7050205CB1F20040204D /* Recipient+CoreDataProperties.swift */,
@@ -225,7 +252,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18478CD9203887E300C91E22 /* Build configuration list for PBXNativeTarget "Card Tracker" */;
 			buildPhases = (
-				1841ECFA269A4D4B00A5527E /* SwiftLint */,
 				18478CBE203887E300C91E22 /* Sources */,
 				18478CBF203887E300C91E22 /* Frameworks */,
 				18478CC0203887E300C91E22 /* Resources */,
@@ -268,7 +294,11 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1420;
+<<<<<<< HEAD
+				LastUpgradeCheck = 1500;
+=======
 				LastUpgradeCheck = 1430;
+>>>>>>> 125001837440e218defb73b0a8aead2f65f4e5ad
 				ORGANIZATIONNAME = "Michael Rowe";
 				TargetAttributes = {
 					18478CC1203887E300C91E22 = {
@@ -321,28 +351,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		1841ECFA269A4D4B00A5527E /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		18478CBE203887E300C91E22 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -352,11 +360,11 @@
 				18839B0F259F9F57000BB450 /* AddNewRecipientView.swift in Sources */,
 				1857025D259A1E0B001AA8EA /* ViewEventsView.swift in Sources */,
 				1875A37F2780CEAC00911FB4 /* MapView.swift in Sources */,
-				185CC1F125981BAF00CF4A6F /* ViewAnEventView.swift in Sources */,
 				1857028A259A75F2001AA8EA /* ViewRecipientsView.swift in Sources */,
 				18CB915A2782268C00FA96ED /* AddressView.swift in Sources */,
 				18F47D9F280C712200CAE03B /* Constants.swift in Sources */,
 				1875A3812780DA4600911FB4 /* Coordinator.swift in Sources */,
+				1802F90129D9F4D500325240 /* EventTypes+CoreDataProperties.swift in Sources */,
 				184F7054205CB1F20040204D /* Recipient+CoreDataProperties.swift in Sources */,
 				18CC9EEE25EF169300434AF9 /* TextFieldModifier.swift in Sources */,
 				18A83CCC27753913005ACB5F /* EditAnEvent.swift in Sources */,
@@ -373,6 +381,8 @@
 				18839B12259FA00D000BB450 /* AddNewCardView.swift in Sources */,
 				1829EA3D25AB9CAB00774299 /* ImagePicker.swift in Sources */,
 				18A3DEB827D5490200F55921 /* FilteredList.swift in Sources */,
+				1846EAD72ABE3F77006ACD5C /* Extensions.swift in Sources */,
+				1802F90029D9F4D500325240 /* EventTypes+CoreDataClass.swift in Sources */,
 				187E4382259D2AD90075AEBF /* PersistentStore.swift in Sources */,
 				18E674C8280B472B001F2BF8 /* MenuOverlayView.swift in Sources */,
 			);
@@ -403,6 +413,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -436,6 +447,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -450,7 +462,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+<<<<<<< HEAD
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+=======
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+>>>>>>> 125001837440e218defb73b0a8aead2f65f4e5ad
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -463,6 +479,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -496,6 +513,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -504,7 +522,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+<<<<<<< HEAD
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+=======
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+>>>>>>> 125001837440e218defb73b0a8aead2f65f4e5ad
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -525,8 +547,12 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = LGX23BH474;
 				INFOPLIST_FILE = "Card Tracker/Info.plist";
+<<<<<<< HEAD
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+=======
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+>>>>>>> 125001837440e218defb73b0a8aead2f65f4e5ad
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -555,8 +581,12 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = LGX23BH474;
 				INFOPLIST_FILE = "Card Tracker/Info.plist";
+<<<<<<< HEAD
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+=======
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+>>>>>>> 125001837440e218defb73b0a8aead2f65f4e5ad
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -583,7 +613,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LGX23BH474;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -606,7 +636,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LGX23BH474;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.theapapp.Card-TrackerTests";
@@ -673,6 +703,7 @@
 		18B70D52205608F600EAC1BD /* Card_Tracker.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				1802F8FD29D9F22400325240 /* Card_Tracker 7.xcdatamodel */,
 				18A83CCA2775381A005ACB5F /* Card_Tracker 6.xcdatamodel */,
 				18570280259A58A6001AA8EA /* Card_Tracker 5.xcdatamodel */,
 				1849EF402590307900EE2780 /* Card_Tracker 4.xcdatamodel */,
