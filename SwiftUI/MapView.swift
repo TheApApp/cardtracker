@@ -30,7 +30,7 @@ struct MapView: View {
     
     init(region: MKCoordinateRegion) {
         var region = region
-        region.span = MKCoordinateSpan(latitudeDelta: CLLocationDegrees(0.08), longitudeDelta: CLLocationDegrees(0.08))
+        region.span = MKCoordinateSpan(latitudeDelta: CLLocationDegrees(0.005), longitudeDelta: CLLocationDegrees(0.005))
         self._region = State(initialValue: region)
         self._position = State(initialValue: MapCameraPosition.region(region))
         places[0].longitude = region.center.longitude
@@ -47,7 +47,7 @@ struct MapView: View {
                     .cornerRadius(4)
             }
         }
-        .mapStyle(.hybrid(elevation: .realistic))
+        .mapStyle(.standard(elevation: .realistic))
         .onMapCameraChange { context in
             region = context.region
         }

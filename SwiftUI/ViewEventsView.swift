@@ -74,6 +74,8 @@ struct ViewEventsView: View {
         ]
         request.predicate =  NSPredicate(format: "%K == %@", #keyPath(Event.recipient), recipient)
         _events = FetchRequest<Event>(fetchRequest: request)
+        print("Events = \(_events)")
+        
         if UIDevice.current.userInterfaceIdiom == .pad {
             self.gridLayout = [
                 GridItem(.adaptive(minimum: 320), spacing: 20, alignment: .center)
@@ -87,118 +89,129 @@ struct ViewEventsView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                HStack {
-                    if let region = region {
-                        MapView(region: region)
-                            .frame(width: iPhone ? 120 : 200, height: 150)
-                            .mask(RoundedRectangle(cornerRadius: 25))
-                            .padding([.top, .leading], 15 )
-                        AddressView(recipient: recipient)
-                            .scaledToFit()
-                            .frame(width: 250, height: 150)
-                    }
-                    Spacer()
-                        .onAppear {
-                            // swiftlint:disable:next line_length
-                            let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
-                            getLocation(from: addressString) { coordinates in
-                                if let coordinates = coordinates {
-                                    self.region = MKCoordinateRegion(
-                                        center: coordinates,
-                                        span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-                                }
+        //        ScrollView {
+        VStack {
+            HStack {
+                if let region = region {
+                    MapView(region: region)
+                        .frame(width: iPhone ? 120 : 200, height: 150)
+                        .mask(RoundedRectangle(cornerRadius: 25))
+                        .padding([.top, .leading], 15 )
+                    AddressView(recipient: recipient)
+                        .scaledToFit()
+                        .frame(width: 250, height: 150)
+                }
+                Spacer()
+                    .onAppear {
+                        // swiftlint:disable:next line_length
+                        let addressString = String("\(recipient.addressLine1 ?? "") \(recipient.city ?? "") \(recipient.state ?? "") \(recipient.zip ?? "") \(recipient.country ?? "")")
+                        getLocation(from: addressString) { coordinates in
+                            if let coordinates = coordinates {
+                                self.region = MKCoordinateRegion(
+                                    center: coordinates,
+                                    span: MKCoordinateSpan(latitudeDelta: 0.008, longitudeDelta: 0.008))
                             }
                         }
+                    }
+            }
+            ScrollView {
+                LazyVGrid(columns: gridLayout, alignment: .center, spacing: 5) {
+                    ForEach(events, id: \.self) { event in
+                        GridView(recipient: recipient, event: event)
+                    }
+                    .padding()
                 }
-                ScrollView {
-                    LazyVGrid(columns: gridLayout, alignment: .center, spacing: 5) {
-                        ForEach(events, id: \.self) { event in
-                            HStack {
-                                VStack {
-                                    Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .scaledToFit()
-                                        .frame(width: iPhone ? 120 : 200, height: iPhone ? 120 : 200)
-                                        .padding(.top, iPhone ? 2: 5)
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing:
                                     HStack {
-                                        VStack {
-                                            Text("\(event.event ?? "")")
-                                                .foregroundColor(.green)
-                                            Spacer()
-                                            HStack {
-                                                // swiftlint:disable:next line_length
-                                                Text("\(event.wrappedEventDate, formatter: ViewEventsView.eventDateFormatter)")
-                                                    .fixedSize()
-                                                    .foregroundColor(.green)
-                                                MenuOverlayView(recipient: recipient, event: event)
-                                            }
-                                        }
-                                        .padding(iPhone ? 1 : 5)
-                                        .font(iPhone ? .caption : .title3)
-                                        .foregroundColor(.primary)
-                                    }
-                                }
-                            }
-                            .padding()
-                            .frame(minWidth: iPhone ? 160 : 320, maxWidth: .infinity,
-                                   minHeight: iPhone ? 160 : 320, maxHeight: .infinity)
-                            .background(Color(UIColor.systemGroupedBackground))
-                            .mask(RoundedRectangle(cornerRadius: 20))
-                            .shadow(radius: 5)
-                            .padding(iPhone ? 5: 10)
-                        }
-                        .padding()
-                    }
-                }
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(trailing:
-                                        HStack {
-                    Button(action: {
-                        navBarItemChosen = .newCard
-                    }, label: {
-                        Image(systemName: "plus.circle.fill")
-                            .foregroundColor(.green)
-                    })
-                    Button(action: {
-                        // MARK: self is Current View
-                        // You can give whatever View to Conver
-                        //                        print(convertToScrollView(content: {
-                        //                            self
-                        //                        }).contentSize)
-                        exportPDF { self } completion: { status, url in
-                            if let url = url, status {
-                                print("Button Pressed for \(url)")
-                                PDFUrl = url
-                                showShareSheet.toggle()
-                            } else {
-                                print("Failed to Produce PDF")
-                            }
-                        }
-                    }, label: {
-                        Image(systemName: "square.and.arrow.up.fill")
-                            .font(.title2)
-                            .foregroundColor(.green)
-                    })
+                Button(action: {
+                    navBarItemChosen = .newCard
+                }, label: {
+                    Image(systemName: "plus.circle.fill")
+                        .foregroundColor(.green)
                 })
-            }
-            .sheet(item: $navBarItemChosen ) { item in
-                switch item {
-                case .newCard:
-                    AddNewCardView(recipient: recipient)
-                }
-            }
-            .sheet(isPresented: $showShareSheet) {
-                PDFUrl = nil
-            } content: {
-                if let PDFUrl = PDFUrl {
-                    ShareSheet(urls: [PDFUrl])
-                }
+                Button(action: {
+                    // MARK: self is Current View
+                    // You can give whatever View to Conver
+                    //                        print(convertToScrollView(content: {
+                    //                            self
+                    //                        }).contentSize)
+                    _ = ShareLink("Export PDF", item: render(viewsPerPage: 10))
+                }, label: {
+                    Image(systemName: "square.and.arrow.up.fill")
+                        .font(.title2)
+                        .foregroundColor(.green)
+                })
+            })
+        }
+        .sheet(item: $navBarItemChosen ) { item in
+            switch item {
+            case .newCard:
+                AddNewCardView(recipient: recipient)
             }
         }
+        .sheet(isPresented: $showShareSheet) {
+            showShareSheet.toggle()
+            print("ShareLink toggled")
+        } content: {
+            ShareLink("Export PDF", item: render(viewsPerPage: 10))
+        }
         .accentColor(.green)
+    }
+    
+    @MainActor func render(viewsPerPage: Int) -> URL {
+        let eventsArray: [Event] = events.map { $0 }
+        // Save it to our documents directory
+        let url = URL.documentsDirectory.appending(path: "\(recipient.fullName)-cards.pdf")
+        
+        // Tell SwiftUI our PDF should be of certain size
+        var box = CGRect(x: 0, y: 0, width: 600, height: 1200)
+        
+        // Create the CGContext for our PDF pages
+        guard let pdf = CGContext(url as CFURL, mediaBox: &box, nil) else {
+            return url
+        }
+        
+        // Calculate number of pages based on passed amount of viewsPerPage
+        // you would like to have
+        let numberOfPages = events.count / viewsPerPage
+        
+        var index = 0
+        for _ in 0..<numberOfPages {
+            
+            // Start a new PDF page
+            pdf.beginPDFPage(nil)
+            
+            // Render necessary views
+            for num in 0..<viewsPerPage {
+                
+                let renderer = ImageRenderer(content: GridView(recipient: recipient, event: eventsArray[num]))
+                renderer.render { size, context in
+                    
+                    // Will place the view in the middle of pdf on x-axis
+                    let xTranslation = box.size.width / 2 - size.width / 2
+                    
+                    // Spacing between the views on y-axis
+                    let spacing: CGFloat = 10
+                    
+                    // TODO: - View starts printing from bottom, need to inverse Y position
+                    pdf.translateBy(
+                        x: xTranslation - min(max(CGFloat(num) * xTranslation, 0), xTranslation),
+                        y: size.height + spacing
+                    )
+                    
+                    // Render the SwiftUI view data onto the page
+                    context(pdf)
+                    // End the page and close the file
+                }
+                index += 1
+                
+            }
+            pdf.endPDFPage()
+        }
+        pdf.closePDF()
+        return url
     }
     
     private func deleteEvent(event: Event) {
