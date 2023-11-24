@@ -117,7 +117,7 @@ struct ViewEventsView: View {
             ScrollView {
                 LazyVGrid(columns: gridLayout, alignment: .center, spacing: 5) {
                     ForEach(events, id: \.self) { event in
-                        GridView(recipient: recipient, event: event)
+                        GridView(recipient: recipient, event: event, printView: false)
                     }
                     .padding()
                 }
@@ -131,18 +131,8 @@ struct ViewEventsView: View {
                     Image(systemName: "plus.circle.fill")
                         .foregroundColor(.green)
                 })
-                Button(action: {
-                    // MARK: self is Current View
-                    // You can give whatever View to Conver
-                    //                        print(convertToScrollView(content: {
-                    //                            self
-                    //                        }).contentSize)
-                    _ = ShareLink("Export PDF", item: render(viewsPerPage: 10))
-                }, label: {
-                    Image(systemName: "square.and.arrow.up.fill")
-                        .font(.title2)
-                        .foregroundColor(.green)
-                })
+                ShareLink("Export PDF", item: render(viewsPerPage: 15))
+                
             })
         }
         .sheet(item: $navBarItemChosen ) { item in
@@ -151,65 +141,68 @@ struct ViewEventsView: View {
                 AddNewCardView(recipient: recipient)
             }
         }
-        .sheet(isPresented: $showShareSheet) {
-            showShareSheet.toggle()
-            print("ShareLink toggled")
-        } content: {
-            ShareLink("Export PDF", item: render(viewsPerPage: 10))
-        }
         .accentColor(.green)
     }
     
     @MainActor func render(viewsPerPage: Int) -> URL {
         let eventsArray: [Event] = events.map { $0 }
-        // Save it to our documents directory
-        let url = URL.documentsDirectory.appending(path: "\(recipient.fullName)-cards.pdf")
+        let url = URL.documentsDirectory.appending(path: "\(recipient.wrappedFirstName)-\(recipient.wrappedLastName)-cards.pdf")
+        var box = CGRect(x: 0, y: 0, width: 612, height: 792)
         
-        // Tell SwiftUI our PDF should be of certain size
-        var box = CGRect(x: 0, y: 0, width: 600, height: 1200)
-        
-        // Create the CGContext for our PDF pages
         guard let pdf = CGContext(url as CFURL, mediaBox: &box, nil) else {
             return url
         }
         
-        // Calculate number of pages based on passed amount of viewsPerPage
-        // you would like to have
-        let numberOfPages = events.count / viewsPerPage
+        let numberOfPages = (events.count + viewsPerPage - 1) / viewsPerPage
+        let viewsPerRow = 3
+        let rowsPerPage = 5
+        let viewWidth: CGFloat = (box.width - CGFloat(viewsPerRow - 1) * 10) / CGFloat(viewsPerRow)
+        let viewHeight: CGFloat = (box.height - CGFloat(rowsPerPage - 1) * 10 ) / CGFloat(viewsPerPage)
+        let spacing: CGFloat = 10
         
-        var index = 0
-        for _ in 0..<numberOfPages {
-            
-            // Start a new PDF page
+        for pageIndex in 0..<numberOfPages {
             pdf.beginPDFPage(nil)
             
-            // Render necessary views
-            for num in 0..<viewsPerPage {
+            let rendererTop = ImageRenderer(content: AddressView(recipient: recipient).frame(maxWidth: .infinity).scaledToFit())
+            rendererTop.render { size, context in
+                let xTranslation = box.size.width / 2 - size.width / 2
+                let yTranslation = box.size.height - size.height - spacing // Adjusted y-translation
+                print("Position for address is x= \(xTranslation) / y = \(yTranslation)")
+                print("Size is \(size)")
+                pdf.translateBy(
+                    x: xTranslation - min(max(CGFloat(pageIndex) * xTranslation, 0), xTranslation),
+                    y: yTranslation
+                )
+                context(pdf)
+            }
+            
+            let startIndex = pageIndex * viewsPerPage
+            let endIndex = min(startIndex + viewsPerPage, eventsArray.count)
+            
+            for row in 0..<rowsPerPage {
+                let yTranslation = CGFloat(row) * (viewHeight + spacing) + spacing
                 
-                let renderer = ImageRenderer(content: GridView(recipient: recipient, event: eventsArray[num]))
-                renderer.render { size, context in
+                for col in 0..<viewsPerRow {
+                    let index = startIndex + row * viewsPerRow + col
                     
-                    // Will place the view in the middle of pdf on x-axis
-                    let xTranslation = box.size.width / 2 - size.width / 2
-                    
-                    // Spacing between the views on y-axis
-                    let spacing: CGFloat = 10
-                    
-                    // TODO: - View starts printing from bottom, need to inverse Y position
-                    pdf.translateBy(
-                        x: xTranslation - min(max(CGFloat(num) * xTranslation, 0), xTranslation),
-                        y: size.height + spacing
-                    )
-                    
-                    // Render the SwiftUI view data onto the page
-                    context(pdf)
-                    // End the page and close the file
+                    if index < endIndex, let event = eventsArray[safe: index] {
+                        let xTranslation = CGFloat(col) * (viewWidth + spacing)
+                        print("Position for event(\(index)) is  x= \(xTranslation) / y = \(yTranslation)")
+                        
+                        let renderer = ImageRenderer(content: GridView(recipient: recipient, event: event, printView: true).frame(width: viewWidth, height: viewHeight).scaledToFit())
+                        renderer.render { size, context in
+                            pdf.translateBy(
+                                x: xTranslation,
+                                y: yTranslation
+                            )
+                            context(pdf)
+                        }
+                    }
                 }
-                index += 1
-                
             }
             pdf.endPDFPage()
         }
+        
         pdf.closePDF()
         return url
     }

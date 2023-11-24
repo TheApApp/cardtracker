@@ -5,8 +5,17 @@
 //  Created by Michael Rowe on 9/22/23.
 //  Copyright © 2023 Michael Rowe. All rights reserved.
 //
+// ToDo: DELETE THIS CODE
 
 import SwiftUI
+
+
+// Extension to safely access array elements
+extension Collection {
+    subscript(safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
 
 //extension View {
 //    // MARK: Extracting View's Height and width with the Help of Hosting Control and ScrollView

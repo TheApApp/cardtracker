@@ -13,12 +13,15 @@ struct GridView: View {
     private let blankCardFront = UIImage(contentsOfFile: "frontImage")
     private var recipient: Recipient
     private var iPhone = false
-    var event: Event
+    private var event: Event
+    private var printView = false
     
     
-    init(recipient: Recipient, event: Event) {
+    
+    init(recipient: Recipient, event: Event, printView: Bool) {
         self.recipient = recipient
         self.event = event
+        self.printView = printView
 
         if UIDevice.current.userInterfaceIdiom == .pad {
             iPhone = false
@@ -46,7 +49,9 @@ struct GridView: View {
                             Text("\(event.wrappedEventDate, formatter: ViewEventsView.eventDateFormatter)")
                                 .fixedSize()
                                 .foregroundColor(.green)
-                            MenuOverlayView(recipient: recipient, event: event)
+                            if printView == false {
+                                MenuOverlayView(recipient: recipient, event: event)
+                            }
                         }
                     }
                     .padding(iPhone ? 1 : 5)
@@ -66,5 +71,5 @@ struct GridView: View {
 }
 
 #Preview {
-    GridView(recipient: Recipient(), event: Event())
+    GridView(recipient: Recipient(), event: Event(), printView: false)
 }
