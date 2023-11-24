@@ -147,66 +147,82 @@ struct ViewEventsView: View {
     @MainActor func render(viewsPerPage: Int) -> URL {
         let eventsArray: [Event] = events.map { $0 }
         let url = URL.documentsDirectory.appending(path: "\(recipient.wrappedFirstName)-\(recipient.wrappedLastName)-cards.pdf")
-        var box = CGRect(x: 0, y: 0, width: 612, height: 792)
+        var pageSize = CGRect(x: 0, y: 0, width: 612, height: 792)
         
-        guard let pdf = CGContext(url as CFURL, mediaBox: &box, nil) else {
+        guard let pdf = CGContext(url as CFURL, mediaBox: &pageSize, nil) else {
             return url
         }
         
-        let numberOfPages = (events.count + viewsPerPage - 1) / viewsPerPage
-        let viewsPerRow = 3
+        let numberOfPages = Int((events.count + viewsPerPage - 1) / viewsPerPage)   // Round to number of pages
+        let viewsPerRow = 4
         let rowsPerPage = 5
-        let viewWidth: CGFloat = (box.width - CGFloat(viewsPerRow - 1) * 10) / CGFloat(viewsPerRow)
-        let viewHeight: CGFloat = (box.height - CGFloat(rowsPerPage - 1) * 10 ) / CGFloat(viewsPerPage)
-        let spacing: CGFloat = 10
+        let viewWidth = 143.0   // Page Width (612) / viewsPerRow (4) - Spacing (10)
+        let viewHeight = 148.4  // Page Height (792) / rowesPerPage (5) - Spacing (10)
+        let spacing = 10.0
+        var header = CGSize(width: 0.0, height: 0.0)
+        var loop = 0
         
         for pageIndex in 0..<numberOfPages {
             pdf.beginPDFPage(nil)
             
             let rendererTop = ImageRenderer(content: AddressView(recipient: recipient).frame(maxWidth: .infinity).scaledToFit())
             rendererTop.render { size, context in
-                let xTranslation = box.size.width / 2 - size.width / 2
-                let yTranslation = box.size.height - size.height - spacing // Adjusted y-translation
-                print("Position for address is x= \(xTranslation) / y = \(yTranslation)")
-                print("Size is \(size)")
+                let xTranslation = 0.0 // pageSize.size.width / 2 - size.width / 2
+                let yTranslation = pageSize.size.height - size.height - spacing // Adjusted y-translation
                 pdf.translateBy(
                     x: xTranslation - min(max(CGFloat(pageIndex) * xTranslation, 0), xTranslation),
                     y: yTranslation
                 )
                 context(pdf)
+                print("\n\nStarting page = \(pageIndex)")
+                print("Address Size is width = \(size.width); height = \(size.height) -- Position x= \(xTranslation - min(max(CGFloat(pageIndex) * xTranslation, 0), xTranslation)) / y = \(yTranslation) for pageIndex = \(pageIndex)")
+                header = size
             }
             
             let startIndex = pageIndex * viewsPerPage
             let endIndex = min(startIndex + viewsPerPage, eventsArray.count)
             
             for row in 0..<rowsPerPage {
-                let yTranslation = CGFloat(row) * (viewHeight + spacing) + spacing
+                var yTranslation = (CGFloat(row) * (viewHeight + spacing)) + spacing + header.height
                 
                 for col in 0..<viewsPerRow {
                     let index = startIndex + row * viewsPerRow + col
-                    
                     if index < endIndex, let event = eventsArray[safe: index] {
                         let xTranslation = CGFloat(col) * (viewWidth + spacing)
-                        print("Position for event(\(index)) is  x= \(xTranslation) / y = \(yTranslation)")
                         
                         let renderer = ImageRenderer(content: GridView(recipient: recipient, event: event, printView: true).frame(width: viewWidth, height: viewHeight).scaledToFit())
                         renderer.render { size, context in
                             pdf.translateBy(
                                 x: xTranslation,
-                                y: yTranslation
+                                y: 692 - yTranslation
                             )
                             context(pdf)
+                            print("Event \(index) is width = \(size.width); height = \(size.height) -- Position x= \(xTranslation) / y = \(692 - yTranslation)")
                         }
                     }
                 }
             }
+            
+            let rendererBottom = ImageRenderer(content: Text("Page \(pageIndex + 1)"))
+            rendererBottom.render { size, context in
+                let xTranslation = 295.0 // pageSize.size.width / 2 - size.width / 2
+                let yTranslation = 0.0 // Adjusted y-translation
+                pdf.translateBy(
+                    x: xTranslation - min(max(CGFloat(pageIndex) * xTranslation, 0), xTranslation),
+                    y: yTranslation
+                )
+                context(pdf)
+                print("\nEnding page = \(pageIndex)")
+            }
+            
             pdf.endPDFPage()
         }
         
         pdf.closePDF()
         return url
     }
-    
+
+
     private func deleteEvent(event: Event) {
         let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "ViewEventsView.DeleteEvent")
         let taskContext = moc

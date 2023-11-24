@@ -36,8 +36,8 @@ struct GridView: View {
                 Image(uiImage: (event.cardFrontImage ?? blankCardFront)!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .frame(width: iPhone ? 120 : 225, height: iPhone ? 120 : 225)
                     .scaledToFit()
-                    .frame(width: iPhone ? 120 : 200, height: iPhone ? 120 : 200)
                     .padding(.top, iPhone ? 2: 5)
                 HStack {
                     VStack {
