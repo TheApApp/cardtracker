@@ -1,5 +1,5 @@
 //
-//  GridView.swift
+//  ScreenView.swift
 //  Card Tracker
 //
 //  Created by Michael Rowe on 11/23/23.
@@ -9,20 +9,16 @@
 import CoreData
 import SwiftUI
 
-struct GridView: View {
+struct ScreenView: View {
     private let blankCardFront = UIImage(contentsOfFile: "frontImage")
     private var recipient: Recipient
     private var iPhone = false
     private var event: Event
-    private var printView = false
     
-    
-    
-    init(recipient: Recipient, event: Event, printView: Bool) {
+    init(recipient: Recipient, event: Event) {
         self.recipient = recipient
         self.event = event
-        self.printView = printView
-
+        
         if UIDevice.current.userInterfaceIdiom == .pad {
             iPhone = false
         } else {
@@ -49,9 +45,7 @@ struct GridView: View {
                             Text("\(event.wrappedEventDate, formatter: ViewEventsView.eventDateFormatter)")
                                 .fixedSize()
                                 .foregroundColor(.green)
-                            if printView == false {
-                                MenuOverlayView(recipient: recipient, event: event)
-                            }
+                            MenuOverlayView(recipient: recipient, event: event)
                         }
                     }
                     .padding(iPhone ? 1 : 5)
@@ -71,5 +65,5 @@ struct GridView: View {
 }
 
 #Preview {
-    GridView(recipient: Recipient(), event: Event(), printView: false)
+    ScreenView(recipient: Recipient(), event: Event())
 }

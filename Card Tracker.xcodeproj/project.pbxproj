@@ -23,7 +23,7 @@
 		185396A1209E454C00435E14 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 185396A0209E454C00435E14 /* Media.xcassets */; };
 		1857028A259A75F2001AA8EA /* ViewRecipientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18570289259A75F2001AA8EA /* ViewRecipientsView.swift */; };
 		1857028D259A7611001AA8EA /* HolidayCardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857028C259A7611001AA8EA /* HolidayCardApp.swift */; };
-		18708EC22B0FC9F700BF5CE4 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18708EC12B0FC9F700BF5CE4 /* GridView.swift */; };
+		18708EC22B0FC9F700BF5CE4 /* ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18708EC12B0FC9F700BF5CE4 /* ScreenView.swift */; };
 		187595BC2B0AB36300B89EB5 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187595BB2B0AB36300B89EB5 /* MapView.swift */; };
 		187595BE2B0AB39B00B89EB5 /* ViewEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187595BD2B0AB39B00B89EB5 /* ViewEventsView.swift */; };
 		187595C02B0AB3B500B89EB5 /* ViewAnEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187595BF2B0AB3B500B89EB5 /* ViewAnEventView.swift */; };
@@ -32,6 +32,7 @@
 		187E4382259D2AD90075AEBF /* PersistentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E4381259D2AD90075AEBF /* PersistentStore.swift */; };
 		18839B0F259F9F57000BB450 /* AddNewRecipientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B0E259F9F57000BB450 /* AddNewRecipientView.swift */; };
 		18839B12259FA00D000BB450 /* AddNewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18839B11259FA00D000BB450 /* AddNewCardView.swift */; };
+		188D25D62B1255AA0039B2E0 /* PrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D25D52B1255AA0039B2E0 /* PrintView.swift */; };
 		18A3DEB827D5490200F55921 /* FilteredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A3DEB727D5490200F55921 /* FilteredList.swift */; };
 		18A83CCC27753913005ACB5F /* EditAnEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A83CCB27753913005ACB5F /* EditAnEvent.swift */; };
 		18B70D54205608F700EAC1BD /* Card_Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18B70D52205608F600EAC1BD /* Card_Tracker.xcdatamodeld */; };
@@ -81,7 +82,7 @@
 		18570280259A58A6001AA8EA /* Card_Tracker 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 5.xcdatamodel"; sourceTree = "<group>"; };
 		18570289259A75F2001AA8EA /* ViewRecipientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRecipientsView.swift; sourceTree = "<group>"; };
 		1857028C259A7611001AA8EA /* HolidayCardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayCardApp.swift; sourceTree = "<group>"; };
-		18708EC12B0FC9F700BF5CE4 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		18708EC12B0FC9F700BF5CE4 /* ScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenView.swift; sourceTree = "<group>"; };
 		187595BB2B0AB36300B89EB5 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		187595BD2B0AB39B00B89EB5 /* ViewEventsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEventsView.swift; sourceTree = "<group>"; };
 		187595BF2B0AB3B500B89EB5 /* ViewAnEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAnEventView.swift; sourceTree = "<group>"; };
@@ -91,6 +92,7 @@
 		187E4381259D2AD90075AEBF /* PersistentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStore.swift; sourceTree = "<group>"; };
 		18839B0E259F9F57000BB450 /* AddNewRecipientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRecipientView.swift; sourceTree = "<group>"; };
 		18839B11259FA00D000BB450 /* AddNewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCardView.swift; sourceTree = "<group>"; };
+		188D25D52B1255AA0039B2E0 /* PrintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintView.swift; sourceTree = "<group>"; };
 		18A3DEB727D5490200F55921 /* FilteredList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredList.swift; sourceTree = "<group>"; };
 		18A83CCA2775381A005ACB5F /* Card_Tracker 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 6.xcdatamodel"; sourceTree = "<group>"; };
 		18A83CCB27753913005ACB5F /* EditAnEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAnEvent.swift; sourceTree = "<group>"; };
@@ -200,8 +202,9 @@
 				187595BB2B0AB36300B89EB5 /* MapView.swift */,
 				18E674C7280B472B001F2BF8 /* MenuOverlayView.swift */,
 				187595BF2B0AB3B500B89EB5 /* ViewAnEventView.swift */,
+				188D25D52B1255AA0039B2E0 /* PrintView.swift */,
 				187595BD2B0AB39B00B89EB5 /* ViewEventsView.swift */,
-				18708EC12B0FC9F700BF5CE4 /* GridView.swift */,
+				18708EC12B0FC9F700BF5CE4 /* ScreenView.swift */,
 				18570289259A75F2001AA8EA /* ViewRecipientsView.swift */,
 			);
 			name = Views;
@@ -366,13 +369,14 @@
 				187AAC712596A9E700BC7682 /* UIImage+Extensions.swift in Sources */,
 				184F74B328145AAF00DACD53 /* ImageCompressor.swift in Sources */,
 				187595C02B0AB3B500B89EB5 /* ViewAnEventView.swift in Sources */,
+				188D25D62B1255AA0039B2E0 /* PrintView.swift in Sources */,
 				18B70D54205608F700EAC1BD /* Card_Tracker.xcdatamodeld in Sources */,
 				18D49B872676F59700833E31 /* CloudKitHelper.swift in Sources */,
 				18EF638425EC7D9800448984 /* EditRecipientView.swift in Sources */,
 				184F7055205CB1F20040204D /* Event+CoreDataClass.swift in Sources */,
 				184F7053205CB1F20040204D /* Recipient+CoreDataClass.swift in Sources */,
 				18839B12259FA00D000BB450 /* AddNewCardView.swift in Sources */,
-				18708EC22B0FC9F700BF5CE4 /* GridView.swift in Sources */,
+				18708EC22B0FC9F700BF5CE4 /* ScreenView.swift in Sources */,
 				1829EA3D25AB9CAB00774299 /* ImagePicker.swift in Sources */,
 				18A3DEB827D5490200F55921 /* FilteredList.swift in Sources */,
 				1846EAD72ABE3F77006ACD5C /* Extensions.swift in Sources */,

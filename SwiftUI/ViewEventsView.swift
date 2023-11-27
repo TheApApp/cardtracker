@@ -117,7 +117,7 @@ struct ViewEventsView: View {
             ScrollView {
                 LazyVGrid(columns: gridLayout, alignment: .center, spacing: 5) {
                     ForEach(events, id: \.self) { event in
-                        GridView(recipient: recipient, event: event, printView: false)
+                        ScreenView(recipient: recipient, event: event)
                     }
                     .padding()
                 }
@@ -131,7 +131,7 @@ struct ViewEventsView: View {
                     Image(systemName: "plus.circle.fill")
                         .foregroundColor(.green)
                 })
-                ShareLink("Export PDF", item: render(viewsPerPage: 15))
+                ShareLink("Export PDF", item: render(viewsPerPage: 16))
                 
             })
         }
@@ -149,80 +149,76 @@ struct ViewEventsView: View {
         let url = URL.documentsDirectory.appending(path: "\(recipient.wrappedFirstName)-\(recipient.wrappedLastName)-cards.pdf")
         var pageSize = CGRect(x: 0, y: 0, width: 612, height: 792)
         
-        guard let pdf = CGContext(url as CFURL, mediaBox: &pageSize, nil) else {
+        guard let pdfOutput = CGContext(url as CFURL, mediaBox: &pageSize, nil) else {
             return url
         }
         
         let numberOfPages = Int((events.count + viewsPerPage - 1) / viewsPerPage)   // Round to number of pages
         let viewsPerRow = 4
-        let rowsPerPage = 5
-        let viewWidth = 143.0   // Page Width (612) / viewsPerRow (4) - Spacing (10)
-        let viewHeight = 148.4  // Page Height (792) / rowesPerPage (5) - Spacing (10)
+        let rowsPerPage = 4
         let spacing = 10.0
-        var header = CGSize(width: 0.0, height: 0.0)
-        var loop = 0
+        
+        // Note the page should be laid out as follows
+        // Header Start on Row 792 to Row 692 (100 Pixels)
+        // Body is a Grid of 143w X 134h PrintViews
+        // Footer Starts on Row 0 to Row 20 (20 Pixels)
         
         for pageIndex in 0..<numberOfPages {
-            pdf.beginPDFPage(nil)
+            var currentX : Double = 0
+            var currentY : Double = 0
             
-            let rendererTop = ImageRenderer(content: AddressView(recipient: recipient).frame(maxWidth: .infinity).scaledToFit())
-            rendererTop.render { size, context in
-                let xTranslation = 0.0 // pageSize.size.width / 2 - size.width / 2
-                let yTranslation = pageSize.size.height - size.height - spacing // Adjusted y-translation
-                pdf.translateBy(
-                    x: xTranslation - min(max(CGFloat(pageIndex) * xTranslation, 0), xTranslation),
-                    y: yTranslation
-                )
-                context(pdf)
+            pdfOutput.beginPDFPage(nil)
+            let rendererTop = ImageRenderer(content: AddressView(recipient: recipient))
+            rendererTop.render { size, renderTop in
+                // Go to Bottom Left of Page
+                pdfOutput.move(to: CGPoint(x: 0.0, y: 0.0))
+                // Translate to top Left with size of AddressView and Padding
+                pdfOutput.translateBy(x: 0.0, y: pageSize.height - size.height - spacing)
+                currentY += pageSize.height - size.height - spacing
+                renderTop(pdfOutput)
                 print("\n\nStarting page = \(pageIndex)")
-                print("Address Size is width = \(size.width); height = \(size.height) -- Position x= \(xTranslation - min(max(CGFloat(pageIndex) * xTranslation, 0), xTranslation)) / y = \(yTranslation) for pageIndex = \(pageIndex)")
-                header = size
             }
+            print("Header - currentX = \(currentX), currentY = \(currentY)")
             
             let startIndex = pageIndex * viewsPerPage
             let endIndex = min(startIndex + viewsPerPage, eventsArray.count)
+            pdfOutput.translateBy(x: spacing / 2, y: -160)
             
             for row in 0..<rowsPerPage {
-                var yTranslation = (CGFloat(row) * (viewHeight + spacing)) + spacing + header.height
-                
                 for col in 0..<viewsPerRow {
                     let index = startIndex + row * viewsPerRow + col
                     if index < endIndex, let event = eventsArray[safe: index] {
-                        let xTranslation = CGFloat(col) * (viewWidth + spacing)
-                        
-                        let renderer = ImageRenderer(content: GridView(recipient: recipient, event: event, printView: true).frame(width: viewWidth, height: viewHeight).scaledToFit())
-                        renderer.render { size, context in
-                            pdf.translateBy(
-                                x: xTranslation,
-                                y: 692 - yTranslation
-                            )
-                            context(pdf)
-                            print("Event \(index) is width = \(size.width); height = \(size.height) -- Position x= \(xTranslation) / y = \(692 - yTranslation)")
+                        let renderBody = ImageRenderer(content: PrintView(event: event))
+                        renderBody.render { size, renderBody in
+                            renderBody(pdfOutput)
+                            pdfOutput.translateBy(x: 144, y: 0) // (to: CGPoint(x: xColumn[col], y: yRow[row] - size.height))
+                            currentX += size.width
                         }
                     }
                 }
+                pdfOutput.translateBy(x: -pageSize.width + 39.5, y: -153)
+                currentY -= 153
+                currentX = -pageSize.width + 39.5
+                print("Body - currentX = \(currentX), currentY = \(currentY)")
             }
             
-            let rendererBottom = ImageRenderer(content: Text("Page \(pageIndex + 1)"))
-            rendererBottom.render { size, context in
-                let xTranslation = 295.0 // pageSize.size.width / 2 - size.width / 2
-                let yTranslation = 0.0 // Adjusted y-translation
-                pdf.translateBy(
-                    x: xTranslation - min(max(CGFloat(pageIndex) * xTranslation, 0), xTranslation),
-                    y: yTranslation
-                )
-                context(pdf)
-                print("\nEnding page = \(pageIndex)")
+            let renderBottom = ImageRenderer(
+                content:
+                    Text("Page \((pageIndex + 1).formatted()) of \(numberOfPages.formatted())").frame(width: pageSize.width ,height: 20)
+            )
+            pdfOutput.translateBy(x: -pageSize.width + 39.5, y: -currentY)
+            print("Footer - currentX = \(currentX), currentY = \(currentY)")
+            renderBottom.render { size, renderBottom in
+                renderBottom(pdfOutput)
+                print("\nEnding page = \(pageIndex), size.width =\(size.width)  , size.height=\(size.height)")
             }
-            
-            pdf.endPDFPage()
+            pdfOutput.endPDFPage()
         }
-        
-        pdf.closePDF()
+        pdfOutput.closePDF()
         return url
     }
-
-
+    
+    
     private func deleteEvent(event: Event) {
         let logger=Logger(subsystem: "com.theapapp.christmascardtracker", category: "ViewEventsView.DeleteEvent")
         let taskContext = moc
@@ -251,22 +247,6 @@ struct ViewEventsView: View {
     }
 }
 
-struct ViewEventsView_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewEventsView(recipient: Recipient())
-    }
-}
-
-// MARK: Share Sheet
-struct ShareSheet: UIViewControllerRepresentable {
-    var urls: [Any]
-    
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        let controller = UIActivityViewController(activityItems: urls, applicationActivities: nil)
-        return controller
-    }
-    
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
-        
-    }
+#Preview {
+    ViewEventsView(recipient: Recipient())
 }
