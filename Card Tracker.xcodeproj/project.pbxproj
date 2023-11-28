@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1802F90029D9F4D500325240 /* EventTypes+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1802F8FE29D9F4D500325240 /* EventTypes+CoreDataClass.swift */; };
 		1802F90129D9F4D500325240 /* EventTypes+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1802F8FF29D9F4D500325240 /* EventTypes+CoreDataProperties.swift */; };
+		180F84622B1573F400EBF579 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F84612B1573F400EBF579 /* FooterView.swift */; };
 		1829EA3D25AB9CAB00774299 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1829EA3C25AB9CAB00774299 /* ImagePicker.swift */; };
 		1846EAD72ABE3F77006ACD5C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1846EAD62ABE3F77006ACD5C /* Extensions.swift */; };
 		18499CC429996E86001A07EE /* ImageTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18499CC329996E86001A07EE /* ImageTransformerTests.swift */; };
@@ -61,6 +62,7 @@
 		1802F8FD29D9F22400325240 /* Card_Tracker 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 7.xcdatamodel"; sourceTree = "<group>"; };
 		1802F8FE29D9F4D500325240 /* EventTypes+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventTypes+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1802F8FF29D9F4D500325240 /* EventTypes+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventTypes+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		180F84612B1573F400EBF579 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		1829EA3C25AB9CAB00774299 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		1836313A20C9D2B100E2E15E /* Card_Tracker 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Card_Tracker 2.xcdatamodel"; sourceTree = "<group>"; };
 		1846EAD62ABE3F77006ACD5C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				18E674C7280B472B001F2BF8 /* MenuOverlayView.swift */,
 				187595BF2B0AB3B500B89EB5 /* ViewAnEventView.swift */,
 				188D25D52B1255AA0039B2E0 /* PrintView.swift */,
+				180F84612B1573F400EBF579 /* FooterView.swift */,
 				187595BD2B0AB39B00B89EB5 /* ViewEventsView.swift */,
 				18708EC12B0FC9F700BF5CE4 /* ScreenView.swift */,
 				18570289259A75F2001AA8EA /* ViewRecipientsView.swift */,
@@ -357,6 +360,7 @@
 				187595BE2B0AB39B00B89EB5 /* ViewEventsView.swift in Sources */,
 				18CB915A2782268C00FA96ED /* AddressView.swift in Sources */,
 				18F47D9F280C712200CAE03B /* Constants.swift in Sources */,
+				180F84622B1573F400EBF579 /* FooterView.swift in Sources */,
 				187595BC2B0AB36300B89EB5 /* MapView.swift in Sources */,
 				1875A3812780DA4600911FB4 /* Coordinator.swift in Sources */,
 				1802F90129D9F4D500325240 /* EventTypes+CoreDataProperties.swift in Sources */,

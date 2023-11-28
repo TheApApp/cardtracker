@@ -158,30 +158,24 @@ struct ViewEventsView: View {
         let rowsPerPage = 4
         let spacing = 10.0
         
-        // Note the page should be laid out as follows
-        // Header Start on Row 792 to Row 692 (100 Pixels)
-        // Body is a Grid of 143w X 134h PrintViews
-        // Footer Starts on Row 0 to Row 20 (20 Pixels)
-        
         for pageIndex in 0..<numberOfPages {
+            let startIndex = pageIndex * viewsPerPage
+            let endIndex = min(startIndex + viewsPerPage, eventsArray.count)
+            
             var currentX : Double = 0
             var currentY : Double = 0
             
             pdfOutput.beginPDFPage(nil)
-            let rendererTop = ImageRenderer(content: AddressView(recipient: recipient))
-            rendererTop.render { size, renderTop in
-                // Go to Bottom Left of Page
-                pdfOutput.move(to: CGPoint(x: 0.0, y: 0.0))
-                // Translate to top Left with size of AddressView and Padding
-                pdfOutput.translateBy(x: 0.0, y: pageSize.height - size.height - spacing)
-                currentY += pageSize.height - size.height - spacing
-                renderTop(pdfOutput)
-                print("\n\nStarting page = \(pageIndex)")
-            }
-            print("Header - currentX = \(currentX), currentY = \(currentY)")
             
-            let startIndex = pageIndex * viewsPerPage
-            let endIndex = min(startIndex + viewsPerPage, eventsArray.count)
+            // Printer header - top 160 points of the page
+            let renderTop = ImageRenderer(content: AddressView(recipient: recipient))
+            renderTop.render { size, renderTop in
+                // Go to Bottom Left of Page and then translate up to 160 points from the top
+                pdfOutput.move(to: CGPoint(x: 0.0, y: 0.0))
+                pdfOutput.translateBy(x: 0.0, y: 692)
+                currentY += 692
+                renderTop(pdfOutput)
+            }
             pdfOutput.translateBy(x: spacing / 2, y: -160)
             
             for row in 0..<rowsPerPage {
@@ -191,26 +185,23 @@ struct ViewEventsView: View {
                         let renderBody = ImageRenderer(content: PrintView(event: event))
                         renderBody.render { size, renderBody in
                             renderBody(pdfOutput)
-                            pdfOutput.translateBy(x: 144, y: 0) // (to: CGPoint(x: xColumn[col], y: yRow[row] - size.height))
-                            currentX += size.width
+                            pdfOutput.translateBy(x: size.width + 10, y: 0)
+                            currentX += size.width + 10
                         }
+                        print("Body - currentX = \(currentX), currentY = \(currentY)")
                     }
                 }
-                pdfOutput.translateBy(x: -pageSize.width + 39.5, y: -153)
+                pdfOutput.translateBy(x: -pageSize.width + 5, y: -144)
                 currentY -= 153
-                currentX = -pageSize.width + 39.5
-                print("Body - currentX = \(currentX), currentY = \(currentY)")
+                currentX = 0
             }
             
-            let renderBottom = ImageRenderer(
-                content:
-                    Text("Page \((pageIndex + 1).formatted()) of \(numberOfPages.formatted())").frame(width: pageSize.width ,height: 20)
-            )
-            pdfOutput.translateBy(x: -pageSize.width + 39.5, y: -currentY)
-            print("Footer - currentX = \(currentX), currentY = \(currentY)")
+            // Print Footer - from bottom of page, up 40 points
+            let renderBottom = ImageRenderer(content: FooterView(page: pageIndex + 1, pages: numberOfPages))
+            pdfOutput.move(to: CGPoint(x: 0, y: 0))
+            pdfOutput.translateBy(x: 0, y: 40)
             renderBottom.render { size, renderBottom in
                 renderBottom(pdfOutput)
-                print("\nEnding page = \(pageIndex), size.width =\(size.width)  , size.height=\(size.height)")
             }
             pdfOutput.endPDFPage()
         }

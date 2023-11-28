@@ -25,5 +25,53 @@
             stopOnStyle = "1">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A43571E7-F78D-4911-B562-E60E407FE0FA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftUI/ViewEventsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "render(viewsPerPage:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A43571E7-F78D-4911-B562-E60E407FE0FA - 5799e9b7989def3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Card_Tracker.ViewEventsView.render(viewsPerPage: Swift.Int) -&gt; Foundation.URL"
+                  moduleName = "Card Tracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/michaelrowe/Development/2023-CardTracker/cardtracker/SwiftUI/ViewEventsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "200"
+                  endingLineNumber = "200"
+                  offsetFromSymbolStart = "5088">
+               </Location>
+               <Location
+                  uuid = "A43571E7-F78D-4911-B562-E60E407FE0FA - 5799e9b7989def3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Card_Tracker.ViewEventsView.render(viewsPerPage: Swift.Int) -&gt; Foundation.URL"
+                  moduleName = "Card Tracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/michaelrowe/Development/2023-CardTracker/cardtracker/SwiftUI/ViewEventsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "200"
+                  endingLineNumber = "200"
+                  offsetFromSymbolStart = "5204">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
